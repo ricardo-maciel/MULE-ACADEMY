@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5 - Jogo de Integração: Mission Control</title>
+    <meta name="description" content="Aprenda fluxos de APIs, request/response, erro e retry jogando um mini-simulador de engenharia de integrações.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="modulo5.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <nav class="progress-nav" id="main-nav">
+        <div class="logo" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="arrow-left" class="back-icon"></i>
+            <span>Mule<span>Academy</span></span>
+        </div>
+        
+        <div class="game-meta-indicators">
+            <span class="game-badge text-teal"><i data-lucide="award"></i> <span id="meta-level-name">Nível 1: O Fluxo</span></span>
+            <span class="game-badge text-json"><i data-lucide="zap"></i> Pontos: <span id="meta-score">0</span></span>
+        </div>
+
+        <div class="chapters-progress">
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+            <div class="steps-container">
+                <button class="step-btn active" data-level="1" title="Nível 1">1</button>
+                <button class="step-btn" data-level="2" title="Nível 2">2</button>
+                <button class="step-btn" data-level="3" title="Nível 3">3</button>
+                <button class="step-btn" data-level="4" title="Nível 4">4</button>
+                <button class="step-btn" data-level="5" title="Nível 5">5</button>
+                <button class="step-btn" data-level="6" title="Nível 6">6</button>
+                <button class="step-btn" data-level="7" title="Nível 7">7</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="app-container">
+
+        <!-- GAME LAYOUT GRID -->
+        <div class="game-grid" id="main-game-layout">
+            
+            <!-- Left: Visual Board and Terminal -->
+            <div class="board-column">
+                
+                <!-- SVG Pipeline Canvas -->
+                <div class="glass-panel canvas-container flex-column align-items-center justify-content-center">
+                    <div class="canvas-title-header" id="pipeline-title">Visualizador de Pipeline</div>
+                    
+                    <div class="svg-wrapper">
+                        <!-- Red flashing panic background overlay -->
+                        <div class="panic-overlay hidden" id="game-panic-overlay"></div>
+                        
+                        <svg width="500" height="200" id="game-svg-canvas">
+                            <!-- Dynamic rendering of nodes, paths, and flow particles -->
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- API Terminal Console Log -->
+                <div class="terminal-log-panel mt-20">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">integration_console.log</span>
+                        <button class="btn btn-outline btn-xs ml-auto" id="btn-clear-console" style="padding: 2px 8px; font-size: 0.75rem;">Limpar</button>
+                    </div>
+                    <pre class="terminal-body" id="game-console-log">> Inicializando sistema de logs...</pre>
+                </div>
+            </div>
+
+            <!-- Right: Mission and Controls Panel -->
+            <div class="controls-column">
+                <div class="glass-panel flex-column justify-content-between controls-box">
+                    
+                    <!-- MISSION TEXT -->
+                    <div class="mission-header-panel">
+                        <span class="badge" id="mission-badge">MISSÃO DO NÍVEL 1</span>
+                        <h2 id="mission-title">O Fluxo de Comunicação</h2>
+                        <div class="divider-line"></div>
+                        <p class="mission-text-description" id="mission-desc">Aprenda a mecânica básica de um fluxo de dados. Clique em executar para assistir ao tráfego do Cliente até o Servidor.</p>
+                    </div>
+
+                    <!-- INTERACTIVE ACTIONS PER LEVEL -->
+                    <div class="interactive-workspace mt-20">
+                        
+                        <!-- LEVEL 1: Basic Flow -->
+                        <div class="level-pane" id="pane-level-1">
+                            <div class="alert-info-box">
+                                <i data-lucide="info"></i>
+                                <span>No primeiro nível, veja como uma requisição (Request) vai e uma resposta (Response) volta do servidor.</span>
+                            </div>
+                            <button class="btn btn-primary btn-lg w-100 mt-20" id="btn-run-l1">
+                                <i data-lucide="play"></i>
+                                <span>Executar Fluxo</span>
+                            </button>
+                        </div>
+
+                        <!-- LEVEL 2: Arrange Blocks (Drag & Drop) -->
+                        <div class="level-pane hidden" id="pane-level-2">
+                            <p class="small-desc mb-10">Arraste as caixas de sistemas abaixo e ordene-as de forma lógica nos slots marcados:</p>
+                            
+                            <!-- Slots placeholder visual -->
+                            <div class="order-slots-grid">
+                                <div class="order-slot" data-slot="0"><span>1. Cliente</span></div>
+                                <div class="order-slot" data-slot="1"><span>2. Vazio</span></div>
+                                <div class="order-slot" data-slot="2"><span>3. Vazio</span></div>
+                                <div class="order-slot" data-slot="3"><span>4. Vazio</span></div>
+                                <div class="order-slot" data-slot="4"><span>5. Vazio</span></div>
+                            </div>
+
+                            <!-- Draggable systems -->
+                            <div class="draggables-pool mt-20" id="draggables-container">
+                                <div class="drag-block" draggable="true" data-type="api" id="db-api">API Gateway</div>
+                                <div class="drag-block" draggable="true" data-type="pay" id="db-pay">Pagamento</div>
+                                <div class="drag-block" draggable="true" data-type="stock" id="db-stock">Estoque</div>
+                                <div class="drag-block" draggable="true" data-type="delivery" id="db-delivery">Entrega</div>
+                            </div>
+
+                            <div class="action-row-buttons mt-20">
+                                <button class="btn btn-primary btn-lg w-100" id="btn-validate-l2">Validar Ordem</button>
+                                <button class="btn btn-outline btn-lg mt-10 w-100" id="btn-reset-l2">Resetar Ordem</button>
+                            </div>
+                        </div>
+
+                        <!-- LEVEL 3: Real Execution & Quizzes -->
+                        <div class="level-pane hidden" id="pane-level-3">
+                            <div class="alert-info-box mb-20" id="l3-info">
+                                <i data-lucide="help-circle"></i>
+                                <span>Clique abaixo para iniciar um pedido. A simulação irá pausar para desafiar seus conhecimentos!</span>
+                            </div>
+                            
+                            <!-- QUIZ AREA -->
+                            <div class="quiz-box-card hidden" id="l3-quiz-card">
+                                <h4 class="mb-10 text-json" id="l3-quiz-question">O que esse JSON representa?</h4>
+                                <div class="quiz-options-list" id="l3-quiz-options">
+                                    <!-- Dynamic options -->
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg w-100 mt-20" id="btn-run-l3">
+                                <i data-lucide="play"></i>
+                                <span>Executar Pedido</span>
+                            </button>
+                        </div>
+
+                        <!-- LEVEL 4: Errors Sim -->
+                        <div class="level-pane hidden" id="pane-level-4">
+                            <p class="small-desc mb-20">No mundo real, falhas acontecem. Escolha qual tipo de erro você deseja simular no fluxo de compra:</p>
+                            
+                            <div class="error-choice-grid">
+                                <button class="btn btn-outline" id="btn-l4-err-pay">
+                                    <i data-lucide="credit-card" class="text-rose"></i>
+                                    <span>Pagamento Recusado</span>
+                                </button>
+                                <button class="btn btn-outline" id="btn-l4-err-stock">
+                                    <i data-lucide="package-x" class="text-rose"></i>
+                                    <span>Estoque Esgotado</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- LEVEL 5: Retry mechanics -->
+                        <div class="level-pane hidden" id="pane-level-5">
+                            <div class="alert-info-box alert-error mb-20">
+                                <i data-lucide="alert-octagon"></i>
+                                <span>A tentativa anterior falhou. O Retry reexecuta o fluxo automaticamente para lidar com instabilidades temporárias!</span>
+                            </div>
+                            
+                            <button class="btn btn-primary btn-lg w-100" id="btn-run-l5">
+                                <i data-lucide="refresh-cw"></i>
+                                <span>Tentar Novamente (Retry)</span>
+                            </button>
+                        </div>
+
+                        <!-- LEVEL 6: Sandbox / Free Play -->
+                        <div class="level-pane hidden" id="pane-level-6">
+                            <p class="small-desc mb-20">Habilite/desabilite erros nos sistemas clicando nos toggles, e clique no nó no SVG para ver os JSONs de request/response:</p>
+                            
+                            <div class="sandbox-switches-grid">
+                                <div class="switch-row">
+                                    <span class="switch-label">Falha no Pagamento:</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="switch-err-pay">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="switch-row">
+                                    <span class="switch-label">Falha no Estoque:</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="switch-err-stock">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="switch-row">
+                                    <span class="switch-label">Falha na Entrega:</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="switch-err-delivery">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg w-100 mt-20" id="btn-run-l6">
+                                <i data-lucide="play-circle"></i>
+                                <span>Testar Fluxo Completo</span>
+                            </button>
+                        </div>
+
+                        <!-- LEVEL 7: Final Challenge -->
+                        <div class="level-pane hidden" id="pane-level-7">
+                            <div class="alert-info-box alert-error mb-10" id="l7-mission-box">
+                                <i data-lucide="alert-triangle"></i>
+                                <span>O estoque está offline e o gateway de pagamento gerando timeouts temporários.</span>
+                            </div>
+                            
+                            <p class="small-desc mb-20"><strong>Seu objetivo:</strong> Corrija o Estoque nas chaves do simulador, ative a política de Retry no terminal e execute o fluxo com sucesso!</p>
+
+                            <div class="challenge-actions-box border-rose-glow" style="padding: 1rem; border-radius: 12px; background: rgba(0,0,0,0.15);">
+                                <div class="switch-row">
+                                    <span class="switch-label">Corrigir Estoque (Ligar Canal):</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="switch-l7-stock">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="switch-row mt-10">
+                                    <span class="switch-label">Ativar Política de Retry:</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="switch-l7-retry">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="challenge-timer-display mt-20 text-center">
+                                <span class="m-label">Cronômetro:</span>
+                                <span class="m-val text-rose-light" id="l7-timer">00:00</span>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg w-100 mt-20" id="btn-run-l7">
+                                <i data-lucide="zap"></i>
+                                <span>Executar Fluxo Final</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- FOOTER NAVIGATION AND NAVIGATION PROGRESS -->
+                    <div class="panel-action-footer mt-30">
+                        <span class="small-desc text-muted" id="level-instruction-help">Conclua o desafio acima para liberar o próximo nível.</span>
+                        <div class="button-footer-row mt-10">
+                            <button class="btn btn-outline w-100" id="btn-prev-level" disabled>Anterior</button>
+                            <button class="btn btn-outline w-100" id="btn-next-level" disabled>Próximo</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 8. SUCCESS / TROPHY GRADUATION SCREEN -->
+        <section id="graduation-screen" class="chapter-section hidden">
+            <div class="section-content text-center">
+                <span class="chapter-number">DESAFIO FINAL CONCLUÍDO</span>
+                
+                <div class="success-trophy">
+                    <div class="trophy-glow"></div>
+                    <i data-lucide="award" class="trophy-icon-data text-teal"></i>
+                </div>
+
+                <h2>Parabéns, Engenheiro de Integrações! 🏆</h2>
+                <p class="subtitle max-w-600">Você provou que sabe modelar fluxos, identificar requests/responses, tratar erros e aplicar retries. O curso básico foi totalmente concluído.</p>
+
+                <div class="summary-cards max-w-800">
+                    <div class="summary-card border-teal-glow">
+                        <i data-lucide="zap" class="sum-icon text-json"></i>
+                        <h4>Sua Pontuação</h4>
+                        <p class="m-val text-json" id="final-score-val" style="font-size: 1.5rem; margin-top: 5px;">0</p>
+                    </div>
+                    <div class="summary-card border-indigo-glow">
+                        <i data-lucide="clock" class="sum-icon text-indigo-light"></i>
+                        <h4>Tempo de Resolução</h4>
+                        <p class="m-val text-indigo-light" id="final-time-val" style="font-size: 1.5rem; margin-top: 5px;">00:00</p>
+                    </div>
+                    <div class="summary-card border-csv-glow">
+                        <i data-lucide="shield-check" class="sum-icon text-csv"></i>
+                        <h4>Nível Conquistado</h4>
+                        <p class="m-val text-csv" style="font-size: 1.25rem; margin-top: 5px;">Pro (MuleSoft Ready)</p>
+                    </div>
+                </div>
+
+                <div class="cta-box glass-panel max-w-600">
+                    <h3>Pronto para se graduar?</h3>
+                    <p>Ao retornar ao Painel Principal, sua trilha estará 100% concluída. Você está pronto para dominar arquiteturas de APIs!</p>
+                    
+                    <div class="module-navigation-group mt-20">
+                        <button class="btn btn-outline btn-lg" onclick="window.location.href='modulo4.html'">
+                            <i data-lucide="arrow-left" class="btn-icon"></i>
+                            <span>Voltar ao Módulo 4</span>
+                        </button>
+                        <button class="btn btn-accent btn-lg" id="btn-graduate-course">
+                            <span>Concluir Curso & Formar!</span>
+                            <i data-lucide="graduation-cap" class="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 MuleAcademy. Desenvolvido para fins didáticos.</p>
+            <button class="btn btn-outline btn-sm" onclick="window.location.href='dashboard.html'">
+                <i data-lucide="layout-dashboard" class="btn-icon"></i>
+                <span>Painel Principal</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="modulo5.js"></script>
+</body>
+</html>
