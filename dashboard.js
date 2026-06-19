@@ -8,6 +8,55 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     }
 
+    // Carrega dados do usuário logado de forma segura contra erros de parseamento
+    let currentUser = null;
+    try {
+        currentUser = JSON.parse(localStorage.getItem('muleacademy_current_user'));
+    } catch (e) {
+        console.error("Erro ao fazer o parse do usuário logado:", e);
+        const rawUser = localStorage.getItem('muleacademy_current_user');
+        if (rawUser) {
+            currentUser = { name: rawUser, email: '' };
+        }
+    }
+
+    if (currentUser) {
+        const profileNameEl = document.getElementById('profile-user-name');
+        if (profileNameEl) {
+            profileNameEl.textContent = currentUser.name;
+        }
+    }
+
+    // Configura botão de logout no sidebar
+    const btnLogout = document.getElementById('btn-logout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            if (confirm('Deseja realmente sair da sua conta?')) {
+                // Fazer backup do progresso do aluno antes de sair
+                if (currentUser && currentUser.email !== 'admin@curso.com') {
+                    saveStudentProgressBackup(currentUser.email);
+                }
+                localStorage.removeItem('muleacademy_current_user');
+                window.location.href = 'login.html';
+            }
+        });
+    }
+
+    // Função para salvar backup de progresso do aluno no localstorage
+    function saveStudentProgressBackup(email) {
+        const backupKey = `muleacademy_progress_${email}`;
+        let backupStr = '';
+        for (let i = 1; i <= 5; i++) {
+            const completed = localStorage.getItem(`muleacademy_completed_${i}`);
+            if (completed === 'true') {
+                backupStr += `muleacademy_completed_${i}=true;`;
+            }
+        }
+        if (backupStr) {
+            localStorage.setItem(backupKey, backupStr);
+        }
+    }
+
     /* ==========================================================================
        1. SISTEMA DE PROGRESSÃO DESSA PLATAFORMA (LOCALSTORAGE)
        ========================================================================== */
@@ -43,6 +92,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (states.mod3) completedCount++;
         if (states.mod4) completedCount++;
         if (states.mod5) completedCount++;
+
+        // Atualizar papel/nível no rodapé do perfil
+        const profileRoleEl = document.getElementById('profile-user-role');
+        if (profileRoleEl) {
+            if (currentUser && currentUser.email === 'admin@curso.com') {
+                profileRoleEl.textContent = 'Admin 👑';
+            } else if (completedCount === 5) {
+                profileRoleEl.textContent = 'Graduado 🎓';
+            } else {
+                profileRoleEl.textContent = `Nível ${completedCount + 1}`;
+            }
+        }
 
         // 1. Atualizar círculo radial de progresso e textos da plataforma
         const radialFill = document.getElementById('radial-progress-fill');

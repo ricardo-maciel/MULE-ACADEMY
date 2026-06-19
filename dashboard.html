@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script>
+        if (!localStorage.getItem('muleacademy_current_user')) {
+            window.location.href = 'login.html';
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MuleAcademy - Dashboard do Curso</title>
@@ -41,14 +46,18 @@
                     <a href="modulo5.html" class="nav-subitem" id="nav-sub-mod5"><i data-lucide="shopping-cart"></i>Módulo 5 — Projeto</a>
                 </div>
             </div>
+            <a href="playground.html" class="nav-item" id="nav-playground"><i data-lucide="compass"></i>Playground Interativo</a>
         </nav>
         <div class="sidebar-footer">
             <div class="user-profile">
                 <div class="avatar"><i data-lucide="user"></i></div>
                 <div class="user-info">
-                    <span class="user-name">Aluno Iniciante</span>
-                    <span class="user-role">Nível 1</span>
+                    <span class="user-name" id="profile-user-name">Aluno Iniciante</span>
+                    <span class="user-role" id="profile-user-role">Nível 1</span>
                 </div>
+                <button class="btn-logout" id="btn-logout" title="Sair da Conta">
+                    <i data-lucide="log-out"></i>
+                </button>
             </div>
         </div>
     </aside>
@@ -176,6 +185,6 @@
     </main>
 
     <!-- App Scripts -->
-    <script src="dashboard.js"></script>
+    <script src="dashboard.js?v=3"></script>
 </body>
 </html>

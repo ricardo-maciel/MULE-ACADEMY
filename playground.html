@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>
+        if (!localStorage.getItem('muleacademy_current_user')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuleAcademy - Playground de Integrações</title>
+    <meta name="description" content="Playground interativo com física de partículas e redes de sistemas. Veja a diferença entre conexões ponto a ponto e arquitetura centralizada com MuleSoft.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="playground.css">
+</head>
+<body>
+
+    <!-- Dashboard Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <i data-lucide="blocks" class="brand-icon"></i>
+            <div class="brand-text-wrapper">
+                <span class="brand-title">Mule<span>Academy</span></span>
+                <span class="brand-sub">Ricardo &bull; Antigravity</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html#welcome" class="nav-item"><i data-lucide="layout-dashboard"></i>Painel Principal</a>
+            <div class="nav-group">
+                <div class="nav-group-title-row">
+                    <a href="dashboard.html#modules" class="nav-item"><i data-lucide="book-open"></i>Introdução a Integrações</a>
+                    <button class="btn-reset-icon" id="btn-reset-sidebar" title="Resetar Progresso">
+                        <i data-lucide="rotate-ccw"></i>
+                    </button>
+                </div>
+                <div class="nav-subitems">
+                    <a href="index.html" class="nav-subitem" id="nav-sub-mod1"><i data-lucide="book-open-check"></i>Módulo 1 — Sistemas</a>
+                    <a href="modulo2.html" class="nav-subitem" id="nav-sub-mod2"><i data-lucide="braces"></i>Módulo 2 — Dados</a>
+                    <a href="modulo3.html" class="nav-subitem" id="nav-sub-mod3"><i data-lucide="cable"></i>Módulo 3 — Caos</a>
+                    <a href="modulo4.html" class="nav-subitem" id="nav-sub-mod4"><i data-lucide="cpu"></i>Módulo 4 — MuleSoft</a>
+                    <a href="modulo5.html" class="nav-subitem" id="nav-sub-mod5"><i data-lucide="shopping-cart"></i>Módulo 5 — Projeto</a>
+                </div>
+            </div>
+            <a href="playground.html" class="nav-item active" id="nav-playground"><i data-lucide="compass"></i>Playground Interativo</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar"><i data-lucide="user"></i></div>
+                <div class="user-info">
+                    <span class="user-name" id="profile-user-name">Aluno Iniciante</span>
+                    <span class="user-role" id="profile-user-role">Nível 1</span>
+                </div>
+                <button class="btn-logout" id="btn-logout" title="Sair da Conta">
+                    <i data-lucide="log-out"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-main playground-main">
+        
+        <!-- HEADER -->
+        <header class="playground-header">
+            <div class="header-info">
+                <span class="badge badge-indigo"><i data-lucide="activity" class="badge-icon"></i> SIMULAÇÃO EM TEMPO REAL</span>
+                <h1>Playground de Integrações</h1>
+                <p class="subtitle">Interaja com a rede de sistemas corporativos. Arraste os nós, simule cenários de integração e compare a arquitetura ponto a ponto com o ecossistema MuleSoft.</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-outline" onclick="window.location.href='dashboard.html'">
+                    <i data-lucide="arrow-left" class="btn-icon"></i>
+                    <span>Voltar ao Painel</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- PLAYGROUND GRID CONTAINER -->
+        <div class="playground-grid">
+            
+            <!-- LEFT PANEL: CONTROL & DETECT STACK -->
+            <div class="control-panel glass-panel">
+                
+                <!-- Toggle Mode Selector -->
+                <div class="control-section">
+                    <h3 class="panel-sec-title"><i data-lucide="git-branch" class="sec-icon text-indigo"></i> Topologia de Conexão</h3>
+                    <div class="toggle-mode-container">
+                        <button class="toggle-btn active" id="btn-mode-p2p" data-mode="p2p">
+                            <i data-lucide="grid" class="btn-icon"></i>
+                            <span>Ponto a Ponto</span>
+                            <span class="tag tag-rose">Caos</span>
+                        </button>
+                        <button class="toggle-btn" id="btn-mode-hub" data-mode="hub">
+                            <i data-lucide="hub" class="btn-icon-custom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M20 12h2M2 12h2M17.65 17.65l-2.15-2.15M8.5 8.5L6.35 6.35M17.65 6.35l-2.15 2.15M8.5 15.5l-2.15 2.15"/></svg></i>
+                            <span>Hub MuleSoft</span>
+                            <span class="tag tag-emerald">Fácil</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scenario Search / Technology Finder -->
+                <div class="control-section">
+                    <h3 class="panel-sec-title"><i data-lucide="search" class="sec-icon text-teal"></i> Localizador de Tecnologia</h3>
+                    <p class="panel-desc">Digite um endereço ou nome de empresa para simular a descoberta das tecnologias que eles utilizam e como integrá-las.</p>
+                    
+                    <div class="search-form-group">
+                        <div class="input-wrapper">
+                            <i data-lucide="globe" class="input-icon"></i>
+                            <input type="text" id="tech-finder-input" placeholder="ex: shopify.com ou adidas.com.br..." autocomplete="off">
+                        </div>
+                        <button class="btn btn-primary" id="btn-run-scan">
+                            <span>Escanear</span>
+                            <i data-lucide="cpu" class="btn-icon"></i>
+                        </button>
+                    </div>
+
+                    <!-- Preset Scenarios -->
+                    <div class="preset-scenarios">
+                        <span class="scenarios-title">Cenários de Integração:</span>
+                        <div class="scenario-pills">
+                            <button class="pill-btn" data-scenario="ecommerce">
+                                <i data-lucide="shopping-cart"></i> E-commerce Completo
+                            </button>
+                            <button class="pill-btn" data-scenario="crm">
+                                <i data-lucide="users"></i> CRM & Leads
+                            </button>
+                            <button class="pill-btn" data-scenario="erp">
+                                <i data-lucide="database"></i> ERP & Finanças
+                            </button>
+                            <button class="pill-btn" data-scenario="custom">
+                                <i data-lucide="plus-circle"></i> Personalizado
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Telemetry Panel -->
+                <div class="control-section telemetry-section">
+                    <h3 class="panel-sec-title"><i data-lucide="activity" class="sec-icon text-rose"></i> Telemetria do Sistema</h3>
+                    
+                    <div class="telemetry-grid">
+                        <div class="telemetry-card">
+                            <span class="tel-label">Conexões Totais</span>
+                            <span class="tel-value" id="tel-connections">15</span>
+                            <span class="tel-sub text-rose" id="tel-connections-sub">Complexidade Alta</span>
+                        </div>
+                        <div class="telemetry-card">
+                            <span class="tel-label">Latência Média</span>
+                            <span class="tel-value" id="tel-latency">340ms</span>
+                            <span class="tel-sub text-rose" id="tel-latency-sub">Risco de Perda</span>
+                        </div>
+                        <div class="telemetry-card">
+                            <span class="tel-label">Custo de Alteração</span>
+                            <span class="tel-value" id="tel-maintenance">Alto</span>
+                            <span class="tel-sub text-rose" id="tel-maintenance-sub">Manutenção Cara</span>
+                        </div>
+                        <div class="telemetry-card">
+                            <span class="tel-label">Taxa de Sucesso</span>
+                            <span class="tel-value" id="tel-success">88.5%</span>
+                            <span class="tel-sub text-yellow" id="tel-success-sub">Falhas Frequentes</span>
+                        </div>
+                    </div>
+
+                    <!-- Alert message dynamic -->
+                    <div class="telemetry-alert warning-glow" id="telemetry-alert-box">
+                        <i data-lucide="alert-triangle" class="alert-icon"></i>
+                        <div class="alert-text">
+                            <strong>Aviso de Arquitetura:</strong> A teia ponto a ponto exige n*(n-1)/2 conexões! Mudar qualquer sistema exige atualizar todos os outros.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: INTERACTIVE PHYSIC CANVAS CONTAINER -->
+            <div class="canvas-panel glass-panel" id="simulator-container">
+                
+                <!-- Laser Sweep Beam Overlay -->
+                <div class="laser-sweep" id="laser-sweep-beam"></div>
+
+                <!-- Canvas Layer -->
+                <canvas id="playground-canvas"></canvas>
+
+                <!-- HTML Nodes Layer (Absolute Positioned by physics loop) -->
+                <div class="nodes-container" id="nodes-container">
+                    
+                    <!-- Central Hub Node (MuleSoft) -->
+                    <div class="node node-hub active-hub" id="node-mulesoft" data-node="mulesoft">
+                        <div class="node-glow"></div>
+                        <div class="node-icon-wrapper">
+                            <i data-lucide="blocks"></i>
+                        </div>
+                        <span class="node-label">MuleSoft Hub</span>
+                        <div class="node-tooltip">Integração Centralizada & Governança</div>
+                    </div>
+
+                    <!-- Salesforce CRM Node -->
+                    <div class="node node-system" id="node-salesforce" data-node="salesforce">
+                        <div class="node-glow"></div>
+                        <div class="node-icon-wrapper">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <span class="node-label">Salesforce CRM</span>
+                        <div class="node-tooltip">Dados de Contatos e Leads</div>
+                    </div>
+
+                    <!-- Shopify E-commerce Node -->
+                    <div class="node node-system" id="node-shopify" data-node="shopify">
+                        <div class="node-glow"></div>
+                        <div class="node-icon-wrapper">
+                            <i data-lucide="shopping-cart"></i>
+                        </div>
+                        <span class="node-label">Shopify Store</span>
+                        <div class="node-tooltip">Vendas Online e Carrinhos</div>
+                    </div>
+
+                    <!-- Stripe Payments Node -->
+                    <div class="node node-system" id="node-stripe" data-node="stripe">
+                        <div class="node-glow"></div>
+                        <div class="node-icon-wrapper">
+                            <i data-lucide="credit-card"></i>
+                        </div>
+                        <span class="node-label">Stripe API</span>
+                        <div class="node-tooltip">Processamento de Pagamentos</div>
+                    </div>
+
+                    <!-- SAP ERP Node -->
+                    <div class="node node-system" id="node-sap" data-node="sap">
+                        <div class="node-glow"></div>
+                        <div class="node-icon-wrapper">
+                            <i data-lucide="building"></i>
+                        </div>
+                        <span class="node-label">SAP ERP</span>
+                        <div class="node-tooltip">Sistema de Gestão Legado (Faturamento)</div>
+                    </div>
+
+                    <!-- PostgreSQL Database Node -->
+                    <div class="node node-system" id="node-database" data-node="database">
+                        <div class="node-glow"></div>
+                        <div class="node-icon-wrapper">
+                            <i data-lucide="database"></i>
+                        </div>
+                        <span class="node-label">PostgreSQL</span>
+                        <div class="node-tooltip">Estoque de Produtos e Inventário</div>
+                    </div>
+
+                    <!-- Slack Notifications Node -->
+                    <div class="node node-system" id="node-slack" data-node="slack">
+                        <div class="node-glow"></div>
+                        <div class="node-icon-wrapper">
+                            <i data-lucide="slack"></i>
+                        </div>
+                        <span class="node-label">Slack API</span>
+                        <div class="node-tooltip">Alertas de Vendas e Avisos</div>
+                    </div>
+                </div>
+
+                <!-- Simulation Info Panel inside simulator -->
+                <div class="simulator-instructions-overlay">
+                    <span class="instruction-badge"><i data-lucide="mouse-pointer" class="icon-inline"></i> Dica</span>
+                    <span>Arraste os sistemas corporativos com o mouse ou movimente o cursor para atrair a rede de dados!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAIL MODAL FOR SYSTEM NODE CLICK -->
+        <div class="playground-modal-backdrop" id="node-modal">
+            <div class="playground-modal glass-panel">
+                <button class="modal-close" id="btn-close-modal"><i data-lucide="x"></i></button>
+                <div class="modal-header">
+                    <div class="modal-icon-container" id="modal-icon-bg">
+                        <i data-lucide="server" id="modal-icon"></i>
+                    </div>
+                    <div class="modal-titles">
+                        <h2 id="modal-title">Salesforce CRM</h2>
+                        <span class="badge badge-teal" id="modal-status">Conectado</span>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-desc">Informações do sistema...</p>
+                    <div class="modal-tech-specs">
+                        <div class="spec-row">
+                            <span class="spec-label">Protocolo Principal:</span>
+                            <span class="spec-val" id="modal-protocol">REST / JSON API</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Conexões Ativas:</span>
+                            <span class="spec-val" id="modal-active-connections">1</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Impacto de Indisponibilidade:</span>
+                            <span class="spec-val text-rose" id="modal-impact">Crítico</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="btn-modal-test-conn">
+                        <i data-lucide="refresh-cw" class="btn-icon"></i>
+                        <span>Testar Conexão</span>
+                    </button>
+                    <button class="btn btn-primary" id="btn-modal-disconnect">
+                        <i data-lucide="zap-off" class="btn-icon"></i>
+                        <span id="btn-disconnect-text">Desconectar do Hub</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- App Scripts -->
+    <script src="playground.js"></script>
+</body>
+</html>

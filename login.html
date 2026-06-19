@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuleAcademy - Acesso ao Portal</title>
+    <meta name="description" content="Página de autenticação e gerenciamento administrativo da MuleAcademy. Aprenda integração de sistemas.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <!-- Interactive Constellation Network Canvas -->
+    <div class="network-bg-container">
+        <canvas id="network-canvas"></canvas>
+    </div>
+
+    <!-- MAIN WRAPPER (Switches between Auth Card and Admin Panel) -->
+    <div class="portal-wrapper">
+
+        <!-- 🔐 AUTHENTICATION CARD -->
+        <div class="auth-card glass-panel" id="auth-card">
+            <!-- Header Logo -->
+            <div class="auth-logo">
+                <i data-lucide="blocks" class="brand-icon"></i>
+                <div class="logo-text">
+                    <span class="logo-title">Mule<span>Academy</span></span>
+                    <span class="logo-sub">Introdução a Integrações</span>
+                </div>
+            </div>
+
+            <!-- Tab Selectors -->
+            <div class="auth-tabs">
+                <button class="tab-btn active" id="tab-login-btn">Entrar</button>
+                <button class="tab-btn" id="tab-register-btn">Criar Conta</button>
+            </div>
+
+            <!-- Messages Alert -->
+            <div class="auth-alert hidden" id="auth-alert"></div>
+
+            <!-- FORM: LOGIN -->
+            <form id="form-login" class="auth-form">
+                <div class="input-group">
+                    <label for="login-email">Endereço de E-mail</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="mail" class="input-icon"></i>
+                        <input type="email" id="login-email" required placeholder="exemplo@email.com">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Senha de Acesso</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="lock" class="input-icon"></i>
+                        <input type="password" id="login-password" required placeholder="Digite sua senha">
+                        <button type="button" class="btn-toggle-pwd" tabindex="-1">
+                            <i data-lucide="eye" class="eye-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-20" id="btn-login-submit">
+                    <span>Acessar Plataforma</span>
+                    <i data-lucide="log-in" class="btn-icon"></i>
+                </button>
+            </form>
+
+            <!-- FORM: REGISTER -->
+            <form id="form-register" class="auth-form hidden">
+                <div class="input-group">
+                    <label for="reg-name">Seu Nome Completo</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input type="text" id="reg-name" required placeholder="Ex: Ricardo Maciel">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="reg-email">Endereço de E-mail</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="mail" class="input-icon"></i>
+                        <input type="email" id="reg-email" required placeholder="exemplo@email.com">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="reg-password">Crie uma Senha Forte</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="lock" class="input-icon"></i>
+                        <input type="password" id="reg-password" required placeholder="Mínimo 6 caracteres">
+                        <button type="button" class="btn-toggle-pwd" tabindex="-1">
+                            <i data-lucide="eye" class="eye-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-accent btn-block mt-20" id="btn-register-submit">
+                    <span>Finalizar Cadastro</span>
+                    <i data-lucide="user-plus" class="btn-icon"></i>
+                </button>
+            </form>
+
+            <!-- Footer terms -->
+            <div class="auth-footer">
+                <span>Criado por Ricardo com Antigravity</span>
+            </div>
+        </div>
+
+
+        <!-- 👑 ADMINISTRATIVE DASHBOARD PORTAL (HIDDEN BY DEFAULT) -->
+        <div class="admin-portal hidden" id="admin-portal">
+            
+            <!-- Admin Header -->
+            <header class="admin-header glass-panel">
+                <div class="admin-logo">
+                    <i data-lucide="shield" class="admin-logo-icon"></i>
+                    <div class="logo-text">
+                        <span class="logo-title">Mule<span>Academy</span></span>
+                        <span class="admin-badge">Painel do Administrador</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline btn-sm" id="btn-admin-to-student">
+                        <i data-lucide="layout-dashboard" class="btn-icon"></i>
+                        <span>Ir para Área do Aluno</span>
+                    </button>
+                    <button class="btn btn-rose btn-sm" id="btn-admin-logout">
+                        <i data-lucide="log-out" class="btn-icon"></i>
+                        <span>Sair do Admin</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Admin Body Layout -->
+            <div class="admin-layout-grid">
+                
+                <!-- Sidebar controls -->
+                <aside class="admin-sidebar glass-panel">
+                    <h3>Menu Administrativo</h3>
+                    <nav class="admin-nav">
+                        <button class="admin-nav-item active" id="nav-students-btn">
+                            <i data-lucide="users"></i>
+                            <span>Gerenciar Alunos</span>
+                        </button>
+                        <button class="admin-nav-item" id="nav-settings-btn">
+                            <i data-lucide="settings"></i>
+                            <span>Configurações</span>
+                        </button>
+                    </nav>
+
+                    <div class="admin-sidebar-footer">
+                        <span class="logged-admin-email">admin@curso.com</span>
+                    </div>
+                </aside>
+
+                <!-- Admin Main Panel -->
+                <main class="admin-main-content">
+
+                    <!-- TAB SECTION 1: STUDENTS MANAGEMENT -->
+                    <section id="admin-section-students" class="admin-tab-section active-tab-section">
+                        
+                        <!-- Statistics Cards Row -->
+                        <div class="stats-row">
+                            <div class="stat-card glass-panel border-indigo-glow">
+                                <div class="stat-icon bg-indigo"><i data-lucide="users"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-label">Total de Alunos</span>
+                                    <h2 class="stat-value" id="stat-total-users">0</h2>
+                                </div>
+                            </div>
+                            <div class="stat-card glass-panel border-teal-glow">
+                                <div class="stat-icon bg-teal"><i data-lucide="shield-check"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-label">Alunos Ativos</span>
+                                    <h2 class="stat-value" id="stat-active-users">0</h2>
+                                </div>
+                            </div>
+                            <div class="stat-card glass-panel border-accent-glow">
+                                <div class="stat-icon bg-accent"><i data-lucide="award"></i></div>
+                                <div class="stat-info">
+                                    <span class="stat-label">Conclusões Registradas</span>
+                                    <h2 class="stat-value" id="stat-completed-courses">0</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data table Wrapper -->
+                        <div class="table-wrapper glass-panel mt-30">
+                            <div class="table-header-bar">
+                                <h3>Lista de Alunos Cadastrados</h3>
+                                <div class="search-box">
+                                    <i data-lucide="search" class="search-icon"></i>
+                                    <input type="text" id="table-search" placeholder="Buscar aluno por nome ou email...">
+                                </div>
+                            </div>
+
+                            <table class="students-table" id="students-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>E-mail</th>
+                                        <th>Progresso do Curso</th>
+                                        <th>Acesso</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="students-table-body">
+                                    <!-- Dynamic rows from JS -->
+                                    <tr class="empty-row">
+                                        <td colspan="5">Nenhum aluno cadastrado no momento.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- TAB SECTION 2: SYSTEM CONFIGURATIONS -->
+                    <section id="admin-section-settings" class="admin-tab-section hidden">
+                        <div class="settings-box glass-panel max-w-600">
+                            <h3>Segurança do Administrador</h3>
+                            <p class="text-muted small-desc">Altere a senha mestre de acesso para o usuário administrador da plataforma.</p>
+                            
+                            <div class="auth-alert hidden mt-10 mb-10" id="settings-alert"></div>
+
+                            <form id="form-admin-password" class="auth-form mt-20">
+                                <div class="input-group">
+                                    <label for="admin-curr-pwd">Senha Atual</label>
+                                    <div class="input-wrapper">
+                                        <i data-lucide="lock" class="input-icon"></i>
+                                        <input type="password" id="admin-curr-pwd" required placeholder="Digite a senha atual">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="admin-new-pwd">Nova Senha</label>
+                                    <div class="input-wrapper">
+                                        <i data-lucide="key" class="input-icon"></i>
+                                        <input type="password" id="admin-new-pwd" required placeholder="Mínimo 6 caracteres">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="admin-conf-pwd">Confirmar Nova Senha</label>
+                                    <div class="input-wrapper">
+                                        <i data-lucide="check" class="input-icon"></i>
+                                        <input type="password" id="admin-conf-pwd" required placeholder="Repita a nova senha">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-20">
+                                    <i data-lucide="save" class="btn-icon"></i>
+                                    <span>Salvar Nova Senha</span>
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+
+                </main>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 👤 MODAL: EDIT STUDENT DATA & RESET PASSWORD -->
+    <div class="modal-overlay hidden" id="modal-edit-user">
+        <div class="modal-card glass-panel">
+            <div class="modal-header">
+                <h3>Editar Dados do Aluno</h3>
+                <button class="btn-close-modal" id="btn-close-modal"><i data-lucide="x"></i></button>
+            </div>
+            
+            <div class="auth-alert hidden mt-10 mb-10" id="modal-alert"></div>
+
+            <form id="form-edit-user" class="auth-form mt-20">
+                <input type="hidden" id="edit-user-index">
+                <div class="input-group">
+                    <label for="edit-user-name">Nome do Aluno</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input type="text" id="edit-user-name" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="edit-user-email">Endereço de E-mail</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="mail" class="input-icon"></i>
+                        <input type="email" id="edit-user-email" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="edit-user-password">Redefinir Senha (Opcional)</label>
+                    <div class="input-wrapper">
+                        <i data-lucide="key" class="input-icon"></i>
+                        <input type="password" id="edit-user-password" placeholder="Preencha apenas para mudar a senha">
+                    </div>
+                    <span class="text-muted small-desc mt-5">Deixe em branco se desejar manter a senha atual do aluno.</span>
+                </div>
+                
+                <div class="modal-actions-row mt-30">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="login.js"></script>
+</body>
+</html>

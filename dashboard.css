@@ -1509,3 +1509,29 @@ input:checked + .slider:before {
         gap: 1rem;
     }
 }
+
+.btn-logout {
+    background: none;
+    border: none;
+    color: var(--color-text-dark);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    margin-left: auto;
+}
+
+.btn-logout:hover {
+    color: var(--color-rose-light);
+    background: rgba(244, 63, 94, 0.1);
+}
+
+.btn-logout i,
+.btn-logout svg {
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
