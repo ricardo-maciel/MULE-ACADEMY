@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Jornada das APIs: Por que sistemas precisam se comunicar?</title>
+    <meta name="description" content="Aprenda de forma simples, interativa e visual como as APIs conectam o mundo digital. Entenda requisições, respostas e onde o MuleSoft entra nessa história.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Navigation Progress Bar -->
+    <nav class="progress-nav" id="main-nav">
+        <div class="logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
+            <i data-lucide="blocks" class="logo-icon"></i>
+            <span>Mule<span>Academy</span></span>
+        </div>
+        
+        <button class="btn btn-outline btn-sm header-dashboard-btn" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="layout-dashboard" class="btn-icon"></i>
+            <span>Painel Principal</span>
+        </button>
+
+        <div class="chapters-progress">
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+            <div class="steps-container">
+                <button class="step-btn active" data-target="hero" title="Introdução">1</button>
+                <button class="step-btn" data-target="cap1" title="O Problema">2</button>
+                <button class="step-btn" data-target="cap2" title="A Necessidade">3</button>
+                <button class="step-btn" data-target="cap3" title="O que é uma API">4</button>
+                <button class="step-btn" data-target="cap4" title="Simulador de API">5</button>
+                <button class="step-btn" data-target="cap5" title="Prática Real">6</button>
+                <button class="step-btn" data-target="cap6" title="MuleSoft">7</button>
+                <button class="step-btn" data-target="conclusion" title="Conclusão">8</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container -->
+    <main class="app-container">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="chapter-section active-section">
+            <div class="section-content grid-2">
+                <div class="text-block">
+                    <span class="badge">AULA INTERATIVA</span>
+                    <h1>Por que os sistemas precisam se comunicar?</h1>
+                    <p class="subtitle">Imagine se os aplicativos no seu celular fossem ilhas totalmente isoladas. Descubra de forma simples e visual a origem das integrações e o poder das APIs.</p>
+                    <div class="cta-group">
+                        <button class="btn btn-primary" id="btn-start-class">
+                            <span>Começar Aula</span>
+                            <i data-lucide="play" class="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="visual-block">
+                    <div class="hero-illustration">
+                        <!-- Isolated Systems Visual -->
+                        <svg viewBox="0 0 400 300" class="svg-il">
+                            <!-- Background Grid Elements -->
+                            <defs>
+                                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="var(--color-indigo)" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="var(--color-indigo)" stop-opacity="0"/>
+                                </radialGradient>
+                            </defs>
+                            <rect width="400" height="300" fill="transparent"/>
+                            <circle cx="200" cy="150" r="120" fill="url(#glow)"/>
+                            
+                            <!-- Left Computer (System A) -->
+                            <g class="float-animation" style="animation-delay: 0s;">
+                                <rect x="50" y="80" width="100" height="70" rx="8" fill="#1e293b" stroke="#6366f1" stroke-width="3"/>
+                                <rect x="58" y="88" width="84" height="46" rx="4" fill="#0f172a"/>
+                                <path d="M70 111 H90 M70 120 H110" stroke="#4f46e5" stroke-dasharray="2 1" stroke-width="2"/>
+                                <polygon points="80,150 70,180 130,180 120,150" fill="#334155"/>
+                                <rect x="65" y="180" width="70" height="8" rx="2" fill="#1e293b"/>
+                                <!-- Cry Eye Icon/Unhappy Face -->
+                                <circle cx="90" cy="103" r="3" fill="#ef4444"/>
+                                <circle cx="110" cy="103" r="3" fill="#ef4444"/>
+                                <path d="M95 120 Q100 115 105 120" stroke="#ef4444" stroke-width="2" fill="none"/>
+                                <text x="100" y="65" fill="#94a3b8" font-size="12" text-anchor="middle" font-family="'Inter', sans-serif">SISTEMA A</text>
+                            </g>
+
+                            <!-- Water / Separation Barrier -->
+                            <path d="M170 40 Q210 150 170 260" stroke="#ef4444" stroke-dasharray="5 5" stroke-width="3" fill="none"/>
+                            <text x="215" y="155" fill="#ef4444" font-size="12" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="bold">ISOLADOS</text>
+                            
+                            <!-- Right Computer (System B) -->
+                            <g class="float-animation" style="animation-delay: 1.5s;">
+                                <rect x="250" y="80" width="100" height="70" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="3"/>
+                                <rect x="258" y="88" width="84" height="46" rx="4" fill="#0f172a"/>
+                                <path d="M270 111 H290 M270 120 H310" stroke="#2563eb" stroke-dasharray="2 1" stroke-width="2"/>
+                                <polygon points="280,150 270,180 330,180 320,150" fill="#334155"/>
+                                <rect x="265" y="180" width="70" height="8" rx="2" fill="#1e293b"/>
+                                <!-- Unhappy Face -->
+                                <circle cx="290" cy="103" r="3" fill="#ef4444"/>
+                                <circle cx="310" cy="103" r="3" fill="#ef4444"/>
+                                <path d="M295 120 Q300 115 305 120" stroke="#ef4444" stroke-width="2" fill="none"/>
+                                <text x="300" y="65" fill="#94a3b8" font-size="12" text-anchor="middle" font-family="'Inter', sans-serif">SISTEMA B</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 1: O PROBLEMA -->
+        <section id="cap1" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 1</span>
+                <h2>O Grande Silêncio do Mundo Digital</h2>
+                <div class="grid-2">
+                    <div class="text-block">
+                        <p>No início, os softwares eram criados apenas para funcionar sozinhos. Mas imagine o que acontece em um exemplo real do dia a dia: uma <strong>loja virtual</strong>.</p>
+                        
+                        <div class="scenario-cards">
+                            <div class="card problem-card">
+                                <div class="card-icon error"><i data-lucide="shopping-cart"></i></div>
+                                <h3>1. Vendas</h3>
+                                <p>O cliente compra um produto no site. O sistema de Vendas registra a compra.</p>
+                            </div>
+                            <div class="card problem-card">
+                                <div class="card-icon error"><i data-lucide="package"></i></div>
+                                <h3>2. Estoque</h3>
+                                <p>O galpão precisa separar o produto. Mas eles não sabem que o produto foi vendido!</p>
+                            </div>
+                            <div class="card problem-card">
+                                <div class="card-icon error"><i data-lucide="receipt"></i></div>
+                                <h3>3. Faturamento</h3>
+                                <p>A nota fiscal precisa ser emitida, mas o sistema financeiro não recebeu as informações da venda.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visual-block flex-center">
+                        <div class="glass-panel">
+                            <h3>Consequências da Desconexão:</h3>
+                            <ul class="bullet-list">
+                                <li>
+                                    <i data-lucide="x-circle" class="list-icon text-rose"></i>
+                                    <span><strong>Erros Humanos:</strong> Funcionários digitando dados manualmente de um sistema para o outro.</span>
+                                </li>
+                                <li>
+                                    <i data-lucide="clock" class="list-icon text-rose"></i>
+                                    <span><strong>Lentidão Extrema:</strong> Pedidos levando dias apenas para serem processados entre departamentos.</span>
+                                </li>
+                                <li>
+                                    <i data-lucide="alert-triangle" class="list-icon text-rose"></i>
+                                    <span><strong>Clientes Furiosos:</strong> O produto acaba no estoque, mas o site continuava vendendo!</span>
+                                </li>
+                            </ul>
+                            <!-- Plug disconnected visual -->
+                            <div class="disconnected-plug-container">
+                                <i data-lucide="cable-car" class="plug-icon"></i>
+                                <span class="badge badge-error">Sem Conexão</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="cap2">
+                        <span>Avançar para o Capítulo 2</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 2: A NECESSIDADE -->
+        <section id="cap2" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 2</span>
+                <h2>A Loja Cresceu... E Agora?</h2>
+                <div class="grid-2">
+                    <div class="text-block">
+                        <p>Quando a loja tinha 2 vendas por dia, copiar dados manualmente do site para a planilha e depois para o estoque era chato, mas possível.</p>
+                        <p>Agora, imagine que a empresa cresceu muito! São <strong>milhares de vendas por minuto</strong>. Fazer isso manualmente é impossível!</p>
+                        <blockquote class="story-quote">
+                            "A tecnologia precisa automatizar esse fluxo. Os sistemas precisam conversar sozinhos, sem intervenção humana, instantaneamente."
+                        </blockquote>
+                        <p>Para resolver isso, os programadores começaram a tentar conectar cada sistema a todos os outros de forma direta...</p>
+                    </div>
+                    <div class="visual-block flex-center">
+                        <div class="interactive-spaghetti-box glass-panel">
+                            <h3>A Armadilha da Conexão Direta:</h3>
+                            <p class="small-desc text-muted">Clique abaixo para ver o que acontece se tentarmos interligar tudo de forma manual e bagunçada (o famoso "Espaguete de Sistemas").</p>
+                            
+                            <div class="spaghetti-visual">
+                                <svg viewBox="0 0 300 200" class="svg-spaghetti">
+                                    <defs>
+                                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-indigo)"/>
+                                        </marker>
+                                    </defs>
+                                    <!-- Central Node (Spaghetti state) -->
+                                    <circle cx="50" cy="50" r="15" fill="#1e293b" stroke="#6366f1" stroke-width="2"/>
+                                    <text x="50" y="54" fill="#fff" font-size="10" font-family="Inter" text-anchor="middle">Vendas</text>
+
+                                    <circle cx="250" cy="50" r="15" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+                                    <text x="250" y="54" fill="#fff" font-size="10" font-family="Inter" text-anchor="middle">Estoque</text>
+
+                                    <circle cx="70" cy="150" r="15" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+                                    <text x="70" y="154" fill="#fff" font-size="10" font-family="Inter" text-anchor="middle">Financ</text>
+
+                                    <circle cx="230" cy="150" r="15" fill="#1e293b" stroke="#ec4899" stroke-width="2"/>
+                                    <text x="230" y="154" fill="#fff" font-size="10" font-family="Inter" text-anchor="middle">Entrega</text>
+
+                                    <!-- Connections that will appear when clicked -->
+                                    <g id="spaghetti-lines" class="hidden-connections">
+                                        <line x1="50" y1="50" x2="250" y2="50" stroke="#f43f5e" stroke-width="2" class="dash-line"/>
+                                        <line x1="50" y1="50" x2="70" y2="150" stroke="#f43f5e" stroke-width="2" class="dash-line"/>
+                                        <line x1="50" y1="50" x2="230" y2="150" stroke="#f43f5e" stroke-width="2" class="dash-line"/>
+                                        <line x1="250" y1="50" x2="70" y2="150" stroke="#f43f5e" stroke-width="2" class="dash-line"/>
+                                        <line x1="250" y1="50" x2="230" y2="150" stroke="#f43f5e" stroke-width="2" class="dash-line"/>
+                                        <line x1="70" y1="150" x2="230" y2="150" stroke="#f43f5e" stroke-width="2" class="dash-line"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <button class="btn btn-accent btn-sm" id="btn-toggle-spaghetti">Ver Conexão Manual</button>
+                            <span class="warning-text text-rose hidden" id="spaghetti-warning-text">☠️ Caótico! E se adicionarmos mais 10 sistemas? Vira uma teia impossível de manter.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="cap3">
+                        <span>Avançar para o Capítulo 3</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 3: O QUE É UMA API -->
+        <section id="cap3" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 3</span>
+                <h2>A Analogia Perfeita: O Garçom</h2>
+                <p class="center-subtitle">Como as APIs resolvem esse problema de comunicação sem bagunça?</p>
+                
+                <div class="grid-3 restaurant-analogy">
+                    <!-- Client -->
+                    <div class="card glass-card text-center">
+                        <div class="badge badge-indigo">CLIENTE</div>
+                        <div class="card-large-icon"><i data-lucide="user"></i></div>
+                        <h3>A Mesa do Cliente</h3>
+                        <p>Você é o <strong>Cliente</strong>. Você escolhe um prato do cardápio e faz o pedido (<strong>Request</strong>).</p>
+                        <p class="highlight-text">Você não vai até a cozinha cozinhar, você apenas faz o pedido.</p>
+                    </div>
+
+                    <!-- API / Waiter -->
+                    <div class="card glass-card text-center highlight-border">
+                        <div class="badge badge-accent">API (INTERMEDIÁRIO)</div>
+                        <div class="card-large-icon anim-bounce"><i data-lucide="soup"></i></div>
+                        <h3>O Garçom (API)</h3>
+                        <p>O <strong>Garçom</strong> é a **API** (Application Programming Interface).</p>
+                        <p>Ele recebe o seu pedido, leva até a cozinha, espera a comida ficar pronta e traz de volta para você (<strong>Response</strong>).</p>
+                    </div>
+
+                    <!-- Server -->
+                    <div class="card glass-card text-center">
+                        <div class="badge badge-teal">SERVIDOR</div>
+                        <div class="card-large-icon"><i data-lucide="cooking-pot"></i></div>
+                        <h3>A Cozinha (Servidor)</h3>
+                        <p>A **Cozinha** é o **Servidor** que guarda e processa os dados.</p>
+                        <p>Ela recebe o pedido do garçom, prepara a refeição e a entrega ao garçom.</p>
+                    </div>
+                </div>
+
+                <div class="alert-box info-alert">
+                    <i data-lucide="info" class="alert-icon"></i>
+                    <div>
+                        <strong>Sacada importante:</strong> O cliente não precisa saber como a cozinha funciona por dentro, só precisa falar com o garçom seguindo as regras do menu. Uma **API** é exatamente esse menu de regras!
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="cap4">
+                        <span>Avançar para o Simulador de API</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 4: FLUXO INTERATIVO DE API -->
+        <section id="cap4" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 4 - PRÁTICA INTERATIVA</span>
+                <h2>Simulador de API em Ação</h2>
+                <p class="center-subtitle">Execute requisições, envie dados, simule erros de servidor e tente novamente para entender a mecânica real.</p>
+                
+                <div class="simulator-layout">
+                    <!-- Visualization Panel -->
+                    <div class="simulator-visual-panel glass-panel">
+                        <!-- Node Network -->
+                        <div class="network-nodes">
+                            <div class="node-wrapper" id="node-client">
+                                <div class="node-circle node-client-circle">
+                                    <i data-lucide="monitor"></i>
+                                </div>
+                                <span>Cliente (Você)</span>
+                            </div>
+
+                            <div class="network-bridge">
+                                <div class="bridge-line">
+                                    <div class="data-packet" id="packet-data"></div>
+                                </div>
+                                <div class="node-wrapper" id="node-api">
+                                    <div class="node-circle node-api-circle">
+                                        <i data-lucide="network"></i>
+                                    </div>
+                                    <span>API</span>
+                                </div>
+                                <div class="bridge-line-2">
+                                    <div class="data-packet" id="packet-data-2"></div>
+                                </div>
+                            </div>
+
+                            <div class="node-wrapper" id="node-server">
+                                <div class="node-circle node-server-circle">
+                                    <i data-lucide="database"></i>
+                                </div>
+                                <span>Servidor (Cozinha)</span>
+                            </div>
+                        </div>
+
+                        <!-- Status Feed / Narrative -->
+                        <div class="simulation-status" id="sim-status">
+                            <i data-lucide="info" class="status-icon"></i>
+                            <span id="sim-status-text">Pronto para iniciar. Escolha uma ação abaixo!</span>
+                        </div>
+
+                        <!-- Control Center -->
+                        <div class="control-center">
+                            <button class="btn btn-primary" id="btn-run-request">
+                                <i data-lucide="play" class="btn-icon"></i>
+                                <span>Executar Requisição (Sucesso)</span>
+                            </button>
+                            <button class="btn btn-rose" id="btn-simulate-error">
+                                <i data-lucide="alert-triangle" class="btn-icon"></i>
+                                <span>Simular Erro 500</span>
+                            </button>
+                            <button class="btn btn-accent hidden" id="btn-retry">
+                                <i data-lucide="refresh-cw" class="btn-icon"></i>
+                                <span>Tentar Novamente (Retry)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- JSON / Data Terminal Panel -->
+                    <div class="simulator-terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="terminal-title">Monitor de Dados JSON</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-section">
+                                <span class="section-label"><i data-lucide="arrow-right-left"></i> Envio (Request)</span>
+                                <pre><code id="json-request">{
+  "pedido_id": null
+}</code></pre>
+                            </div>
+                            <hr class="terminal-separator">
+                            <div class="terminal-section">
+                                <span class="section-label"><i data-lucide="reply"></i> Retorno (Response)</span>
+                                <pre><code id="json-response">{
+  "mensagem": "Aguardando requisição..."
+}</code></pre>
+                            </div>
+                            <div class="terminal-http-badge idly" id="http-status-badge">---</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="cap5">
+                        <span>Avançar para o Exemplo Prático</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 5: EXEMPLO PRÁTICO -->
+        <section id="cap5" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 5</span>
+                <h2>A Orquestra do E-Commerce</h2>
+                <p class="center-subtitle">Como as APIs trabalham em conjunto nos bastidores quando você clica em "Comprar".</p>
+                
+                <div class="grid-2 align-items-center">
+                    <div class="text-block">
+                        <p>Quando você realiza uma compra, um único clique ativa várias APIs diferentes de forma invisível. Veja a sequência lógica:</p>
+                        
+                        <ol class="step-ordered-list">
+                            <li>
+                                <div class="step-num">1</div>
+                                <div>
+                                    <h4>Aprovação do Pagamento</h4>
+                                    <p>O site chama a <strong>API de Pagamento</strong> (como Stripe ou PayPal) enviando os dados do cartão de crédito. Ela processa e devolve: <em>"Aprovado!"</em>.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="step-num">2</div>
+                                <div>
+                                    <h4>Separação do Produto</h4>
+                                    <p>Após aprovar o pagamento, o site chama a <strong>API de Estoque</strong> para reservar o tênis no galpão físico e atualizar o saldo.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="step-num">3</div>
+                                <div>
+                                    <h4>Envio e Logística</h4>
+                                    <p>Por fim, o site chama a <strong>API de Entrega</strong> (como Correios ou DHL) para gerar a etiqueta de postagem e obter o código de rastreamento.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="visual-block flex-center">
+                        <!-- Step by Step Visual Flow -->
+                        <div class="glass-panel w-100 flex-column">
+                            <h3>Fluxo de Compra Completo</h3>
+                            <div class="checkout-flow-graphic">
+                                <div class="flow-step-item">
+                                    <div class="flow-circle active"><i data-lucide="shopping-bag"></i></div>
+                                    <span>Checkout</span>
+                                </div>
+                                <div class="flow-connector active"></div>
+                                <div class="flow-step-item">
+                                    <div class="flow-circle active"><i data-lucide="credit-card"></i></div>
+                                    <span>API Pagamento</span>
+                                </div>
+                                <div class="flow-connector"></div>
+                                <div class="flow-step-item">
+                                    <div class="flow-circle"><i data-lucide="truck"></i></div>
+                                    <span>API Entrega</span>
+                                </div>
+                            </div>
+                            <p class="small-desc text-muted mt-20 text-center">Tudo acontece em frações de segundos, proporcionando a experiência imediata de compra online!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="cap6">
+                        <span>Avançar para o MuleSoft</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPÍTULO 6: ONDE ENTRA O MULESOFT -->
+        <section id="cap6" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 6 - A SOLUÇÃO PROFISSIONAL</span>
+                <h2>MuleSoft: O Super Conector</h2>
+                <div class="grid-2">
+                    <div class="text-block">
+                        <p>À medida que as empresas crescem, elas precisam gerenciar **centenas ou milhares** de APIs e conexões. Lembra daquela teia de espaguete bagunçada do Capítulo 2?</p>
+                        <p>O **MuleSoft** entra como o **Hub Central de Integração** (uma central de conexões inteligente e segura).</p>
+                        
+                        <div class="mulesoft-features">
+                            <div class="feature-item">
+                                <i data-lucide="check-circle" class="feat-icon"></i>
+                                <div>
+                                    <h4>Sem Código Complexo (No-Code/Low-Code)</h4>
+                                    <p>Permite ligar sistemas arrastando e soltando conectores prontos, economizando meses de programação manual.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i data-lucide="shield-check" class="feat-icon"></i>
+                                <div>
+                                    <h4>Segurança & Governança</h4>
+                                    <p>Garante que dados confidenciais de clientes viajem de forma criptografada e segura pelas APIs.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i data-lucide="bar-chart-3" class="feat-icon"></i>
+                                <div>
+                                    <h4>Monitoramento Completo</h4>
+                                    <p>Mostra em tempo real quais APIs estão ativas, quais estão lentas ou falhando.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visual-block flex-center">
+                        <div class="hub-visual-container glass-panel">
+                            <h3>Como o MuleSoft Organiza Tudo</h3>
+                            <!-- Central Hub SVG visual representation -->
+                            <svg viewBox="0 0 300 250" class="svg-hub">
+                                <defs>
+                                    <radialGradient id="hub-glow" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="var(--color-accent)" stop-opacity="0.4"/>
+                                        <stop offset="100%" stop-color="var(--color-accent)" stop-opacity="0"/>
+                                    </radialGradient>
+                                </defs>
+                                
+                                <circle cx="150" cy="125" r="50" fill="url(#hub-glow)"/>
+                                
+                                <!-- Connection Lines to central hub -->
+                                <line x1="50" y1="50" x2="150" y2="125" stroke="var(--color-teal)" stroke-width="2" class="dash-line-pulse"/>
+                                <line x1="250" y1="50" x2="150" y2="125" stroke="var(--color-teal)" stroke-width="2" class="dash-line-pulse"/>
+                                <line x1="50" y1="200" x2="150" y2="125" stroke="var(--color-teal)" stroke-width="2" class="dash-line-pulse"/>
+                                <line x1="250" y1="200" x2="150" y2="125" stroke="var(--color-teal)" stroke-width="2" class="dash-line-pulse"/>
+
+                                <!-- Surrounding systems -->
+                                <circle cx="50" cy="50" r="18" fill="#1e293b" stroke="var(--color-indigo)" stroke-width="2"/>
+                                <text x="50" y="80" fill="#94a3b8" font-size="10" font-family="Inter" text-anchor="middle">Salesforce</text>
+                                
+                                <circle cx="250" cy="50" r="18" fill="#1e293b" stroke="var(--color-indigo)" stroke-width="2"/>
+                                <text x="250" y="80" fill="#94a3b8" font-size="10" font-family="Inter" text-anchor="middle">Banco de Dados</text>
+
+                                <circle cx="50" cy="200" r="18" fill="#1e293b" stroke="var(--color-indigo)" stroke-width="2"/>
+                                <text x="50" y="230" fill="#94a3b8" font-size="10" font-family="Inter" text-anchor="middle">ERP SAP</text>
+
+                                <circle cx="250" cy="200" r="18" fill="#1e293b" stroke="var(--color-indigo)" stroke-width="2"/>
+                                <text x="250" y="230" fill="#94a3b8" font-size="10" font-family="Inter" text-anchor="middle">Loja Shopify</text>
+
+                                <!-- Central Hub (MuleSoft) -->
+                                <circle cx="150" cy="125" r="30" fill="var(--color-accent)" class="pulse-animation"/>
+                                <text x="150" y="129" fill="#0f172a" font-size="9" font-family="Outfit" font-weight="bold" text-anchor="middle">MULESOFT</text>
+                            </svg>
+                            <p class="small-desc text-accent text-center font-semibold">Os sistemas não se tocam diretamente. O MuleSoft gerencia toda a conversa com elegância.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="conclusion">
+                        <span>Avançar para Concluir Aula</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCLUSÃO -->
+        <section id="conclusion" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="chapter-number">AULA CONCLUÍDA</span>
+                <div class="success-trophy">
+                    <div class="trophy-glow"></div>
+                    <i data-lucide="award" class="trophy-icon"></i>
+                </div>
+                <h2>Parabéns! Você concluiu a Introdução às APIs!</h2>
+                <p class="subtitle max-w-600">Agora você já entende que os sistemas precisam trocar dados para as empresas funcionarem, que as **APIs** são as pontes seguras desse tráfego, e que o **MuleSoft** organiza tudo de forma profissional.</p>
+                
+                <div class="summary-cards max-w-800">
+                    <div class="summary-card">
+                        <i data-lucide="key" class="sum-icon"></i>
+                        <h4>Conectividade</h4>
+                        <p>Sistemas isolados geram retrabalho. Integração automatiza processos.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i data-lucide="arrow-right-left" class="sum-icon"></i>
+                        <h4>Request & Response</h4>
+                        <p>O cliente faz uma pergunta (Request) e a API traz a resposta (Response).</p>
+                    </div>
+                    <div class="summary-card">
+                        <i data-lucide="refresh-cw" class="sum-icon"></i>
+                        <h4>Erros & Retries</h4>
+                        <p>Tratar erros com tentativas de reenvio garante a estabilidade de compras e processos.</p>
+                    </div>
+                </div>
+
+                <div class="cta-box glass-panel max-w-600">
+                    <h3>Pronto para o próximo passo?</h3>
+                    <p>Vamos aprender a linguagem que os sistemas usam para trocar dados de verdade no Módulo 2!</p>
+                    <div class="module-navigation-group mt-20">
+                        <button class="btn btn-outline btn-lg" disabled title="Você está no primeiro módulo.">
+                            <i data-lucide="arrow-left" class="btn-icon"></i>
+                            <span>Módulo Anterior</span>
+                        </button>
+                        <a href="modulo2.html" class="btn btn-accent btn-lg" id="btn-final-learn">
+                            <span>Ir para o Módulo 2</span>
+                            <i data-lucide="arrow-right" class="btn-icon"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="btn btn-link mt-20" id="btn-restart-class">
+                    <i data-lucide="rotate-ccw"></i>
+                    <span>Reiniciar aula desde o começo</span>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 MuleAcademy. Desenvolvido para fins educacionais de iniciantes em tecnologia.</p>
+            <button class="btn btn-outline btn-sm" onclick="window.location.href='dashboard.html'">
+                <i data-lucide="layout-dashboard" class="btn-icon"></i>
+                <span>Painel Principal</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- App Logic Script -->
+    <script src="app.js"></script>
+</body>
+</html>

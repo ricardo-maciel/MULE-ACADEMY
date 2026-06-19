@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 2 - JSON, XML e CSV: Como sistemas conversam?</title>
+    <meta name="description" content="Aprenda o que são objetos e compare formatos de dados comuns (JSON, XML e CSV) com ferramentas interativas e simuladores práticos.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="modulo2.css">
+</head>
+<body>
+
+    <!-- Navigation Progress Bar -->
+    <nav class="progress-nav" id="main-nav">
+        <div class="logo" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="arrow-left" class="back-icon"></i>
+            <span>Mule<span>Academy</span></span>
+        </div>
+        
+        <button class="btn btn-outline btn-sm header-dashboard-btn" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="layout-dashboard" class="btn-icon"></i>
+            <span>Painel Principal</span>
+        </button>
+
+        <div class="chapters-progress">
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+            <div class="steps-container">
+                <button class="step-btn active" data-target="hero" title="Introdução">1</button>
+                <button class="step-btn" data-target="o-que-e-objeto" title="O que é Objeto">2</button>
+                <button class="step-btn" data-target="objeto-em-dados" title="Formatos Estáticos">3</button>
+                <button class="step-btn" data-target="conversor-interativo" title="Conversor Visual">4</button>
+                <button class="step-btn" data-target="comparativo" title="Tabela Comparativa">5</button>
+                <button class="step-btn" data-target="modo-api" title="Modo API">6</button>
+                <button class="step-btn" data-target="simulador-erro" title="Simular Erros">7</button>
+                <button class="step-btn" data-target="exercicio-pratico" title="Exercício Prático">8</button>
+                <button class="step-btn" data-target="conclusao" title="Conclusão">9</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="app-container">
+
+        <!-- 1. HERO -->
+        <section id="hero" class="chapter-section active-section">
+            <div class="section-content grid-2">
+                <div class="text-block">
+                    <span class="badge">MÓDULO 2 — CONCEITOS INICIAIS</span>
+                    <h1>Como os sistemas organizam informações?</h1>
+                    <p class="subtitle">Antes de entender linguagens complexas de dados como JSON ou XML, você precisa entender o conceito mais simples de todos: **o que é um Objeto**.</p>
+                    <div class="cta-group">
+                        <button class="btn btn-primary" id="btn-start-lesson">
+                            <span>Começar Aula</span>
+                            <i data-lucide="arrow-right" class="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="visual-block">
+                    <div class="hero-illustration">
+                        <svg viewBox="0 0 400 300" class="svg-il">
+                            <defs>
+                                <radialGradient id="hero-glow" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="var(--color-indigo)" stop-opacity="0.25"/>
+                                    <stop offset="100%" stop-color="var(--color-indigo)" stop-opacity="0"/>
+                                </radialGradient>
+                            </defs>
+                            <rect width="400" height="300" fill="transparent"/>
+                            <circle cx="200" cy="150" r="110" fill="url(#hero-glow)"/>
+                            
+                            <!-- Floating Data Braces & Tags -->
+                            <g class="float-animation" style="animation-delay: 0s;">
+                                <rect x="80" y="80" width="80" height="60" rx="8" fill="#1e293b" stroke="#f97316" stroke-width="2"/>
+                                <text x="120" y="115" fill="#f97316" font-family="'Fira Code', monospace" font-size="18" text-anchor="middle" font-weight="bold">{ JSON }</text>
+                            </g>
+                            <g class="float-animation" style="animation-delay: 1.5s;">
+                                <rect x="240" y="70" width="80" height="60" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+                                <text x="280" y="105" fill="#3b82f6" font-family="'Fira Code', monospace" font-size="18" text-anchor="middle" font-weight="bold">&lt;XML&gt;</text>
+                            </g>
+                            <g class="float-animation" style="animation-delay: 0.8s;">
+                                <rect x="160" y="170" width="80" height="60" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+                                <text x="200" y="205" fill="#10b981" font-family="'Fira Code', monospace" font-size="18" text-anchor="middle" font-weight="bold">CSV,csv</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. O QUE É UM OBJETO -->
+        <section id="o-que-e-objeto" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 1</span>
+                <h2>A Menor Caixinha de Dados: O Objeto</h2>
+                <div class="grid-2">
+                    <div class="text-block">
+                        <p>No mundo real, tudo é um "objeto" que possui características específicas. Uma **Pessoa** possui nome, idade e endereço. Um **Carro** possui marca, modelo e cor.</p>
+                        <p>Na programação, fazemos a mesma coisa! Criamos **Objetos Digitais** que são "caixinhas virtuais" contendo essas mesmas características (que chamamos de **atributos** ou **propriedades**).</p>
+                        
+                        <blockquote class="story-quote">
+                            "Um Objeto Digital é a forma que os sistemas usam para carregar informações sobre itens do mundo real de uma forma que o computador consiga compreender."
+                        </blockquote>
+                    </div>
+                    <div class="visual-block flex-center">
+                        <div class="comparison-container glass-panel">
+                            <h3>Pessoa Real vs Objeto Digital</h3>
+                            
+                            <div class="comparison-split">
+                                <!-- Real person card -->
+                                <div class="visual-card-p flex-column align-items-center">
+                                    <div class="card-avatar"><i data-lucide="user"></i></div>
+                                    <h4>João da Silva</h4>
+                                    <span class="card-desc">Humano Físico</span>
+                                    <hr class="card-divider">
+                                    <p class="card-p-detail">Mora em **São Luís** e tem **25 anos** de idade.</p>
+                                </div>
+                                
+                                <div class="arrow-between"><i data-lucide="arrow-right-left"></i></div>
+
+                                <!-- Digital Box -->
+                                <div class="visual-card-d flex-column">
+                                    <div class="digital-box-header"><i data-lucide="package-open"></i><span>Objeto: Pessoa</span></div>
+                                    <div class="digital-field" id="v-field-nome">
+                                        <span class="f-key">Nome:</span> <span class="f-val">"João"</span>
+                                    </div>
+                                    <div class="digital-field" id="v-field-idade">
+                                        <span class="f-key">Idade:</span> <span class="f-val">25</span>
+                                    </div>
+                                    <div class="digital-field" id="v-field-cidade">
+                                        <span class="f-key">Cidade:</span> <span class="f-val">"São Luís"</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="objeto-em-dados">
+                        <span>Ir para o Capítulo 2</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. O MESMO OBJETO EM DADOS -->
+        <section id="objeto-em-dados" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 2</span>
+                <h2>Representando o Objeto em Texto</h2>
+                <p class="center-subtitle">Como as caixinhas de dados são escritas para serem enviadas pela rede? O objeto "João" pode ser formatado de 3 formas clássicas.</p>
+                
+                <div class="grid-3 static-formats-grid">
+                    <!-- JSON Card -->
+                    <div class="card format-info-card border-json">
+                        <div class="format-card-header text-json">
+                            <i data-lucide="braces"></i>
+                            <h3>Formato JSON</h3>
+                        </div>
+                        <pre><code>{
+  "nome": "João",
+  "idade": 25,
+  "cidade": "São Luís"
+}</code></pre>
+                        <p class="card-desc">Linguagem moderna e compacta baseada em pares de **Chave / Valor**. Hoje é a rainha da internet.</p>
+                    </div>
+
+                    <!-- XML Card -->
+                    <div class="card format-info-card border-xml">
+                        <div class="format-card-header text-xml">
+                            <i data-lucide="file-code"></i>
+                            <h3>Formato XML</h3>
+                        </div>
+                        <pre><code>&lt;pessoa&gt;
+  &lt;nome&gt;João&lt;/nome&gt;
+  &lt;idade&gt;25&lt;/idade&gt;
+  &lt;cidade&gt;São Luís&lt;/cidade&gt;
+&lt;/pessoa&gt;</code></pre>
+                        <p class="card-desc">Usa etiquetas (tags) com sinal de maior/menor para marcar onde começa e termina cada dado. Muito estruturado.</p>
+                    </div>
+
+                    <!-- CSV Card -->
+                    <div class="card format-info-card border-csv">
+                        <div class="format-card-header text-csv">
+                            <i data-lucide="file-spreadsheet"></i>
+                            <h3>Formato CSV</h3>
+                        </div>
+                        <pre><code>nome,idade,cidade
+João,25,São Luís</code></pre>
+                        <p class="card-desc">Dados dispostos em linhas simples separados apenas por **vírgulas**. É o formato nativo de planilhas Excel.</p>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="conversor-interativo">
+                        <span>Avançar para o Conversor Interativo</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. INTERATIVIDADE OBRIGATÓRIA (CONVERSOR) -->
+        <section id="conversor-interativo" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 3 - LABORATÓRIO VISUAL</span>
+                <h2>Conversor de Dados Interativo</h2>
+                <p class="center-subtitle">Clique nos botões de formato para ver como a "caixinha" de informações do João é estruturada em código real.</p>
+                
+                <div class="interactive-converter-layout grid-2">
+                    <!-- Left: Interactive Visual Card -->
+                    <div class="glass-panel flex-column align-items-center justify-content-center">
+                        <h3 class="mb-20">1. Objeto Visual (Clique nos formatos ao lado)</h3>
+                        
+                        <div class="active-interactive-object-container">
+                            <!-- Visual João Card -->
+                            <div class="joao-visual-box" id="joao-visual-box">
+                                <div class="visual-head">
+                                    <i data-lucide="circle-user" class="visual-avatar-icon"></i>
+                                    <div>
+                                        <h4 class="card-field-val" data-field="nome">João</h4>
+                                        <span>Objeto: Pessoa</span>
+                                    </div>
+                                </div>
+                                <div class="visual-body-fields">
+                                    <div class="vis-field" data-highlight="nome">
+                                        <span class="vis-key"><i data-lucide="tag"></i> Nome:</span>
+                                        <span class="vis-val">João</span>
+                                    </div>
+                                    <div class="vis-field" data-highlight="idade">
+                                        <span class="vis-key"><i data-lucide="calendar"></i> Idade:</span>
+                                        <span class="vis-val">25 anos</span>
+                                    </div>
+                                    <div class="vis-field" data-highlight="cidade">
+                                        <span class="vis-key"><i data-lucide="map-pin"></i> Cidade:</span>
+                                        <span class="vis-val">São Luís</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Format Converter Terminal -->
+                    <div class="formats-conversion-terminal">
+                        <div class="converter-tabs">
+                            <button class="conv-tab-btn active" data-convert="json" id="btn-convert-json">
+                                <i data-lucide="braces"></i> JSON
+                            </button>
+                            <button class="conv-tab-btn" data-convert="xml" id="btn-convert-xml">
+                                <i data-lucide="file-code"></i> XML
+                            </button>
+                            <button class="conv-tab-btn" data-convert="csv" id="btn-convert-csv">
+                                <i data-lucide="file-spreadsheet"></i> CSV
+                            </button>
+                        </div>
+                        
+                        <div class="terminal-body-content">
+                            <!-- Code monitor editor -->
+                            <div class="code-terminal-wrapper">
+                                <div class="terminal-editor-header">
+                                    <span id="term-filename">dados_pessoa.json</span>
+                                    <span class="term-status-ok" id="term-lang">JSON</span>
+                                </div>
+                                <pre><code id="interactive-code-block" class="code-output-pane"></code></pre>
+                            </div>
+                            
+                            <!-- Highlight explanation card -->
+                            <div class="interactive-explanation-bubble" id="interactive-explanation">
+                                <i data-lucide="sparkles" class="exp-spark-icon text-json"></i>
+                                <div id="interactive-explanation-text">
+                                    Passe o mouse por cima das propriedades no código ou no card de pessoa para ver o mapeamento correspondente!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="comparativo">
+                        <span>Avançar para o Comparativo</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. ENTENDIMENTO COMPARATIVO -->
+        <section id="comparativo" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 4</span>
+                <h2>Qual formato escolher?</h2>
+                <p class="center-subtitle">Cada formato possui forças e fraquezas. Não existe o "melhor", existe o mais adequado para o cenário.</p>
+                
+                <div class="grid-3 comparative-grid">
+                    <!-- JSON Card -->
+                    <div class="glass-panel text-center border-json-glow">
+                        <div class="format-badge-circle bg-json"><i data-lucide="braces"></i></div>
+                        <h3>JSON</h3>
+                        <p class="badge-text-subtitle text-json">Moderno & Leve</p>
+                        <hr class="card-separator">
+                        <ul class="bullet-list-sm">
+                            <li><i data-lucide="check" class="text-emerald"></i> Muito fácil de ler por humanos</li>
+                            <li><i data-lucide="check" class="text-emerald"></i> Arquivos pequenos (economiza internet)</li>
+                            <li><i data-lucide="check" class="text-emerald"></i> Compatibilidade nativa com JavaScript</li>
+                            <li><i data-lucide="x" class="text-rose"></i> Não suporta comentários internos</li>
+                        </ul>
+                    </div>
+
+                    <!-- XML Card -->
+                    <div class="glass-panel text-center border-xml-glow">
+                        <div class="format-badge-circle bg-xml"><i data-lucide="file-code"></i></div>
+                        <h3>XML</h3>
+                        <p class="badge-text-subtitle text-xml">Estruturado & Verboso</p>
+                        <hr class="card-separator">
+                        <ul class="bullet-list-sm">
+                            <li><i data-lucide="check" class="text-emerald"></i> Extremamente robusto e rígido</li>
+                            <li><i data-lucide="check" class="text-emerald"></i> Suporta validações complexas nativas</li>
+                            <li><i data-lucide="x" class="text-rose"></i> Muito verboso (repete tags toda hora)</li>
+                            <li><i data-lucide="x" class="text-rose"></i> Arquivos grandes e lentos para processar</li>
+                        </ul>
+                    </div>
+
+                    <!-- CSV Card -->
+                    <div class="glass-panel text-center border-csv-glow">
+                        <div class="format-badge-circle bg-csv"><i data-lucide="file-spreadsheet"></i></div>
+                        <h3>CSV</h3>
+                        <p class="badge-text-subtitle text-csv">Simples & Tabular</p>
+                        <hr class="card-separator">
+                        <ul class="bullet-list-sm">
+                            <li><i data-lucide="check" class="text-emerald"></i> O menor tamanho de arquivo de todos</li>
+                            <li><i data-lucide="check" class="text-emerald"></i> Perfeito para importar no Excel/planilhas</li>
+                            <li><i data-lucide="x" class="text-rose"></i> Péssimo para dados aninhados (hierarquias)</li>
+                            <li><i data-lucide="x" class="text-rose"></i> Não diferencia tipos de dados (tudo é texto)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="modo-api">
+                        <span>Avançar para o Modo API</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. DYNAMIC API SEND SIMULATOR (MODO API) -->
+        <section id="modo-api" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 5</span>
+                <h2>Simulação de Envio de Dados: Modo API</h2>
+                <div class="grid-2 align-items-center">
+                    <div class="text-block">
+                        <p>No Capítulo 1 do curso, vimos que os computadores usam as APIs para se comunicarem. Mas **o que viaja na linha de conexão?**</p>
+                        <p>Na prática, quando você clica em "Salvar Cadastro" ou "Efetuar Compra", seu celular converte os dados do formulário em um **objeto JSON** e o envia pela API.</p>
+                        
+                        <div class="interactive-control-panel glass-panel mt-20">
+                            <h3>Controle de Simulação:</h3>
+                            <p class="small-desc text-muted mb-20">Clique abaixo para ativar o envio da caixinha JSON do João para o Servidor de Banco de Dados da API.</p>
+                            
+                            <button class="btn btn-primary btn-lg" id="btn-simulate-api">
+                                <i data-lucide="send" class="btn-icon"></i>
+                                <span>Enviar Objeto via API (JSON)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="visual-block">
+                        <!-- Simulated interactive terminal network layout -->
+                        <div class="api-network-box glass-panel">
+                            <div class="network-path-graphic">
+                                <div class="net-node active-net-node" id="api-node-client">
+                                    <i data-lucide="smartphone"></i>
+                                    <span>Seu App</span>
+                                </div>
+                                <div class="net-line">
+                                    <div class="net-packet" id="api-net-packet">JSON</div>
+                                </div>
+                                <div class="net-node" id="api-node-server">
+                                    <i data-lucide="database"></i>
+                                    <span>Servidor API</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Sub console display -->
+                            <div class="console-box-mini mt-20">
+                                <div class="console-header-mini">Terminal de Tráfego</div>
+                                <pre><code id="api-console-log">Aguardando envio de dados...</code></pre>
+                                <span class="badge badge-success hidden" id="api-badge-201">201 Created</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="simulador-erro">
+                        <span>Avançar para o Simulador de Erro</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. SYNTAX ERROR SIMULATOR -->
+        <section id="simulador-erro" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 6 - PRÁTICA DE BUG-HUNTING</span>
+                <h2>Regras de Sintaxe Importam!</h2>
+                <div class="grid-2">
+                    <div class="text-block">
+                        <p>Os computadores são muito rápidos, mas são "bobos" no quesito de sintaxe. Se você esquecer uma única vírgula ou aspas, o computador não consegue ler o objeto.</p>
+                        <p>Veja o JSON no monitor de código à direita. Ele possui um erro de sintaxe. Tente validar e veja como o sistema de APIs da empresa falha por causa de um único caractere!</p>
+                        
+                        <div class="error-validation-controls glass-panel mt-20">
+                            <h3>Painel de Validação</h3>
+                            <p class="small-desc text-muted mb-20">Clique para validar o formato enviado.</p>
+                            
+                            <button class="btn btn-rose btn-lg" id="btn-validate-error">Validar Código JSON</button>
+                            <button class="btn btn-accent btn-lg hidden" id="btn-fix-error">Consertar Código (Adicionar Vírgula)</button>
+                        </div>
+                    </div>
+
+                    <div class="visual-block flex-column">
+                        <div class="code-terminal-wrapper error-term-border">
+                            <div class="terminal-editor-header">
+                                <span>cadastro_erro.json</span>
+                                <span class="term-status-error">JSON INCORRETO</span>
+                            </div>
+                            <pre><code id="error-code-pane">1: {
+2:   "nome": "João"   <span class="error-marker" id="comma-line">&lt;-- Falta uma vírgula aqui!</span>
+3:   "idade": 25,
+4:   "cidade": "São Luís"
+5: }</code></pre>
+                        </div>
+
+                        <!-- Error result block -->
+                        <div class="error-narrative-result mt-20" id="error-result-alert">
+                            <i data-lucide="check-circle" class="err-alert-icon text-teal"></i>
+                            <span id="error-alert-text">Pronto para validar o JSON do cadastro.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="exercicio-pratico">
+                        <span>Avançar para Exercício Prático</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. EXERCÍCIO PRÁTICO -->
+        <section id="exercicio-pratico" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 7 - PRÁTICA ATIVA</span>
+                <h2>Escreva Você Mesmo!</h2>
+                <p class="center-subtitle">Escreva o objeto digital do **Carro** ao lado no formato selecionado e valide a sua sintaxe.</p>
+                
+                <div class="interactive-converter-layout grid-2">
+                    <!-- Left: Car Target Card -->
+                    <div class="glass-panel flex-column align-items-center justify-content-center">
+                        <h3 class="mb-20">Objeto Alvo (Carro)</h3>
+                        
+                        <div class="active-interactive-object-container">
+                            <div class="car-visual-box">
+                                <div class="car-head">
+                                    <i data-lucide="car" class="car-avatar-icon"></i>
+                                    <div>
+                                        <h4>Uno</h4>
+                                        <span>Objeto: Carro</span>
+                                    </div>
+                                </div>
+                                <div class="visual-body-fields">
+                                    <div class="vis-field">
+                                        <span class="vis-key"><i data-lucide="tag"></i> Marca:</span>
+                                        <span class="vis-val">Fiat</span>
+                                    </div>
+                                    <div class="vis-field">
+                                        <span class="vis-key"><i data-lucide="info"></i> Modelo:</span>
+                                        <span class="vis-val">Uno</span>
+                                    </div>
+                                    <div class="vis-field">
+                                        <span class="vis-key"><i data-lucide="calendar"></i> Ano:</span>
+                                        <span class="vis-val">2010</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Code Workspace -->
+                    <div class="exercise-workspace">
+                        <div class="exercise-tabs">
+                            <button class="exe-tab-btn active" data-exe="json">
+                                <i data-lucide="braces"></i> JSON
+                            </button>
+                            <button class="exe-tab-btn" data-exe="xml">
+                                <i data-lucide="file-code"></i> XML
+                            </button>
+                            <button class="exe-tab-btn" data-exe="csv">
+                                <i data-lucide="file-spreadsheet"></i> CSV
+                            </button>
+                        </div>
+                        
+                        <div class="exercise-body-content">
+                            <div class="textarea-container">
+                                <div class="terminal-editor-header">
+                                    <span id="exe-filename">carro.json</span>
+                                    <span class="term-status-ok" id="exe-lang">JSON</span>
+                                </div>
+                                <textarea class="exercise-editor-textarea" id="exercise-code-editor" spellcheck="false" placeholder="// Digite aqui o objeto Carro em formato JSON..."></textarea>
+                            </div>
+                            
+                            <!-- Feedback alert area -->
+                            <div class="exercise-feedback-result" id="exercise-feedback">
+                                <i data-lucide="info" class="err-alert-icon"></i>
+                                <span id="exercise-feedback-text">Selecione o formato acima e digite sua resposta para validar.</span>
+                            </div>
+                            
+                            <div class="exercise-actions">
+                                <button class="btn btn-primary" id="btn-validate-exercise">
+                                    <i data-lucide="play-circle" class="btn-icon"></i>
+                                    <span>Validar Sintaxe</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="conclusao">
+                        <span>Avançar para Concluir</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. CONCLUSAO -->
+        <section id="conclusao" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="chapter-number">MÓDULO CONCLUÍDO</span>
+                <div class="success-trophy">
+                    <div class="trophy-glow"></div>
+                    <i data-lucide="braces" class="trophy-icon-data"></i>
+                </div>
+                <h2>Parabéns! Você dominou JSON, XML e CSV!</h2>
+                <p class="subtitle max-w-600">Agora você já entende que um **Objeto** é uma caixa digital de atributos e que os formatos JSON, XML e CSV são apenas formas de escrever essa caixa em texto para transferi-la pela rede.</p>
+                
+                <div class="summary-cards max-w-800">
+                    <div class="summary-card">
+                        <i data-lucide="package-open" class="sum-icon"></i>
+                        <h4>Objetos Virtuais</h4>
+                        <p>Atributos do mundo real empacotados em chaves e valores digitais.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i data-lucide="file-json" class="sum-icon text-json"></i>
+                        <h4>Sintaxe Rígida</h4>
+                        <p>Uma simples vírgula ou aspas faltando quebra a comunicação (HTTP 500).</p>
+                    </div>
+                    <div class="summary-card">
+                        <i data-lucide="sparkles" class="sum-icon text-teal"></i>
+                        <h4>Flexibilidade</h4>
+                        <p>O mesmo objeto pode ser escrito como JSON, XML ou CSV.</p>
+                    </div>
+                </div>
+
+                <div class="cta-box glass-panel max-w-600">
+                    <h3>Pronto para o próximo desafio?</h3>
+                    <p>O Módulo 3 está liberado! Vamos descobrir o caos de integrar múltiplos sistemas sem usar ferramentas centralizadas.</p>
+                    <div class="module-navigation-group mt-20">
+                        <button class="btn btn-outline btn-lg" onclick="window.location.href='index.html'">
+                            <i data-lucide="arrow-left" class="btn-icon"></i>
+                            <span>Voltar ao Módulo Anterior</span>
+                        </button>
+                        <button class="btn btn-accent btn-lg" id="btn-next-module">
+                            <span>Ir para o Módulo 3</span>
+                            <i data-lucide="arrow-right" class="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 MuleAcademy. Desenvolvido para fins didáticos.</p>
+            <button class="btn btn-outline btn-sm" onclick="window.location.href='dashboard.html'">
+                <i data-lucide="layout-dashboard" class="btn-icon"></i>
+                <span>Painel Principal</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="modulo2.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4 - MuleSoft como Solução: A Era do Hub Central</title>
+    <meta name="description" content="Aprenda como a arquitetura centralizada com MuleSoft reduz conexões e resolve a manutenção de integrações em grandes empresas.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="modulo4.css">
+</head>
+<body>
+
+    <!-- Navigation Progress Bar -->
+    <nav class="progress-nav" id="main-nav">
+        <div class="logo" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="arrow-left" class="back-icon"></i>
+            <span>Mule<span>Academy</span></span>
+        </div>
+        
+        <button class="btn btn-outline btn-sm header-dashboard-btn" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="layout-dashboard" class="btn-icon"></i>
+            <span>Painel Principal</span>
+        </button>
+
+        <div class="chapters-progress">
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+            <div class="steps-container">
+                <button class="step-btn active" data-target="hero" title="Introdução">1</button>
+                <button class="step-btn" data-target="o-problema" title="O Problema">2</button>
+                <button class="step-btn" data-target="o-hub" title="O Hub Central">3</button>
+                <button class="step-btn" data-target="simulador-hub" title="Laboratório">4</button>
+                <button class="step-btn" data-target="vantagens" title="Vantagens">5</button>
+                <button class="step-btn" data-target="conclusao" title="Conclusão">6</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="app-container">
+
+        <!-- 1. HERO -->
+        <section id="hero" class="chapter-section active-section">
+            <div class="section-content grid-2">
+                <div class="text-block">
+                    <span class="badge">MÓDULO 4 — A SOLUÇÃO</span>
+                    <h1>Existe uma forma melhor de integrar!</h1>
+                    <p class="subtitle">Conectar sistemas diretamente é como construir pontes entre todas as casas de uma cidade. O MuleSoft revoluciona isso agindo como uma central elegante, organizada e infinitamente mais fácil de manter.</p>
+                    <div class="cta-group">
+                        <button class="btn btn-primary" id="btn-start-lesson">
+                            <span>Conhecer a Solução</span>
+                            <i data-lucide="arrow-right" class="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="visual-block flex-center">
+                    <div class="hero-illustration">
+                        <svg viewBox="0 0 400 300" class="svg-il">
+                            <defs>
+                                <radialGradient id="hero-glow" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="var(--color-indigo)" stop-opacity="0.3"/>
+                                    <stop offset="100%" stop-color="var(--color-indigo)" stop-opacity="0"/>
+                                </radialGradient>
+                            </defs>
+                            <circle cx="200" cy="150" r="110" fill="url(#hero-glow)"/>
+                            
+                            <!-- Star connection lines -->
+                            <line x1="200" y1="150" x2="90" y2="80" stroke="var(--color-indigo)" stroke-width="2.5" class="glow-line-active"/>
+                            <line x1="200" y1="150" x2="310" y2="80" stroke="var(--color-indigo)" stroke-width="2.5" class="glow-line-active"/>
+                            <line x1="200" y1="150" x2="200" y2="240" stroke="var(--color-indigo)" stroke-width="2.5" class="glow-line-active"/>
+                            
+                            <!-- Central Hub -->
+                            <circle cx="200" cy="150" r="30" fill="#0c1020" stroke="var(--color-indigo)" stroke-width="3" class="pulse-node-center"/>
+                            <text x="200" y="154" fill="var(--color-indigo-light)" font-family="Outfit" font-size="20" font-weight="bold" text-anchor="middle">M</text>
+                            
+                            <!-- Outer Nodes -->
+                            <circle cx="90" cy="80" r="18" fill="#1e293b" stroke="var(--color-teal)" stroke-width="2"/>
+                            <text x="90" y="83" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" text-anchor="middle">CRM</text>
+                            
+                            <circle cx="310" cy="80" r="18" fill="#1e293b" stroke="var(--color-accent)" stroke-width="2"/>
+                            <text x="310" y="83" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" text-anchor="middle">ERP</text>
+                            
+                            <circle cx="200" cy="240" r="18" fill="#1e293b" stroke="var(--color-json)" stroke-width="2"/>
+                            <text x="200" y="243" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" text-anchor="middle">DB</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. O PROBLEMA ANTERIOR (RESUMO VISUAL) -->
+        <section id="o-problema" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 1</span>
+                <h2>Relembrando o Pesadelo Ponto a Ponto</h2>
+                <p class="center-subtitle">Conectar sistemas ligando diretamente uns aos outros é uma solução que parece simples no começo, mas se torna insustentável ao crescer.</p>
+                
+                <div class="grid-2">
+                    <div class="text-block">
+                        <p>No modelo de arquitetura anterior, cada nova ferramenta adicionada exigia uma conexão individual com **todas as outras ferramentas** que já existiam no ecossistema.</p>
+                        <p>Isso resulta no <strong>Caos do Espaguete</strong>:</p>
+                        <ul class="bullet-list-sm mt-10">
+                            <li><i data-lucide="x" class="text-rose"></i> <strong>Excesso de conexões:</strong> Para 5 sistemas, são 10 conexões. Para 10 sistemas, são 45 conexões!</li>
+                            <li><i data-lucide="x" class="text-rose"></i> <strong>Código Redundante:</strong> Cada conexão exige um script de tradução manual de formatos (JSON para XML, XML para CSV).</li>
+                            <li><i data-lucide="x" class="text-rose"></i> <strong>Forte Acoplamento:</strong> Se você mexer no banco de dados, precisará alterar os scripts de todos os outros sistemas que o acessam.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="visual-block flex-center">
+                        <div class="mesh-box glass-panel flex-column align-items-center justify-content-center text-center">
+                            <h3 class="mb-10 text-rose text-center">Arquitetura Sem Hub (Espaguete)</h3>
+                            <svg width="250" height="250" id="visual-spaghetti-summary">
+                                <!-- Pre-rendered mini spaghetti diagram -->
+                                <line x1="50" y1="50" x2="200" y2="50" stroke="rgba(244,63,94,0.4)" stroke-width="2"/>
+                                <line x1="50" y1="50" x2="200" y2="200" stroke="rgba(244,63,94,0.4)" stroke-width="2"/>
+                                <line x1="50" y1="50" x2="50" y2="200" stroke="rgba(244,63,94,0.4)" stroke-width="2"/>
+                                <line x1="50" y1="50" x2="125" y2="125" stroke="rgba(244,63,94,0.4)" stroke-width="2"/>
+                                <line x1="200" y1="50" x2="200" y2="200" stroke="rgba(244,63,94,0.4)" stroke-width="2"/>
+                                <line x1="200" y1="50" x2="50" y2="200" stroke="rgba(244,63,94,0.4)" stroke-width="2"/>
+                                <line x1="200" y1="200" x2="50" y2="200" stroke="rgba(244,63,94,0.4)" stroke-width="2"/>
+                                
+                                <circle cx="50" cy="50" r="16" fill="#04060c" stroke="var(--color-rose)" stroke-width="2"/>
+                                <text x="50" y="53" fill="#fff" font-family="Outfit" font-size="8" text-anchor="middle">CRM</text>
+                                
+                                <circle cx="200" cy="50" r="16" fill="#04060c" stroke="var(--color-rose)" stroke-width="2"/>
+                                <text x="200" y="53" fill="#fff" font-family="Outfit" font-size="8" text-anchor="middle">ERP</text>
+                                
+                                <circle cx="200" cy="200" r="16" fill="#04060c" stroke="var(--color-rose)" stroke-width="2"/>
+                                <text x="200" y="203" fill="#fff" font-family="Outfit" font-size="8" text-anchor="middle">DB</text>
+                                
+                                <circle cx="50" cy="200" r="16" fill="#04060c" stroke="var(--color-rose)" stroke-width="2"/>
+                                <text x="50" y="203" fill="#fff" font-family="Outfit" font-size="8" text-anchor="middle">Loja</text>
+                                
+                                <circle cx="125" cy="125" r="16" fill="#04060c" stroke="var(--color-rose)" stroke-width="2"/>
+                                <text x="125" y="128" fill="#fff" font-family="Outfit" font-size="8" text-anchor="middle">API</text>
+                            </svg>
+                            <span class="text-rose small-desc mt-10 font-bold">5 Sistemas = 10 Conexões desordenadas</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="o-hub">
+                        <span>Avançar para o Hub MuleSoft</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. INTRODUZIR MULESOFT COMO HUB -->
+        <section id="o-hub" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 2</span>
+                <h2>MuleSoft como o Hub Centralizador</h2>
+                <div class="grid-2">
+                    <div class="text-block">
+                        <p>O MuleSoft atua no modelo **Hub-and-Spoke (Estrela)**. Ao invés de ligar cada sistema a todos os outros, nós ligamos cada sistema **apenas uma vez** diretamente no MuleSoft.</p>
+                        <p>O MuleSoft centraliza os dados, cuida da tradução (JSON, XML, CSV) e encaminha a mensagem para o destinatário correto.</p>
+                        <blockquote class="story-quote">
+                            "Com MuleSoft, o número de conexões cai para exatamente o número de sistemas. É uma solução limpa, organizada e escalável."
+                        </blockquote>
+                        <p class="mt-10">Se você tem 10 sistemas, precisará de apenas **10 conexões** ao invés de 45!</p>
+                    </div>
+                    <div class="visual-block flex-center">
+                        <div class="mesh-box glass-panel flex-column align-items-center justify-content-center text-center">
+                            <h3 class="mb-10 text-indigo-light text-center">Arquitetura Estrela com MuleSoft</h3>
+                            <svg width="250" height="250" id="visual-hub-summary">
+                                <!-- Star connections -->
+                                <line x1="125" y1="125" x2="50" y2="50" stroke="var(--color-indigo)" stroke-width="2"/>
+                                <line x1="125" y1="125" x2="200" y2="50" stroke="var(--color-indigo)" stroke-width="2"/>
+                                <line x1="125" y1="125" x2="200" y2="200" stroke="var(--color-indigo)" stroke-width="2"/>
+                                <line x1="125" y1="125" x2="50" y2="200" stroke="var(--color-indigo)" stroke-width="2"/>
+                                
+                                <!-- Central Hub -->
+                                <circle cx="125" cy="125" r="22" fill="#0f172a" stroke="var(--color-indigo)" stroke-width="3" class="pulse-node-center"/>
+                                <text x="125" y="129" fill="var(--color-indigo-light)" font-family="Outfit" font-weight="bold" font-size="12" text-anchor="middle">Mule</text>
+                                
+                                <circle cx="50" cy="50" r="16" fill="#04060c" stroke="var(--color-teal)" stroke-width="2"/>
+                                <text x="50" y="53" fill="#fff" font-family="Outfit" font-size="8" text-anchor="middle">CRM</text>
+                                
+                                <circle cx="200" cy="50" r="16" fill="#04060c" stroke="var(--color-accent)" stroke-width="2"/>
+                                <text x="200" y="53" fill="#fff" font-family="Outfit" font-size="8" text-anchor="middle">ERP</text>
+                                
+                                <circle cx="200" cy="200" r="16" fill="#04060c" stroke="var(--color-json)" stroke-width="2"/>
+                                <text x="200" y="203" fill="#fff" font-family="Outfit" font-size="8" text-anchor="middle">DB</text>
+                                
+                                <circle cx="50" cy="200" r="16" fill="#04060c" stroke="var(--color-emerald)" stroke-width="2"/>
+                                <text x="50" y="203" fill="#fff" font-family="Outfit" font-size="8" text-anchor="middle">Loja</text>
+                            </svg>
+                            <span class="text-indigo-light small-desc mt-10 font-bold">5 Sistemas = Apenas 4 conexões com o Hub!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="simulador-hub">
+                        <span>Ir para o Laboratório do Hub</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SIMULADOR DE ARRASTAR E CONECTAR (INTERATIVIDADE) -->
+        <section id="simulador-hub" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 3 - LABORATÓRIO PRÁTICO</span>
+                <h2>Sandbox: Conectando Sistemas ao Hub</h2>
+                <p class="center-subtitle">Conecte os sistemas abaixo ao MuleSoft arrastando-os para o centro ou simplesmente clicando em seus cards, e assista ao fluxo centralizado.</p>
+                
+                <div class="grid-2 interactive-simulator-layout">
+                    <!-- Left: Systems cards drag panel -->
+                    <div class="glass-panel flex-column justify-content-between simulator-sidebar">
+                        <div>
+                            <h3>Sistemas Disponíveis</h3>
+                            <p class="text-muted small-desc">Arraste os cards para o alvo do MuleSoft ou clique no botão para conectá-los.</p>
+                            
+                            <div class="drag-items-container mt-20" id="drag-items-list">
+                                <!-- Salesforce -->
+                                <div class="drag-card" draggable="true" data-system="crm" id="drag-crm">
+                                    <div class="drag-icon-label">
+                                        <i data-lucide="sparkles" class="text-teal"></i>
+                                        <div>
+                                            <span class="card-title-span">Salesforce (CRM)</span>
+                                            <span class="card-desc-span">Contatos e Clientes</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline btn-connect" data-connect="crm">Conectar</button>
+                                </div>
+                                <!-- MySQL Database -->
+                                <div class="drag-card" draggable="true" data-system="db" id="drag-db">
+                                    <div class="drag-icon-label">
+                                        <i data-lucide="database" class="text-indigo"></i>
+                                        <div>
+                                            <span class="card-title-span">Banco SQL</span>
+                                            <span class="card-desc-span">Dados de Venda</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline btn-connect" data-connect="db">Conectar</button>
+                                </div>
+                                <!-- ERP -->
+                                <div class="drag-card" draggable="true" data-system="erp" id="drag-erp">
+                                    <div class="drag-icon-label">
+                                        <i data-lucide="file-text" class="text-rose"></i>
+                                        <div>
+                                            <span class="card-title-span">Faturamento (ERP)</span>
+                                            <span class="card-desc-span">Notas Fiscais</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline btn-connect" data-connect="erp">Conectar</button>
+                                </div>
+                                <!-- Shopify -->
+                                <div class="drag-card" draggable="true" data-system="shop" id="drag-shop">
+                                    <div class="drag-icon-label">
+                                        <i data-lucide="shopping-cart" class="text-json"></i>
+                                        <div>
+                                            <span class="card-title-span">Loja Shopify</span>
+                                            <span class="card-desc-span">Pedidos Online</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline btn-connect" data-connect="shop">Conectar</button>
+                                </div>
+                                <!-- Pagamento -->
+                                <div class="drag-card" draggable="true" data-system="pay" id="drag-pay">
+                                    <div class="drag-icon-label">
+                                        <i data-lucide="credit-card" class="text-csv"></i>
+                                        <div>
+                                            <span class="card-title-span">Gateway API</span>
+                                            <span class="card-desc-span">Cobranças & Cartões</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline btn-connect" data-connect="pay">Conectar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Metrics comparatives -->
+                        <div class="ecosystem-metrics-box mt-20">
+                            <div class="metric-row">
+                                <span class="m-label">Sistemas Conectados:</span>
+                                <span class="m-val text-indigo-light" id="hub-systems-count">0</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="m-label">Conexões Ponto a Ponto Normais:</span>
+                                <span class="m-val text-rose-light" id="hub-p2p-count">0</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="m-label">Conexões com MuleSoft Hub:</span>
+                                <span class="m-val text-teal-light" id="hub-actual-count">0</span>
+                            </div>
+                            <hr class="card-separator">
+                            <div class="metric-feedback-alert" id="hub-feedback-alert">
+                                <i data-lucide="info" class="text-indigo-light"></i>
+                                <span id="hub-feedback-text">Arraste um sistema para o centro do MuleSoft ou clique em Conectar para iniciar!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Centralized Hub SVG Canvas -->
+                    <div class="glass-panel flex-column align-items-center justify-content-center canvas-wrapper">
+                        <div class="canvas-header-title">Ecossistema Centralizado MuleSoft</div>
+                        
+                        <div class="svg-drawing-area-container" id="hub-drop-zone">
+                            <!-- Drop zone target visual element -->
+                            <div class="drop-target-indicator" id="drop-indicator">Solte aqui!</div>
+                            
+                            <svg width="400" height="400" id="hub-svg-canvas" class="spaghetti-svg-canvas">
+                                <!-- Central target placeholder group -->
+                                <g id="mulesoft-hub-node" class="mulesoft-center-node">
+                                    <circle cx="200" cy="200" r="45" fill="#0b0f19" stroke="var(--color-indigo)" stroke-width="4" id="mulesoft-circle-element"/>
+                                    <!-- Glow circle -->
+                                    <circle cx="200" cy="200" r="45" fill="none" stroke="var(--color-indigo-light)" stroke-width="1.5" stroke-opacity="0.5" class="pulse-node-center"/>
+                                    <text x="200" y="206" fill="#ffffff" font-family="Outfit" font-size="14" font-weight="800" text-anchor="middle" id="mulesoft-text-element">MuleSoft</text>
+                                </g>
+                                <!-- Dynamic lines and nodes go here via JS -->
+                            </svg>
+                        </div>
+                        
+                        <!-- Tooltip indicator -->
+                        <div class="hover-connection-explanation" id="hub-explanation-box">
+                            <i data-lucide="help-circle" class="text-indigo-light"></i>
+                            <span id="hub-explanation-text">Passe o mouse por cima de um sistema conectado para entender sua tradução!</span>
+                        </div>
+                        
+                        <button class="btn btn-outline btn-sm mt-10" id="btn-reset-hub">
+                            <i data-lucide="rotate-ccw"></i>
+                            <span>Desconectar Todos</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="vantagens">
+                        <span>Ver as Vantagens Práticas</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MOSTRAR VANTAGENS -->
+        <section id="vantagens" class="chapter-section">
+            <div class="section-content">
+                <span class="chapter-number">CAPÍTULO 4</span>
+                <h2>A Diferença Prática de um Hub</h2>
+                <p class="center-subtitle">Centralizar suas integrações não poupa apenas linhas no desenho. Poupa centenas de horas de trabalho e previne falhas graves na operação.</p>
+                
+                <div class="grid-3 comparative-grid">
+                    <!-- Menos Conexões -->
+                    <div class="glass-panel text-center border-teal-glow">
+                        <div class="format-badge-circle bg-csv"><i data-lucide="trending-down"></i></div>
+                        <h3>Conexões Lineares</h3>
+                        <p class="badge-text-subtitle text-csv">N Conexões</p>
+                        <hr class="card-separator">
+                        <p class="small-desc text-left text-muted">Cada sistema se conecta uma única vez ao MuleSoft. O número de integrações para gerenciar cai drasticamente, tornando o crescimento da sua empresa sustentável.</p>
+                    </div>
+
+                    <!-- Mais Organização -->
+                    <div class="glass-panel text-center border-indigo-glow">
+                        <div class="format-badge-circle bg-xml"><i data-lucide="eye"></i></div>
+                        <h3>Visão Centralizada</h3>
+                        <p class="badge-text-subtitle text-xml">Visibilidade Completa</p>
+                        <hr class="card-separator">
+                        <p class="small-desc text-left text-muted">Você tem um console de monitoramento central. Se uma integração falhar, o MuleSoft acusa o erro instantaneamente, mostrando onde e o porquê do problema.</p>
+                    </div>
+
+                    <!-- Fácil Manutenção -->
+                    <div class="glass-panel text-center border-rose-glow">
+                        <div class="format-badge-circle bg-rose"><i data-lucide="layers"></i></div>
+                        <h3>Isolamento de Erros</h3>
+                        <p class="badge-text-subtitle text-rose">Baixo Acoplamento</p>
+                        <hr class="card-separator">
+                        <p class="small-desc text-left text-muted">Como os sistemas não estão colados diretamente, se o ERP mudar de XML para JSON, os outros sistemas não precisam ser alterados. Só o conector do ERP muda.</p>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <button class="btn btn-outline next-section-btn" data-next="conclusao">
+                        <span>Avançar para Concluir Aula</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CONCLUSAO -->
+        <section id="conclusao" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="chapter-number">MÓDULO CONCLUÍDO</span>
+                <div class="success-trophy">
+                    <div class="trophy-glow"></div>
+                    <i data-lucide="cpu" class="trophy-icon-data text-indigo"></i>
+                </div>
+                <h2>Agora sim faz sentido!</h2>
+                <p class="subtitle max-w-600">Substituir a teia espaguete por um Hub MuleSoft transforma a tecnologia da empresa: as conexões são organizadas, o fluxo é monitorado em tempo real e a manutenção vira um processo simples.</p>
+                
+                <div class="summary-cards max-w-800">
+                    <div class="summary-card">
+                        <i data-lucide="cpu" class="sum-icon text-indigo-light"></i>
+                        <h4>Hub MuleSoft</h4>
+                        <p>Gerencia, traduz e roteia os dados entre sistemas em um canal centralizado.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i data-lucide="activity" class="sum-icon text-teal-light"></i>
+                        <h4>Monitoramento</h4>
+                        <p>O fluxo de dados flui sob sua supervisão, facilitando encontrar falhas.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i data-lucide="zap" class="sum-icon text-json"></i>
+                        <h4>Velocidade</h4>
+                        <p>Novos sistemas são adicionados rapidamente sem mexer em quem já está rodando.</p>
+                    </div>
+                </div>
+
+                <div class="cta-box glass-panel max-w-600">
+                    <h3>Pronto para criar sua primeira integração na prática?</h3>
+                    <p>No Módulo 5, vamos programar um laboratório de compra online, ligando estoque, gateway de pagamento e logística na prática!</p>
+                    
+                    <div class="module-navigation-group mt-20">
+                        <button class="btn btn-outline btn-lg" onclick="window.location.href='modulo3.html'">
+                            <i data-lucide="arrow-left" class="btn-icon"></i>
+                            <span>Voltar ao Módulo 3</span>
+                        </button>
+                        <button class="btn btn-accent btn-lg" id="btn-next-module">
+                            <span>Iniciar Projeto Prático (Módulo 5)</span>
+                            <i data-lucide="arrow-right" class="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 MuleAcademy. Desenvolvido para fins didáticos.</p>
+            <button class="btn btn-outline btn-sm" onclick="window.location.href='dashboard.html'">
+                <i data-lucide="layout-dashboard" class="btn-icon"></i>
+                <span>Painel Principal</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="modulo4.js"></script>
+</body>
+</html>

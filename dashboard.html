@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuleAcademy - Dashboard do Curso</title>
+    <meta name="description" content="Dashboard interativo para iniciantes aprenderem integração de sistemas, formatos de dados, APIs e MuleSoft com laboratórios práticos.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <!-- Dashboard Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <i data-lucide="blocks" class="brand-icon"></i>
+            <span>Mule<span>Academy</span></span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html#welcome" class="nav-item active"><i data-lucide="layout-dashboard"></i>Painel Principal</a>
+            <div class="nav-group">
+                <a href="dashboard.html#modules" class="nav-item"><i data-lucide="book-open"></i>Módulos de Aula</a>
+                <div class="nav-subitems">
+                    <a href="index.html" class="nav-subitem" id="nav-sub-mod1"><i data-lucide="book-open-check"></i>Módulo 1 — Sistemas</a>
+                    <a href="modulo2.html" class="nav-subitem" id="nav-sub-mod2"><i data-lucide="braces"></i>Módulo 2 — Dados</a>
+                    <a href="modulo3.html" class="nav-subitem" id="nav-sub-mod3"><i data-lucide="cable"></i>Módulo 3 — Caos</a>
+                    <a href="modulo4.html" class="nav-subitem" id="nav-sub-mod4"><i data-lucide="cpu"></i>Módulo 4 — MuleSoft</a>
+                    <a href="modulo5.html" class="nav-subitem" id="nav-sub-mod5"><i data-lucide="shopping-cart"></i>Módulo 5 — Projeto</a>
+                </div>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar"><i data-lucide="user"></i></div>
+                <div class="user-info">
+                    <span class="user-name">Aluno Iniciante</span>
+                    <span class="user-role">Nível 1</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-main">
+
+        <!-- WELCOME SECTION -->
+        <section id="welcome" class="dashboard-section active-sec">
+            <div class="welcome-banner glass-panel">
+                <div class="welcome-text">
+                    <span class="badge badge-indigo">JORNADA DE APRENDIZADO</span>
+                    <h1>Bem-vindo ao mundo das Integrações!</h1>
+                    <p class="subtitle">Aprenda de forma visual e totalmente prática como os sistemas de software se conectam, transmitem dados e resolvem a complexidade das empresas modernas.</p>
+                    <div class="banner-ctas">
+                        <button class="btn btn-primary btn-lg" id="btn-start-journey">
+                            <span>Começar Jornada</span>
+                            <i data-lucide="compass" class="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="welcome-stats glass-card">
+                    <h3>Seu Progresso</h3>
+                    <div class="radial-progress-container">
+                        <div class="progress-bar-circle">
+                            <svg viewBox="0 0 100 100" class="circle-svg">
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1e293b" stroke-width="8"/>
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="var(--color-indigo)" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="251.2" id="radial-progress-fill"/>
+                            </svg>
+                            <span class="progress-percent" id="progress-text">0%</span>
+                        </div>
+                    </div>
+                    <span class="progress-desc" id="progress-text-desc">0 de 5 Módulos concluídos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- COURSE MODULES SECTION -->
+        <section id="modules" class="dashboard-section">
+            <h2 class="sec-title">Módulos da sua Trilha</h2>
+            <p class="sec-subtitle">Siga as aulas passo a passo para construir sua base e dominar integrações. Cada módulo desbloqueia novas ferramentas!</p>
+            
+            <div class="modules-grid">
+                <!-- Module 1 -->
+                <div class="module-card glass-panel" id="card-mod1">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="network"></i></div>
+                        <span class="module-status-badge" id="badge-mod1"><i data-lucide="circle"></i> Pendente</span>
+                    </div>
+                    <h3>📘 Módulo 1 — Comunicação entre sistemas</h3>
+                    <p>Por que as empresas precisam integrar seus softwares e o que acontece quando eles operam isolados.</p>
+                    <a href="index.html" class="btn btn-primary btn-sm mt-auto" id="btn-mod1">Iniciar Aula</a>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="module-card glass-panel" id="card-mod2">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="braces"></i></div>
+                        <span class="module-status-badge" id="badge-mod2"><i data-lucide="circle"></i> Bloqueado</span>
+                    </div>
+                    <h3>📦 Módulo 2 — JSON, XML e CSV</h3>
+                    <p>Aprenda a decifrar a "linguagem" que os computadores usam para enviar dados entre si.</p>
+                    <a href="modulo2.html" class="btn btn-outline btn-sm mt-auto" id="btn-mod2">Bloqueado</a>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="module-card glass-panel" id="card-mod3">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="cable"></i></div>
+                        <span class="module-status-badge" id="badge-mod3"><i data-lucide="circle"></i> Bloqueado</span>
+                    </div>
+                    <h3>🔄 Módulo 3 — O problema da complexidade</h3>
+                    <p>Entenda por que criar conexões manuais "ponto a ponto" vira um pesadelo de manutenção.</p>
+                    <a href="modulo3.html" class="btn btn-outline btn-sm mt-auto" id="btn-mod3">Bloqueado</a>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="module-card glass-panel" id="card-mod4">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="cpu"></i></div>
+                        <span class="module-status-badge" id="badge-mod4"><i data-lucide="circle"></i> Bloqueado</span>
+                    </div>
+                    <h3>🌉 Módulo 4 — MuleSoft como solução</h3>
+                    <p>Como a plataforma MuleSoft age como um hub centralizado organizando o fluxo de dados.</p>
+                    <a href="modulo4.html" class="btn btn-outline btn-sm mt-auto" id="btn-mod4">Bloqueado</a>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="module-card glass-panel" id="card-mod5">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="shopping-cart"></i></div>
+                        <span class="module-status-badge" id="badge-mod5"><i data-lucide="circle"></i> Bloqueado</span>
+                    </div>
+                    <h3>🛒 Módulo 5 — Projeto Prático</h3>
+                    <p>Simulação real de uma compra online integrada com pagamento, estoque e logística de entrega.</p>
+                    <a href="modulo5.html" class="btn btn-outline btn-sm mt-auto" id="btn-mod5">Bloqueado</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROGRESS FOOTER -->
+        <section id="progress-summary" class="dashboard-section mt-40">
+            <div class="progress-bar-footer glass-panel">
+                <div class="progress-info">
+                    <h4>Módulos Concluídos: <span id="footer-modules-count">0 / 5</span></h4>
+                    <p class="text-muted small-desc">Excelente trabalho! Complete os laboratórios práticos para subir de nível.</p>
+                </div>
+                <div class="progress-cta-box">
+                    <button class="btn btn-accent btn-lg" id="btn-footer-continue">
+                        <span>Iniciar Módulo 1</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- App Scripts -->
+    <script src="dashboard.js"></script>
+</body>
+</html>
