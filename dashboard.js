@@ -186,6 +186,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Lógica para resetar o progresso do Módulo Pai (Introdução a Integrações)
+    const resetProgress = () => {
+        if (confirm('Deseja realmente resetar todo o progresso do módulo "Introdução a Integrações"? Todas as aulas serão marcadas como pendentes.')) {
+            localStorage.removeItem('muleacademy_completed_1');
+            localStorage.removeItem('muleacademy_completed_2');
+            localStorage.removeItem('muleacademy_completed_3');
+            localStorage.removeItem('muleacademy_completed_4');
+            localStorage.removeItem('muleacademy_completed_5');
+            window.location.reload();
+        }
+    };
+
+    const btnResetCourse = document.getElementById('btn-reset-course');
+    const btnResetSidebar = document.getElementById('btn-reset-sidebar');
+
+    if (btnResetCourse) {
+        btnResetCourse.addEventListener('click', resetProgress);
+    }
+    if (btnResetSidebar) {
+        btnResetSidebar.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            resetProgress();
+        });
+    }
+
     // Inicialização da plataforma
     renderDashboardProgress();
 });
