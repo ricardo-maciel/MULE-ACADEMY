@@ -17,8 +17,13 @@
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="tech-background.css">
 </head>
 <body>
+    <div class="tech-network-bg" aria-hidden="true">
+        <canvas id="tech-network-canvas"></canvas>
+    </div>
+    <div class="tech-spotlight" aria-hidden="true"></div>
 
     <!-- Dashboard Sidebar Navigation -->
     <aside class="sidebar">
@@ -26,7 +31,7 @@
             <i data-lucide="blocks" class="brand-icon"></i>
             <div class="brand-text-wrapper">
                 <span class="brand-title">Mule<span>Academy</span></span>
-                <span class="brand-sub">Ricardo &bull; Antigravity</span>
+                <span class="brand-sub">Ricardo <i data-lucide="bot" class="ai-signature-icon"></i></span>
             </div>
         </div>
         <nav class="sidebar-nav">
@@ -185,6 +190,7 @@
     </main>
 
     <!-- App Scripts -->
+    <script src="tech-background.js"></script>
     <script src="dashboard.js?v=3"></script>
 </body>
 </html>

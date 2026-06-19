@@ -1,0 +1,72 @@
+/* Global interactive technology background */
+body {
+    background:
+        radial-gradient(circle at 18% 12%, rgba(52, 213, 255, 0.17), transparent 28rem),
+        radial-gradient(circle at 86% 18%, rgba(139, 92, 246, 0.16), transparent 32rem),
+        linear-gradient(145deg, #01030a 0%, #071224 54%, #02050d 100%) !important;
+}
+
+.tech-network-bg,
+.tech-spotlight {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.tech-network-bg {
+    z-index: 0;
+    overflow: hidden;
+}
+
+#tech-network-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.tech-spotlight {
+    z-index: 1;
+    background: radial-gradient(
+        circle 23rem at var(--tech-mx, 50%) var(--tech-my, 50%),
+        rgba(52, 213, 255, 0.12),
+        rgba(139, 92, 246, 0.07) 34%,
+        transparent 70%
+    );
+    mix-blend-mode: screen;
+}
+
+body::before {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    content: "";
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 58px 58px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.82), transparent 78%);
+}
+
+body > main,
+body > footer,
+body > .portal-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+.ai-signature-icon {
+    width: 1em;
+    height: 1em;
+    margin-left: 0.28rem;
+    color: #34d5ff;
+    vertical-align: -0.16em;
+    filter: drop-shadow(0 0 8px rgba(52, 213, 255, 0.45));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tech-network-bg,
+    .tech-spotlight {
+        opacity: 0.38;
+    }
+}

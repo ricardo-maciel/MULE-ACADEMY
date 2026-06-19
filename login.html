@@ -12,13 +12,15 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="tech-background.css">
 </head>
 <body>
 
-    <!-- Interactive Constellation Network Canvas -->
-    <div class="network-bg-container">
-        <canvas id="network-canvas"></canvas>
+    <!-- Interactive Technology Network Canvas -->
+    <div class="tech-network-bg" aria-hidden="true">
+        <canvas id="tech-network-canvas"></canvas>
     </div>
+    <div class="tech-spotlight" aria-hidden="true"></div>
 
     <!-- MAIN WRAPPER (Switches between Auth Card and Admin Panel) -->
     <div class="portal-wrapper">
@@ -102,7 +104,7 @@
 
             <!-- Footer terms -->
             <div class="auth-footer">
-                <span>Criado por Ricardo com Antigravity</span>
+                <span>Criado por Ricardo <i data-lucide="bot" class="ai-signature-icon"></i></span>
             </div>
         </div>
 
@@ -302,6 +304,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="tech-background.js"></script>
     <script src="login.js"></script>
 </body>
 </html>

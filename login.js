@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
        1. MOTOR INTERATIVO DO CANVAS DE CONSTELAÇÃO (PLAYGROUND DE REDE E APIS)
        ========================================================================== */
     const canvas = document.getElementById('network-canvas');
+    if (canvas) {
     const ctx = canvas.getContext('2d');
 
     let width = window.innerWidth;
@@ -168,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     animateNetwork();
+    }
 
 
     /* ==========================================================================

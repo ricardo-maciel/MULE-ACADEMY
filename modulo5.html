@@ -17,8 +17,13 @@
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="modulo5.css">
+    <link rel="stylesheet" href="tech-background.css">
 </head>
 <body>
+    <div class="tech-network-bg" aria-hidden="true">
+        <canvas id="tech-network-canvas"></canvas>
+    </div>
+    <div class="tech-spotlight" aria-hidden="true"></div>
 
     <!-- Header Navigation -->
     <nav class="progress-nav" id="main-nav">
@@ -329,7 +334,7 @@
     <!-- Footer -->
     <footer class="main-footer">
         <div class="footer-content">
-            <p>&copy; 2026 MuleAcademy. Criado por Ricardo com Antigravity.</p>
+            <p>&copy; 2026 MuleAcademy. Criado por Ricardo <i data-lucide="bot" class="ai-signature-icon"></i></p>
             <button class="btn btn-outline btn-sm" onclick="window.location.href='dashboard.html'">
                 <i data-lucide="layout-dashboard" class="btn-icon"></i>
                 <span>Painel Principal</span>
@@ -338,6 +343,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="tech-background.js"></script>
     <script src="modulo5.js"></script>
 </body>
 </html>
