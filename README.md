@@ -1,57 +1,103 @@
-# 🎓 MuleAcademy — Introdução a Integrações
+# MuleAcademy
 
-> Uma plataforma didática, interativa e gamificada projetada para ensinar os fundamentos de integração de sistemas, formatos de dados, APIs e MuleSoft para iniciantes em tecnologia de forma prática e divertida.
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-34d399?style=for-the-badge)
+![Frontend](https://img.shields.io/badge/frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-38bdf8?style=for-the-badge)
+![Projeto](https://img.shields.io/badge/projeto-curso%20interativo-8b5cf6?style=for-the-badge)
 
-🔗 **Acesse o curso online:** [MuleAcademy - Dashboard Principal](https://ricardo-maciel.github.io/MULE-ACADEMY/dashboard.html)
+Uma plataforma didática, interativa e gamificada para ensinar fundamentos de integração de sistemas, APIs, formatos de dados e conceitos de MuleSoft para iniciantes em tecnologia.
 
----
+O projeto combina aulas visuais, simuladores, desafios práticos, progresso por módulos e uma interface futurista com background animado para tornar o aprendizado mais envolvente.
 
-## 🎯 Objetivos do Curso
+## Acesse
 
-*   **Sentir a dor do desenvolvimento manual:** Compreender as limitações e a complexidade exponencial de conectar sistemas através de código ponto a ponto.
-*   **Aprender as linguagens de dados:** Dominar a leitura e a escrita das sintaxes mais usadas em transporte de informações (JSON, XML e CSV).
-*   **Dominar arquiteturas modernas:** Compreender o papel do MuleSoft como um Hub Centralizador estruturado (modelo estrela).
-*   **Vivenciar cenários reais:** Aprender a lidar com requests/responses, ler consoles de logs de sistemas, identificar erros HTTP e aplicar políticas de reenvio (retry).
+[Abrir o curso online](https://ricardo-maciel.github.io/MULE-ACADEMY/dashboard.html)
 
----
+## Sobre o Projeto
 
-## 📚 Módulos da Trilha de Aprendizado
+O MuleAcademy foi criado para transformar conceitos abstratos de integração em experiências práticas. Em vez de apenas explicar o que é uma API, o curso mostra por que sistemas precisam conversar, como dados trafegam, onde surgem falhas e como uma arquitetura centralizada ajuda a organizar esse fluxo.
 
-A trilha **Introdução a Integrações** é composta por 5 módulos sequenciais dinâmicos:
+A trilha foi pensada para quem está começando e precisa construir uma base visual antes de entrar em ferramentas corporativas mais complexas.
 
-### 📘 Módulo 1 — Comunicação entre Sistemas
-*   **O que é ensinado:** Por que as empresas precisam integrar seus softwares e o que acontece quando eles operam de forma isolada (silos de informação).
-*   **Interatividade:** Simulações e questionários sobre barramentos básicos de comunicação.
+## Principais Recursos
 
-### 📦 Módulo 2 — JSON, XML e CSV
-*   **O que é ensinado:** As regras estruturais que regem o JSON, XML e CSV.
-*   **Interatividade:** Correção de erros sintáticos em tempo real e um laboratório prático para codificar um objeto real (Fiat Uno 2010) nos três formatos com validação de código estrita.
+- Login, cadastro e controle simples de acesso com `localStorage`
+- Dashboard com progresso dos módulos
+- Aulas interativas com navegação por capítulos
+- Simuladores visuais de sistemas, dados, APIs e integrações
+- Laboratórios com validação de respostas e feedback imediato
+- Mini game de integração com níveis, logs, erros HTTP e retry
+- Playground interativo de arquitetura ponto a ponto e hub central
+- Background tecnológico animado com partículas, conexões e resposta ao cursor
+- Interface dark, responsiva e com estética de produto educacional moderno
 
-### 🔄 Módulo 3 — O Problema da Complexidade (Caos do Espaguete)
-*   **O que é ensinado:** A matemática por trás das conexões ponto a ponto e os gargalos de manutenção que elas causam.
-*   **Interatividade:** Um painel de simulação trigonométrico onde o aluno adiciona até 10 sistemas e vê a teia de conexões explodir fisicamente na tela em animações vermelhas neon de sobrecarga.
+## Trilha de Aprendizado
 
-### 🌉 Módulo 4 — MuleSoft como Solução (O Hub Central)
-*   **O que é ensinado:** Como a arquitetura estrela centraliza os dados, cuida de traduções em tempo real e isola falhas nos sistemas de destino.
-*   *   **Interatividade:** Sandbox para arrastar e soltar (drag & drop) ou conectar cartões de sistemas diretamente em um barramento centralizado e ver o fluxo de partículas de luz em tempo real.
+### Módulo 1: Comunicação entre Sistemas
 
-### 🛒 Módulo 5 — Jogo de Integração: Mission Control
-*   **O que é ensinado:** A rotina de engenharia de integrações: pipelines, logs de terminal, HTTP payloads, códigos de status, tratamentos de erro (402, 404, 503) e retentativas automáticas.
-*   **Interatividade:** Um simulador em formato de jogo com 7 níveis desbloqueáveis que coloca o aluno no papel de engenheiro resolvendo a entrega de um e-commerce integrado.
+Introduz o problema de sistemas isolados e mostra por que empresas precisam integrar softwares para automatizar processos e reduzir retrabalho.
 
----
+### Módulo 2: JSON, XML e CSV
 
-## 🛠️ Tecnologias e Design
+Apresenta os principais formatos de troca de dados, com comparações visuais, exercícios de sintaxe e validação prática.
 
-Este portal foi construído utilizando as melhores práticas modernas de desenvolvimento front-end:
-*   **Vanilla HTML5 & CSS3**: Customização de componentes de alta performance e responsividade (sem frameworks pesados).
-*   **Vanilla Javascript**: Lógica de simulações, motores trigonométricos dinâmicos de SVG e gerenciadores de estados complexos de jogos.
-*   **Neon Dark Aesthetics**: Tema escuro de ficção científica (glassmorphism) com glows coloridos que atraem a atenção do aluno a cada clique.
-*   **Lucide Icons**: Pacote de ícones minimalistas e modernos para melhoria de acessibilidade.
+### Módulo 3: O Caos do Espaguete
 
----
+Mostra como conexões ponto a ponto crescem em complexidade e tornam a manutenção difícil conforme novos sistemas entram no ecossistema.
 
-## 👥 Créditos e Criação
+### Módulo 4: MuleSoft como Hub Central
 
-*   **Idealizado e Criado por:** Ricardo Maciel
-*   **Desenvolvido com auxílio de:** Antigravity AI (Google DeepMind)
+Explica a arquitetura centralizada, com sistemas conectados a um hub responsável por organizar fluxos, traduções e isolamento de falhas.
+
+### Módulo 5: Mission Control
+
+Simulador em formato de jogo onde o aluno acompanha pipelines, payloads, status HTTP, logs, falhas e retentativas em um cenário inspirado em e-commerce.
+
+## Tecnologias
+
+- **HTML5** para estrutura das telas
+- **CSS3** para layout, glassmorphism, responsividade e animações
+- **JavaScript puro** para lógica de aulas, simuladores e interações
+- **Canvas API** para o background dinâmico de rede digital
+- **SVG** para ilustrações, fluxos e animações educativas
+- **Lucide Icons** para iconografia da interface
+- **LocalStorage** para progresso, autenticação simulada e estado do aluno
+
+## Estrutura
+
+```text
+MULESOFT/
+├── login.html              # Acesso, cadastro e área administrativa
+├── dashboard.html          # Painel principal do aluno
+├── index.html              # Módulo 1
+├── modulo2.html            # Módulo 2
+├── modulo3.html            # Módulo 3
+├── modulo4.html            # Módulo 4
+├── modulo5.html            # Módulo 5
+├── playground.html         # Playground interativo
+├── *.css                   # Estilos específicos das telas
+├── *.js                    # Lógica das telas e simuladores
+├── tech-background.css     # Estilo do background global
+└── tech-background.js      # Motor Canvas do background interativo
+```
+
+## Como Executar Localmente
+
+Como o projeto é estático, basta abrir `login.html` no navegador.
+
+Também é possível servir a pasta localmente:
+
+```bash
+python -m http.server 4173
+```
+
+Depois acesse:
+
+```text
+http://127.0.0.1:4173/login.html
+```
+
+## Créditos
+
+Projeto idealizado e criado por **Ricardo Maciel**.
+
+Desenvolvido com apoio de ferramentas de inteligência artificial para acelerar prototipação, interface, escrita e refinamento da experiência.
