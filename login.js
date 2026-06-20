@@ -305,8 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Salva usuário ativo na sessão do localStorage
-                localStorage.setItem('muleacademy_current_user', JSON.stringify({
+                // Salva usuário ativo na sessão do sessionStorage
+                sessionStorage.setItem('muleacademy_current_user', JSON.stringify({
                     name: student.name,
                     email: student.email
                 }));
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Login rápido de administrador na visualização do aluno
     document.getElementById('btn-admin-to-student').addEventListener('click', () => {
         // Define usuário atual como o admin de testes
-        localStorage.setItem('muleacademy_current_user', JSON.stringify({
+        sessionStorage.setItem('muleacademy_current_user', JSON.stringify({
             name: 'Administrador',
             email: 'admin@curso.com'
         }));
@@ -485,8 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function getStudentProgressPercent(email) {
         const backup = localStorage.getItem(`muleacademy_progress_${email}`);
         
-        // Caso seja o usuário atualmente logado, lê as chaves diretas do localStorage
-        const currentUser = JSON.parse(localStorage.getItem('muleacademy_current_user'));
+        // Caso seja o usuário atualmente logado, lê as chaves diretas do sessionStorage
+        const currentUser = JSON.parse(sessionStorage.getItem('muleacademy_current_user'));
         if (currentUser && currentUser.email.toLowerCase() === email.toLowerCase()) {
             let directCount = 0;
             for (let i = 1; i <= 5; i++) {

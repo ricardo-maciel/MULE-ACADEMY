@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <script>
-        if (!localStorage.getItem('muleacademy_current_user')) {
+        if (!sessionStorage.getItem('muleacademy_current_user')) {
             window.location.href = 'login.html';
         }
     </script>
@@ -35,7 +35,7 @@
             <span class="brand-title" style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--color-indigo-light); margin-left: 0.35rem;">Mule<span style="color: var(--color-teal-light);">Academy</span></span>
         </div>
         <div class="mobile-header-actions">
-            <button class="btn-logout" onclick="if(confirm('Deseja realmente sair da sua conta?')) { localStorage.removeItem('muleacademy_current_user'); window.location.href='login.html'; }" style="background: none; border: none; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 6px; border-radius: 6px; transition: var(--transition-smooth);" title="Sair da Conta">
+            <button class="btn-logout" onclick="if(confirm('Deseja realmente sair da sua conta?')) { sessionStorage.removeItem('muleacademy_current_user'); window.location.href='login.html'; }" style="background: none; border: none; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 6px; border-radius: 6px; transition: var(--transition-smooth);" title="Sair da Conta">
                 <i data-lucide="log-out" style="width: 18px; height: 18px;"></i>
             </button>
         </div>

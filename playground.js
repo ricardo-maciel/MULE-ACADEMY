@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================== */
     let currentUser = null;
     try {
-        currentUser = JSON.parse(localStorage.getItem('muleacademy_current_user'));
+        currentUser = JSON.parse(sessionStorage.getItem('muleacademy_current_user'));
     } catch (e) {
         console.error("Erro ao fazer o parse do usuário logado:", e);
-        const rawUser = localStorage.getItem('muleacademy_current_user');
+        const rawUser = sessionStorage.getItem('muleacademy_current_user');
         if (rawUser) {
             currentUser = { name: rawUser, email: '' };
         }
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnLogout) {
         btnLogout.addEventListener('click', () => {
             if (confirm('Deseja realmente sair da sua conta?')) {
-                localStorage.removeItem('muleacademy_current_user');
+                sessionStorage.removeItem('muleacademy_current_user');
                 window.location.href = 'login.html';
             }
         });
