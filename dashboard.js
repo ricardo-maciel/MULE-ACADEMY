@@ -273,6 +273,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Lógica para toggle do menu lateral no mobile
+    const mobileToggle = document.getElementById('mobile-sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    if (mobileToggle && sidebar && overlay) {
+        const toggleMenu = () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        };
+
+        mobileToggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+        
+        // Fechar ao clicar em um link interno (para âncoras/módulos)
+        sidebar.querySelectorAll('.nav-item, .nav-subitem').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 992) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+    }
+
     // Inicialização da plataforma
     renderDashboardProgress();
 });

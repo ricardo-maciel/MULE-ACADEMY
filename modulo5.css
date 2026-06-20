@@ -1035,3 +1035,9 @@ input:checked + .slider:before {
         gap: 1.25rem;
     }
 }
+
+#game-svg-canvas {
+    max-width: 100%;
+    height: auto;
+}
+

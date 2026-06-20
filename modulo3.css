@@ -638,6 +638,13 @@ p {
     box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
 }
 
+.mesh-svg,
+#static-spaghetti-svg,
+.spaghetti-svg-canvas {
+    max-width: 100%;
+    height: auto;
+}
+
 .spaghetti-svg-canvas {
     position: relative;
     z-index: 5;
@@ -996,5 +1003,16 @@ p {
     .summary-cards {
         grid-template-columns: 1fr;
         gap: 1.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .svg-drawing-area-container {
+        width: 290px;
+        height: 290px;
+    }
+    .spaghetti-svg-container {
+        width: 280px;
+        height: 280px;
     }
 }

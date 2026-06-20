@@ -589,6 +589,12 @@ body {
     overflow: hidden;
 }
 
+.table-responsive-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .table-header-bar {
     display: flex;
     justify-content: space-between;

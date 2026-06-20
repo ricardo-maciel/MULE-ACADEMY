@@ -25,6 +25,25 @@
     </div>
     <div class="tech-spotlight" aria-hidden="true"></div>
 
+    <!-- Mobile Top Header -->
+    <header class="mobile-header">
+        <button class="mobile-menu-toggle-btn" id="mobile-sidebar-toggle" aria-label="Abrir Menu">
+            <i data-lucide="menu"></i>
+        </button>
+        <div class="mobile-logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
+            <i data-lucide="blocks" class="brand-icon" style="width: 22px; height: 22px;"></i>
+            <span class="brand-title" style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--color-indigo-light); margin-left: 0.35rem;">Mule<span style="color: var(--color-teal-light);">Academy</span></span>
+        </div>
+        <div class="mobile-header-actions">
+            <button class="btn-logout" onclick="if(confirm('Deseja realmente sair da sua conta?')) { localStorage.removeItem('muleacademy_current_user'); window.location.href='login.html'; }" style="background: none; border: none; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 6px; border-radius: 6px; transition: var(--transition-smooth);" title="Sair da Conta">
+                <i data-lucide="log-out" style="width: 18px; height: 18px;"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
     <!-- Dashboard Sidebar Navigation -->
     <aside class="sidebar">
         <div class="sidebar-brand">
