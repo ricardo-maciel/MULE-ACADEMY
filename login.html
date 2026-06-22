@@ -148,6 +148,10 @@
                             <i data-lucide="settings"></i>
                             <span>Configurações</span>
                         </button>
+                        <button class="admin-nav-item" id="nav-logs-btn">
+                            <i data-lucide="file-text"></i>
+                            <span>Logs de Acesso</span>
+                        </button>
                     </nav>
 
                     <div class="admin-sidebar-footer">
@@ -253,6 +257,38 @@
                                     <span>Salvar Nova Senha</span>
                                 </button>
                             </form>
+                        </div>
+                    </section>
+
+                    <!-- TAB SECTION 3: ACCESS LOGS -->
+                    <section id="admin-section-logs" class="admin-tab-section hidden">
+                        <div class="table-wrapper glass-panel">
+                            <div class="table-header-bar">
+                                <h3>Logs de Atividades e Acessos</h3>
+                                <div class="header-actions">
+                                    <button class="btn btn-rose btn-sm" id="btn-clear-logs">
+                                        <i data-lucide="trash-2"></i>
+                                        <span>Limpar Logs</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="table-responsive-container">
+                                <table class="students-table" id="logs-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Data / Hora</th>
+                                            <th>Usuário / E-mail</th>
+                                            <th>Ação / Evento</th>
+                                            <th>Dispositivo / Browser</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="logs-table-body">
+                                        <tr class="empty-row">
+                                            <td colspan="4">Nenhum log de acesso registrado.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </section>
 

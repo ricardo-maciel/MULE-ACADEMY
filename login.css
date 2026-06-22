@@ -898,6 +898,35 @@ body {
     gap: 0.75rem;
 }
 
+/* Badges para os Logs de Acesso */
+.badge-log {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-family: var(--font-primary);
+}
+
+.badge-log-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-emerald-light);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-log-fail {
+    background: rgba(244, 63, 94, 0.1);
+    color: var(--color-rose-light);
+    border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.badge-log-info {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--color-indigo-light);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
 /* ==========================================================================
    5. RESPONSIVE MEDIA QUERIES
    ========================================================================== */

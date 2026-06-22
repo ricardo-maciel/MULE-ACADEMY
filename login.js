@@ -192,9 +192,33 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('muleacademy_progress_maria@email.com', 'muleacademy_completed_1=true;');
     }
 
-    // Configuração de senha Admin padrão
-    if (!localStorage.getItem('muleacademy_admin_password') || localStorage.getItem('muleacademy_admin_password') === 'admin123') {
-        localStorage.setItem('muleacademy_admin_password', '####admin123');
+    // Helper function to hash a password using SHA-256
+    async function hashPassword(password) {
+        const msgBuffer = new TextEncoder().encode(password);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+    }
+
+    // Configuração de senha Admin padrão (armazenada com hash SHA-256)
+    const defaultAdminHash = 'a6563a56ce7603365074a939695cc0e8166b149a1f74c3f5a1dc4bf8642b2eda'; // hash de ####admin123
+    
+    // Migração automática de senhas antigas em texto plano
+    const oldPlainAdminPassword = localStorage.getItem('muleacademy_admin_password');
+    if (oldPlainAdminPassword) {
+        if (oldPlainAdminPassword === 'admin123' || oldPlainAdminPassword === '####admin123') {
+            localStorage.setItem('muleacademy_admin_password_hash', defaultAdminHash);
+        } else {
+            hashPassword(oldPlainAdminPassword).then(hash => {
+                localStorage.setItem('muleacademy_admin_password_hash', hash);
+            });
+        }
+        localStorage.removeItem('muleacademy_admin_password');
+    }
+
+    if (!localStorage.getItem('muleacademy_admin_password_hash')) {
+        localStorage.setItem('muleacademy_admin_password_hash', defaultAdminHash);
     }
 
     // Obtém usuários da base local
@@ -267,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Ação: LOGIN DE USUÁRIO / ADMIN
-    formLogin.addEventListener('submit', (e) => {
+    formLogin.addEventListener('submit', async (e) => {
         e.preventDefault();
         clearAlert(authAlert);
 
@@ -276,11 +300,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Credenciais fixas de Admin
         const adminEmail = 'admin@curso.com';
-        const adminSavedPassword = localStorage.getItem('muleacademy_admin_password');
 
         if (email === adminEmail) {
-            if (password === adminSavedPassword) {
+            const adminSavedHash = localStorage.getItem('muleacademy_admin_password_hash') || 'a6563a56ce7603365074a939695cc0e8166b149a1f74c3f5a1dc4bf8642b2eda';
+            const inputHash = await hashPassword(password);
+
+            if (inputHash === adminSavedHash) {
                 // Logado com sucesso como ADMIN
+                addAccessLog('admin@curso.com', 'Login de Admin (Sucesso)', 'sucesso');
                 showAlert(authAlert, 'Acesso de administrador confirmado! Carregando painel...', 'success');
                 setTimeout(() => {
                     authCard.classList.add('hidden');
@@ -289,6 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     clearAlert(authAlert);
                 }, 1000);
             } else {
+                addAccessLog('admin@curso.com', 'Tentativa de Login Admin (Senha Incorreta)', 'falha');
                 showAlert(authAlert, 'Senha incorreta para o administrador.', 'error');
             }
             return;
@@ -301,6 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (student) {
             if (student.password === password) {
                 if (!student.active) {
+                    addAccessLog(student.email, 'Tentativa de Login (Acesso Desativado)', 'falha');
                     showAlert(authAlert, 'Acesso desativado pelo administrador. Entre em contato para liberação.', 'error');
                     return;
                 }
@@ -314,15 +343,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Carrega o progresso específico deste aluno de volta nas chaves reais se houver backup
                 restoreStudentProgress(student.email);
 
+                addAccessLog(student.email, 'Login de Aluno (Sucesso)', 'sucesso');
                 showAlert(authAlert, `Bem-vindo de volta, ${student.name}! Redirecionando...`, 'success');
                 setTimeout(() => {
                     window.location.href = 'dashboard.html';
                 }, 1000);
 
             } else {
+                addAccessLog(student.email, 'Tentativa de Login (Senha Incorreta)', 'falha');
                 showAlert(authAlert, 'Senha incorreta. Tente novamente.', 'error');
             }
         } else {
+            addAccessLog(email, 'Tentativa de Login (E-mail não Cadastrado)', 'falha');
             showAlert(authAlert, 'Nenhum aluno cadastrado com este e-mail.', 'error');
         }
     });
@@ -345,12 +377,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Bloquear cadastro de emails iguais ao do admin
         if (email === 'admin@curso.com') {
+            addAccessLog(email, 'Tentativa de Cadastro (E-mail Reservado)', 'falha');
             showAlert(authAlert, 'Este endereço de e-mail é reservado para a administração.', 'error');
             return;
         }
 
         const emailExists = users.some(u => u.email.toLowerCase() === email);
         if (emailExists) {
+            addAccessLog(email, 'Tentativa de Cadastro (E-mail Duplicado)', 'falha');
             showAlert(authAlert, 'Este endereço de e-mail já está cadastrado.', 'error');
             return;
         }
@@ -367,6 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
         users.push(newUser);
         saveUsers(users);
 
+        addAccessLog(newUser.email, 'Novo Cadastro de Aluno', 'sucesso');
         showAlert(authAlert, 'Cadastro realizado com sucesso! Alternando para login...', 'success');
         setTimeout(() => {
             formRegister.reset();
@@ -413,32 +448,161 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    // Função para registrar logs de acesso no localStorage
+    function addAccessLog(email, action, status) {
+        try {
+            const logs = JSON.parse(localStorage.getItem('muleacademy_access_logs')) || [];
+            
+            // Cria um novo log formatado
+            const newLog = {
+                timestamp: new Date().toISOString(),
+                email: email,
+                action: action,
+                status: status,
+                userAgent: navigator.userAgent
+            };
+            
+            // Adiciona no início do array
+            logs.unshift(newLog);
+            
+            // Limita a 100 registros
+            if (logs.length > 100) {
+                logs.splice(100);
+            }
+            
+            localStorage.setItem('muleacademy_access_logs', JSON.stringify(logs));
+        } catch (e) {
+            console.error("Erro ao salvar log de acesso:", e);
+        }
+    }
+
+    // Tradução amigável do User Agent
+    function getFriendlyUserAgent(ua) {
+        if (!ua) return "Desconhecido";
+        let os = "Outro OS";
+        if (ua.includes("Windows NT 10.0")) os = "Windows 10/11";
+        else if (ua.includes("Windows NT 6.1")) os = "Windows 7";
+        else if (ua.includes("Android")) os = "Android";
+        else if (ua.includes("iPhone") || ua.includes("iPad")) os = "iOS";
+        else if (ua.includes("Macintosh")) os = "macOS";
+        else if (ua.includes("Linux")) os = "Linux";
+
+        let browser = "Outro";
+        if (ua.includes("Firefox/")) browser = "Firefox";
+        else if (ua.includes("Edg/")) browser = "Edge";
+        else if (ua.includes("Chrome/")) browser = "Chrome";
+        else if (ua.includes("Safari/")) browser = "Safari";
+        
+        return `${browser} (${os})`;
+    }
+
+    // Renderizar tabela de logs
+    function renderLogsTable() {
+        const tbody = document.getElementById('logs-table-body');
+        if (!tbody) return;
+
+        const logs = JSON.parse(localStorage.getItem('muleacademy_access_logs')) || [];
+        tbody.innerHTML = '';
+
+        if (logs.length === 0) {
+            tbody.innerHTML = `
+                <tr class="empty-row">
+                    <td colspan="4">Nenhum log de acesso registrado no momento.</td>
+                </tr>
+            `;
+            return;
+        }
+
+        logs.forEach(log => {
+            const tr = document.createElement('tr');
+            
+            let formattedDate = "";
+            try {
+                const dateObj = new Date(log.timestamp);
+                formattedDate = dateObj.toLocaleString('pt-BR');
+            } catch (err) {
+                formattedDate = log.timestamp;
+            }
+
+            let badgeClass = "badge-log-info";
+            if (log.status === "sucesso") badgeClass = "badge-log-success";
+            else if (log.status === "falha") badgeClass = "badge-log-fail";
+
+            const friendlyUA = getFriendlyUserAgent(log.userAgent);
+
+            tr.innerHTML = `
+                <td><span class="font-mono text-muted small-desc">${formattedDate}</span></td>
+                <td><span class="student-meta-name">${escapeHtml(log.email)}</span></td>
+                <td>
+                    <span class="badge-log ${badgeClass}">
+                        <span>${escapeHtml(log.action)}</span>
+                    </span>
+                </td>
+                <td><span class="text-muted small-desc" title="${escapeHtml(log.userAgent)}">${escapeHtml(friendlyUA)}</span></td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+
     /* ==========================================================================
        4. LOGICA DO PAINEL ADMINISTRATIVO (ADMIN CONSOLE)
        ========================================================================== */
     const navStudentsBtn = document.getElementById('nav-students-btn');
     const navSettingsBtn = document.getElementById('nav-settings-btn');
+    const navLogsBtn = document.getElementById('nav-logs-btn');
     const adminSectionStudents = document.getElementById('admin-section-students');
     const adminSectionSettings = document.getElementById('admin-section-settings');
+    const adminSectionLogs = document.getElementById('admin-section-logs');
 
     // Navegação interna do Admin
-    navStudentsBtn.addEventListener('click', () => {
-        navStudentsBtn.classList.add('active');
-        navSettingsBtn.classList.remove('active');
-        adminSectionStudents.classList.remove('hidden');
-        adminSectionSettings.classList.add('hidden');
-    });
+    function switchAdminTab(activeBtn, activeSection) {
+        [navStudentsBtn, navSettingsBtn, navLogsBtn].forEach(btn => {
+            if (btn) btn.classList.remove('active');
+        });
+        [adminSectionStudents, adminSectionSettings, adminSectionLogs].forEach(sec => {
+            if (sec) sec.classList.add('hidden');
+        });
+        
+        activeBtn.classList.add('active');
+        activeSection.classList.remove('hidden');
+    }
 
-    navSettingsBtn.addEventListener('click', () => {
-        navSettingsBtn.classList.add('active');
-        navStudentsBtn.classList.remove('active');
-        adminSectionSettings.classList.remove('hidden');
-        adminSectionStudents.classList.add('hidden');
-        clearAlert(document.getElementById('settings-alert'));
-    });
+    if (navStudentsBtn) {
+        navStudentsBtn.addEventListener('click', () => {
+            switchAdminTab(navStudentsBtn, adminSectionStudents);
+        });
+    }
+
+    if (navSettingsBtn) {
+        navSettingsBtn.addEventListener('click', () => {
+            switchAdminTab(navSettingsBtn, adminSectionSettings);
+            clearAlert(document.getElementById('settings-alert'));
+        });
+    }
+
+    if (navLogsBtn) {
+        navLogsBtn.addEventListener('click', () => {
+            switchAdminTab(navLogsBtn, adminSectionLogs);
+            renderLogsTable();
+        });
+    }
+
+    // Botão Limpar Logs
+    const btnClearLogs = document.getElementById('btn-clear-logs');
+    if (btnClearLogs) {
+        btnClearLogs.addEventListener('click', () => {
+            if (confirm("Deseja realmente limpar todos os logs de atividade? Esta ação não pode ser desfeita.")) {
+                localStorage.setItem('muleacademy_access_logs', JSON.stringify([]));
+                addAccessLog('admin@curso.com', 'Logs de atividades limpos', 'info');
+                renderLogsTable();
+            }
+        });
+    }
 
     // Logout do Admin
     document.getElementById('btn-admin-logout').addEventListener('click', () => {
+        addAccessLog('admin@curso.com', 'Logout de Admin', 'info');
         document.getElementById('admin-portal').classList.add('hidden');
         authCard.classList.remove('hidden');
         formLogin.reset();
@@ -446,6 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Login rápido de administrador na visualização do aluno
     document.getElementById('btn-admin-to-student').addEventListener('click', () => {
+        addAccessLog('admin@curso.com', 'Acesso rápido à Área do Aluno', 'info');
         // Define usuário atual como o admin de testes
         sessionStorage.setItem('muleacademy_current_user', JSON.stringify({
             name: 'Administrador',
@@ -603,6 +768,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const idx = parseInt(btn.getAttribute('data-index'));
                 users[idx].active = !users[idx].active;
                 saveUsers(users);
+                addAccessLog('admin@curso.com', `${users[idx].active ? 'Ativou' : 'Desativou'} acesso do aluno: ${users[idx].email}`, 'info');
                 loadAdminDashboard();
             });
         });
@@ -633,6 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Remove também o backup de progresso correspondente
                     localStorage.removeItem(`muleacademy_progress_${student.email}`);
                     
+                    addAccessLog('admin@curso.com', `Excluiu aluno: ${student.email}`, 'info');
                     users.splice(idx, 1);
                     saveUsers(users);
                     loadAdminDashboard();
@@ -700,6 +867,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         saveUsers(users);
+        addAccessLog('admin@curso.com', `Editou dados do aluno: ${email}`, 'info');
         showAlert(modalAlert, 'Dados do aluno salvos com sucesso!', 'success');
         
         setTimeout(() => {
@@ -709,7 +877,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Ação: Alteração da Senha Mestre do Administrador
-    document.getElementById('form-admin-password').addEventListener('submit', (e) => {
+    document.getElementById('form-admin-password').addEventListener('submit', async (e) => {
         e.preventDefault();
         const settingsAlert = document.getElementById('settings-alert');
         clearAlert(settingsAlert);
@@ -718,9 +886,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const newPwd = document.getElementById('admin-new-pwd').value;
         const confPwd = document.getElementById('admin-conf-pwd').value;
 
-        const savedAdminPwd = localStorage.getItem('muleacademy_admin_password');
+        const savedAdminHash = localStorage.getItem('muleacademy_admin_password_hash') || 'a6563a56ce7603365074a939695cc0e8166b149a1f74c3f5a1dc4bf8642b2eda';
+        const currHash = await hashPassword(currPwd);
 
-        if (currPwd !== savedAdminPwd) {
+        if (currHash !== savedAdminHash) {
+            addAccessLog('admin@curso.com', 'Falha ao alterar senha (Senha Atual Incorreta)', 'falha');
             showAlert(settingsAlert, 'A senha atual digitada está incorreta.', 'error');
             return;
         }
@@ -735,8 +905,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Salva nova senha
-        localStorage.setItem('muleacademy_admin_password', newPwd);
+        // Salva nova senha com hash
+        const newHash = await hashPassword(newPwd);
+        localStorage.setItem('muleacademy_admin_password_hash', newHash);
+        addAccessLog('admin@curso.com', 'Senha de Admin alterada com sucesso', 'info');
         showAlert(settingsAlert, 'Senha do administrador alterada com sucesso!', 'success');
         document.getElementById('form-admin-password').reset();
     });
