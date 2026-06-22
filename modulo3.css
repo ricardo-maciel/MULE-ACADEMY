@@ -1006,13 +1006,132 @@ p {
     }
 }
 
-@media (max-width: 576px) {
-    .svg-drawing-area-container {
-        width: 290px;
-        height: 290px;
+@media (max-width: 768px) {
+    .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
     }
+
+    .navigation-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .navigation-footer .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .preset-buttons {
+        flex-wrap: wrap;
+    }
+
+    .preset-buttons .btn {
+        flex: 1;
+        min-width: 0;
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .cta-group {
+        flex-direction: column;
+    }
+
+    .cta-group .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .module-navigation-group .btn {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .svg-drawing-area-container,
     .spaghetti-svg-container {
-        width: 280px;
-        height: 280px;
+        margin: 0 auto;
+    }
+
+    .canvas-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .simulator-sidebar {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.85rem;
+    }
+
+    h2 {
+        font-size: 1.65rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .subtitle {
+        font-size: 1.05rem;
+    }
+
+    .glass-panel {
+        padding: 1.25rem;
+        border-radius: 14px;
+    }
+
+    .chapter-section {
+        padding: 2.5rem 0.5rem;
+        min-height: auto;
+    }
+
+    .progress-nav {
+        padding: 0 1rem;
+        height: 65px;
+    }
+
+    .header-dashboard-btn {
+        display: none;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .cta-box {
+        padding: 2rem 1rem;
+    }
+
+    .story-quote {
+        font-size: 1rem;
+    }
+
+    .svg-drawing-area-container {
+        width: 260px;
+        height: 260px;
+    }
+
+    .spaghetti-svg-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .formula-math {
+        font-size: 1.6rem;
+    }
+
+    .fraction {
+        font-size: 1.2rem;
     }
 }
