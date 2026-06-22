@@ -193,8 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Configuração de senha Admin padrão
-    if (!localStorage.getItem('muleacademy_admin_password')) {
-        localStorage.setItem('muleacademy_admin_password', 'admin123');
+    if (!localStorage.getItem('muleacademy_admin_password') || localStorage.getItem('muleacademy_admin_password') === 'admin123') {
+        localStorage.setItem('muleacademy_admin_password', '####admin123');
     }
 
     // Obtém usuários da base local
