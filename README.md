@@ -27,15 +27,16 @@ A trilha foi pensada para quem está começando e precisa construir uma base vis
 
 ## Principais Recursos
 
-- Login, cadastro e controle simples de acesso com `localStorage`
-- Dashboard com progresso dos módulos
-- Aulas interativas com navegação por capítulos
-- Simuladores visuais de sistemas, dados, APIs e integrações
-- Laboratórios com validação de respostas e feedback imediato
-- Mini game de integração com níveis, logs, erros HTTP e retry
-- Playground interativo de arquitetura ponto a ponto e hub central
-- Background tecnológico animado com partículas, conexões e resposta ao cursor
-- Interface dark, responsiva e com estética de produto educacional moderno
+- **Controle de Acesso Flexível:** Sistema de login, cadastro de estudantes e portal de administração com sessão via `sessionStorage` e persistência via `localStorage`.
+- **Painel Administrativo Embutido:** Acesso restrito para administradores (`admin@curso.com`) com visualização de métricas (total de alunos, alunos ativos, conclusões), gerenciamento de usuários (cadastro, edição, exclusão, bloqueio de acesso) e logs de auditoria detalhados com decodificação amigável de navegador e OS.
+- **Dashboard de Progresso:** Painel interativo com status visual de cada módulo da trilha de aprendizado, liberando módulos sequencialmente conforme conclusão dos anteriores.
+- **Aulas Interativas:** Conteúdo teórico estruturado com navegação fluida por capítulos.
+- **Simuladores de Integração Prática:** Laboratórios visuais e simuladores práticos de APIs, payload JSON, conversão XML, requisições HTTP e logs.
+- **Playground de Arquitetura com Telemetria:** Simulador físico de arrastar e soltar (drag and drop) que compara na prática o acoplamento caótico Ponto a Ponto (P2P) com a arquitetura centralizada (Hub-and-Spoke com MuleSoft), exibindo estatísticas em tempo real de latência, esforço de manutenção, número de conexões e riscos de falha.
+- **Scanner de Tecnologias Simulado:** Ferramenta no Playground que simula uma varredura de sistemas na rede da empresa (com efeito visual de laser e presets de cenários como e-commerce, CRM e ERP).
+- **Efeitos Sonoros Dinâmicos:** Efeitos de sucesso, erro, scanner e interações sintetizados diretamente no navegador via **Web Audio API**.
+- **Background Animado e Interativo:** Motor Canvas com efeito de constelação tecnológica que responde à movimentação do cursor.
+- **Design de Alta Qualidade:** Visual dark futurista, glassmorphism e micro-animações responsivas desenvolvidas inteiramente em CSS puro.
 
 ## Trilha de Aprendizado
 
@@ -61,19 +62,20 @@ Simulador em formato de jogo onde o aluno acompanha pipelines, payloads, status 
 
 ## Tecnologias
 
-- **HTML5** para estrutura das telas
-- **CSS3** para layout, glassmorphism, responsividade e animações
-- **JavaScript puro** para lógica de aulas, simuladores e interações
-- **Canvas API** para o background dinâmico de rede digital
-- **SVG** para ilustrações, fluxos e animações educativas
-- **Lucide Icons** para iconografia da interface
-- **LocalStorage** para progresso, autenticação simulada e estado do aluno
+- **HTML5** para estrutura semântica das telas e controle de redirecionamentos.
+- **CSS3** para o layout moderno (glassmorphism), responsividade avançada e micro-animações interativas.
+- **JavaScript (ES6+)** para o motor de física de partículas, lógica dos simuladores, auditoria, controle de sessão e manipulação dinâmica de DOM.
+- **Web Audio API** para a geração/síntese de áudio e efeitos sonoros retrofuturistas em tempo real, sem necessidade de carregar arquivos MP3/WAV pesados.
+- **Canvas API** para renderização de redes de partículas e conexões interativas tanto no background quanto na simulação do playground.
+- **SVG** para ilustrações e fluxogramas explicativos com animações integradas.
+- **Lucide Icons** para a iconografia rica e consistente da interface.
+- **LocalStorage & SessionStorage** para controle de sessão ativo, persistência de banco de dados mockado localmente e histórico de logs.
 
 ## Estrutura
 
 ```text
 MULESOFT/
-├── login.html              # Acesso, cadastro e área administrativa
+├── login.html              # Acesso, cadastro e Portal Administrativo integrado
 ├── dashboard.html          # Painel principal do aluno
 ├── index.html              # Módulo 1
 ├── modulo2.html            # Módulo 2
