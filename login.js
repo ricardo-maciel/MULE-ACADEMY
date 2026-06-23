@@ -180,7 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const defaultStudents = [
         { name: "João Silva", email: "joao@email.com", password: "user123", active: true, signupDate: "2026-06-18" },
         { name: "Maria Oliveira", email: "maria@email.com", password: "user123", active: true, signupDate: "2026-06-19" },
-        { name: "Carlos Souza", email: "carlos@email.com", password: "user123", active: false, signupDate: "2026-06-15" }
+        { name: "Carlos Souza", email: "carlos@email.com", password: "user123", active: false, signupDate: "2026-06-15" },
+        { name: "Aluno de Estudos", email: "estudo@email.com", password: "user123", active: true, signupDate: "2026-06-22" }
     ];
 
     // Se não existirem usuários, inicializa mock
@@ -190,6 +191,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Simular o progresso no localStorage para João e Maria para fins de relatório visual no admin
         localStorage.setItem('muleacademy_progress_joao@email.com', 'muleacademy_completed_1=true;muleacademy_completed_2=true;muleacademy_completed_3=true;');
         localStorage.setItem('muleacademy_progress_maria@email.com', 'muleacademy_completed_1=true;');
+    } else {
+        // Garantir que o usuário de estudos exista na base mesmo se já foi inicializada antes
+        try {
+            const currentUsers = JSON.parse(localStorage.getItem('muleacademy_users'));
+            if (Array.isArray(currentUsers) && !currentUsers.some(u => u.email === 'estudo@email.com')) {
+                currentUsers.push({ name: "Aluno de Estudos", email: "estudo@email.com", password: "user123", active: true, signupDate: "2026-06-22" });
+                localStorage.setItem('muleacademy_users', JSON.stringify(currentUsers));
+            }
+        } catch (e) {
+            console.error("Erro ao sincronizar usuário de estudos no localStorage:", e);
+        }
     }
 
     // Helper function to hash a password using SHA-256

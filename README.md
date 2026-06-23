@@ -12,6 +12,13 @@ O projeto combina aulas visuais, simuladores, desafios práticos, progresso por 
 
 [Abrir o curso online](https://ricardo-maciel.github.io/MULE-ACADEMY/dashboard.html)
 
+> [!TIP]
+> **Credenciais de Teste para Estudos:**
+> - **E-mail:** `estudo@email.com`
+> - **Senha:** `user123`
+>
+> *Caso prefira, você também pode utilizar a opção **"Criar conta"** diretamente na tela inicial para registrar um novo usuário para seus estudos. Todo o progresso do curso ficará salvo localmente no seu navegador (`localStorage`).*
+
 ## Sobre o Projeto
 
 O MuleAcademy foi criado para transformar conceitos abstratos de integração em experiências práticas. Em vez de apenas explicar o que é uma API, o curso mostra por que sistemas precisam conversar, como dados trafegam, onde surgem falhas e como uma arquitetura centralizada ajuda a organizar esse fluxo.
