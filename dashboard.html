@@ -8,12 +8,12 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MuleAcademy - Dashboard do Curso</title>
+    <title>Mule Sem Freio Academy - Dashboard do Curso</title>
     <meta name="description" content="Dashboard interativo para iniciantes aprenderem integração de sistemas, formatos de dados, APIs e MuleSoft com laboratórios práticos.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="dashboard.css">
@@ -31,8 +31,8 @@
             <i data-lucide="menu"></i>
         </button>
         <div class="mobile-logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
-            <i data-lucide="blocks" class="brand-icon" style="width: 22px; height: 22px;"></i>
-            <span class="brand-title" style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--color-indigo-light); margin-left: 0.35rem;">Mule<span style="color: var(--color-teal-light);">Academy</span></span>
+            <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo" style="width: 38px; height: 38px; margin-right: 6px;">
+            <span class="brand-title" style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--color-indigo-light); margin-left: 0.35rem;">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
         </div>
         <div class="mobile-header-actions">
             <button class="btn-logout" onclick="if(confirm('Deseja realmente sair da sua conta?')) { sessionStorage.removeItem('muleacademy_current_user'); window.location.href='login.html'; }" style="background: none; border: none; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 6px; border-radius: 6px; transition: var(--transition-smooth);" title="Sair da Conta">
@@ -47,9 +47,9 @@
     <!-- Dashboard Sidebar Navigation -->
     <aside class="sidebar">
         <div class="sidebar-brand">
-            <i data-lucide="blocks" class="brand-icon"></i>
+            <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo" style="width: 48px; height: 48px; margin-right: 10px;">
             <div class="brand-text-wrapper">
-                <span class="brand-title">Mule<span>Academy</span></span>
+                <span class="brand-title">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
                 <span class="brand-sub">Ricardo <i data-lucide="sparkles" class="ai-signature-icon"></i></span>
             </div>
         </div>

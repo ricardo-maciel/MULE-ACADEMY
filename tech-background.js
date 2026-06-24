@@ -19,10 +19,10 @@
     let frame = 0;
 
     const palette = [
-        [52, 213, 255],
-        [99, 102, 241],
-        [139, 92, 246],
-        [20, 184, 166]
+        [255, 106, 0],   // Laranja
+        [255, 179, 0],   // Amarelo Ouro
+        [160, 167, 179], // Cinza Claro
+        [224, 93, 0]     // Laranja Escuro
     ];
 
     const random = (min, max) => Math.random() * (max - min) + min;

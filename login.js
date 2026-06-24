@@ -1,5 +1,5 @@
 // ==========================================================================
-// MULEACADEMY - LOGIN & SISTEMA ADMINISTRATIVO (LOGIC ENGINE)
+// MULE SEM FREIO ACADEMY - LOGIN & SISTEMA ADMINISTRATIVO (LOGIC ENGINE)
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
             this.vx = (Math.random() - 0.5) * 0.4; // Velocidade lenta de deriva
             this.vy = (Math.random() - 0.5) * 0.4;
             this.radius = Math.random() * 2 + 1.2;
-            // Cores baseadas nos formatos de dados da MuleAcademy (indigo, teal, accent, json)
-            const colors = ['#6366f1', '#14b8a6', '#8b5cf6', '#f97316'];
+            // Cores baseadas nos formatos de dados da Mule Sem Freio Academy (laranja, amarelo ouro, cinza claro, laranja escuro)
+            const colors = ['#FF6A00', '#FFB300', '#A0A7B3', '#E05D00'];
             this.color = colors[Math.floor(Math.random() * colors.length)];
         }
 
