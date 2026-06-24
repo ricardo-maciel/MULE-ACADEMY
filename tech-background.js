@@ -6,6 +6,9 @@
     const spotlight = document.querySelector('.tech-spotlight');
     const pointer = { x: 0, y: 0, tx: 0, ty: 0, active: false, lastMove: 0 };
 
+    let currentMode = localStorage.getItem('muleacademy_perf_mode') || 'normal';
+    let animationId = null;
+
     let width = 0;
     let height = 0;
     let dpr = 1;
@@ -55,11 +58,17 @@
 
         const smallScreen = width < 720;
         const area = width * height;
-        const total = clamp(
+        let total = clamp(
             Math.floor(area / (smallScreen ? 15800 : 10800)),
             smallScreen ? 42 : 74,
             smallScreen ? 74 : 132
         );
+
+        if (currentMode === 'media') {
+            total = Math.floor(total * 0.5);
+        } else if (currentMode === 'maxima') {
+            total = 0;
+        }
 
         particles = [];
         for (let i = 0; i < total; i += 1) {
@@ -180,11 +189,14 @@
                 if (d > maxDistance) continue;
 
                 const opacity = (1 - d / maxDistance) * (0.32 + (a.layer + b.layer) * 0.08);
-                const gradient = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
-                gradient.addColorStop(0, `rgba(${a.color.join(',')}, ${opacity})`);
-                gradient.addColorStop(1, `rgba(${b.color.join(',')}, ${opacity * 0.62})`);
-
-                ctx.strokeStyle = gradient;
+                if (currentMode === 'normal') {
+                    const gradient = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+                    gradient.addColorStop(0, `rgba(${a.color.join(',')}, ${opacity})`);
+                    gradient.addColorStop(1, `rgba(${b.color.join(',')}, ${opacity * 0.62})`);
+                    ctx.strokeStyle = gradient;
+                } else {
+                    ctx.strokeStyle = `rgba(${a.color.join(',')}, ${opacity * 0.7})`;
+                }
                 ctx.lineWidth = 0.5 + Math.max(a.layer, b.layer) * 0.22;
                 ctx.beginPath();
                 ctx.moveTo(a.x, a.y);
@@ -212,8 +224,10 @@
             const glow = 0.55 + Math.sin(time * 0.003 + particle.phase) * 0.35;
 
             ctx.save();
-            ctx.shadowColor = `rgba(${particle.color.join(',')}, ${0.5 + particle.layer * 0.12})`;
-            ctx.shadowBlur = 14 + particle.layer * 7;
+            if (currentMode === 'normal') {
+                ctx.shadowColor = `rgba(${particle.color.join(',')}, ${0.5 + particle.layer * 0.12})`;
+                ctx.shadowBlur = 14 + particle.layer * 7;
+            }
             ctx.fillStyle = `rgba(${particle.color.join(',')}, ${0.48 + glow * 0.35})`;
             ctx.beginPath();
             ctx.arc(particle.x, particle.y, particle.radius + particle.layer * 0.22, 0, Math.PI * 2);
@@ -240,8 +254,10 @@
             }
 
             ctx.save();
-            ctx.shadowColor = `rgba(${packet.color.join(',')}, 0.84)`;
-            ctx.shadowBlur = 16;
+            if (currentMode === 'normal') {
+                ctx.shadowColor = `rgba(${packet.color.join(',')}, 0.84)`;
+                ctx.shadowBlur = 16;
+            }
             ctx.fillStyle = `rgba(${packet.color.join(',')}, ${Math.max(packet.life, 0)})`;
             ctx.beginPath();
             ctx.arc(packet.x, packet.y, 2.1, 0, Math.PI * 2);
@@ -274,8 +290,10 @@
             ctx.save();
             ctx.strokeStyle = `rgba(52, 213, 255, ${ripple.life * 0.46})`;
             ctx.lineWidth = 1.5;
-            ctx.shadowColor = 'rgba(52, 213, 255, 0.72)';
-            ctx.shadowBlur = 18;
+            if (currentMode === 'normal') {
+                ctx.shadowColor = 'rgba(52, 213, 255, 0.72)';
+                ctx.shadowBlur = 18;
+            }
             ctx.beginPath();
             ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
             ctx.stroke();
@@ -284,6 +302,11 @@
     }
 
     function animate(time = 0) {
+        if (currentMode === 'maxima') {
+            ctx.clearRect(0, 0, width, height);
+            animationId = null;
+            return;
+        }
         frame += 1;
         ctx.clearRect(0, 0, width, height);
         ctx.globalCompositeOperation = 'source-over';
@@ -295,7 +318,7 @@
         drawRipples();
         drawParticles(time);
         drawPackets();
-        requestAnimationFrame(animate);
+        animationId = requestAnimationFrame(animate);
     }
 
     window.addEventListener('resize', resize);
@@ -312,7 +335,21 @@
         addRipple(event.clientX, event.clientY);
     });
 
-    resize();
+    window.setPerformanceMode = function (mode) {
+        if (mode !== 'normal' && mode !== 'media' && mode !== 'maxima') return;
+        currentMode = mode;
+        localStorage.setItem('muleacademy_perf_mode', mode);
+
+        document.body.classList.remove('perf-normal', 'perf-media', 'perf-maxima');
+        document.body.classList.add(`perf-${mode}`);
+
+        resize();
+
+        if (currentMode !== 'maxima' && !animationId) {
+            animationId = requestAnimationFrame(animate);
+        }
+    };
+
     updatePointer(width * 0.62, height * 0.42, false);
-    requestAnimationFrame(animate);
+    window.setPerformanceMode(currentMode);
 }());

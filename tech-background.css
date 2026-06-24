@@ -84,3 +84,23 @@ body > .portal-wrapper {
         opacity: 0.38;
     }
 }
+
+/* Performance Mode Overrides */
+body.perf-maxima .tech-spotlight,
+body.perf-maxima .tech-network-bg {
+    display: none !important;
+}
+
+body.perf-maxima::before {
+    mask-image: none;
+    opacity: 0.15;
+}
+
+body.perf-maxima {
+    background: #06090e !important;
+}
+
+body.perf-media .tech-spotlight {
+    mix-blend-mode: normal;
+    opacity: 0.5;
+}

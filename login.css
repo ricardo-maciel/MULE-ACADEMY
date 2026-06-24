@@ -1003,3 +1003,66 @@ body {
         display: none; /* Hide progress column on smaller viewports */
     }
 }
+
+/* ==========================================================================
+   PERFORMANCE CONTROL SELECTOR STYLING
+   ========================================================================== */
+.perf-control {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.perf-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.perf-label i,
+.perf-label svg {
+    width: 14px;
+    height: 14px;
+}
+
+.perf-buttons {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.perf-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    padding: 0.55rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-align: center;
+}
+
+.perf-btn:hover {
+    color: var(--color-text);
+}
+
+.perf-btn.active {
+    background: rgba(20, 184, 166, 0.15);
+    color: var(--color-teal-light);
+    border: 1px solid rgba(20, 184, 166, 0.2);
+}

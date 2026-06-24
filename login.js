@@ -9,6 +9,28 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     }
 
+    // Configurações do seletor de desempenho (Modo Desempenho)
+    const perfButtons = document.querySelectorAll('.perf-btn');
+    const savedPerfMode = localStorage.getItem('muleacademy_perf_mode') || 'normal';
+
+    perfButtons.forEach(btn => {
+        if (btn.getAttribute('data-mode') === savedPerfMode) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+
+        btn.addEventListener('click', () => {
+            const selectedMode = btn.getAttribute('data-mode');
+            perfButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (typeof window.setPerformanceMode === 'function') {
+                window.setPerformanceMode(selectedMode);
+            }
+        });
+    });
+
     /* ==========================================================================
        1. MOTOR INTERATIVO DO CANVAS DE CONSTELAÇÃO (PLAYGROUND DE REDE E APIS)
        ========================================================================== */
