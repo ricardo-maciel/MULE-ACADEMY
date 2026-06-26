@@ -38,6 +38,31 @@ A trilha foi pensada para quem está começando e precisa construir uma base vis
 - **Background Animado e Interativo:** Motor Canvas com efeito de constelação tecnológica que responde à movimentação do cursor.
 - **Design de Alta Qualidade:** Visual dark futurista, glassmorphism e micro-animações responsivas desenvolvidas inteiramente em CSS puro.
 
+## 🎨 Identidades Visuais
+
+A plataforma tem **duas identidades visuais** que você escolhe na tela de login — só muda a aparência, o conteúdo e o progresso são exatamente os mesmos nas duas.
+
+| | Identidade | Visual |
+|---|---|---|
+| ![MuleCraft](MuleCraftIcone.png) | **MuleCraft** *(padrão)* | Tema roxo e ciano, estilo tech corporativo. Ideal para um ambiente mais profissional e sóbrio. |
+| 🐴 | **Mule Sem Freio** | Tema laranja vibrante com mascote. Estilo mais descontraído e divertido. |
+
+> 💡 Trocar de identidade não apaga nem altera nenhum dado. O aluno pode estudar com qualquer uma e continuar de onde parou normalmente.
+
+---
+
+## ⚡ Modo Desempenho
+
+Controla a intensidade dos efeitos visuais do background (constelação animada, spotlight do cursor, sombras). Útil para adaptar a experiência ao hardware do dispositivo.
+
+| Modo | Ícone | O que faz |
+|---|---|---|
+| **Normal** | ⚡ | Todos os efeitos ativos — experiência visual completa. |
+| **Médio** *(padrão)* | ✨ | Efeitos reduzidos e sombras mais leves — bom equilíbrio entre visual e performance. |
+| **Máximo** | 🖥️ | Animações de fundo desativadas — para máquinas mais lentas ou foco total no conteúdo. |
+
+> 💡 A preferência fica salva automaticamente. Na próxima visita, o modo escolhido é restaurado.
+
 ## Trilha de Aprendizado
 
 ### Módulo 1: Comunicação entre Sistemas
