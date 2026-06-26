@@ -1134,17 +1134,33 @@ body[data-brand="mulecraft"] .brand-choice-option input:checked + span {
 }
 
 /* ==========================================================================
-   PERFORMANCE CONTROL SELECTOR STYLING
+   FOOTER SETTINGS (BRAND & PERFORMANCE CONTROLS)
    ========================================================================== */
-.perf-control {
+.footer-settings {
     margin-top: 1.5rem;
     padding-top: 1.25rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+@media (max-width: 480px) {
+    .footer-settings {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+}
+
+.brand-control,
+.perf-control {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
 }
 
+.control-label,
 .perf-label {
     display: flex;
     align-items: center;
@@ -1156,12 +1172,15 @@ body[data-brand="mulecraft"] .brand-choice-option input:checked + span {
     letter-spacing: 0.5px;
 }
 
+.control-label i,
+.control-label svg,
 .perf-label i,
 .perf-label svg {
     width: 14px;
     height: 14px;
 }
 
+.brand-buttons,
 .perf-buttons {
     display: flex;
     background: rgba(0, 0, 0, 0.2);
@@ -1169,21 +1188,79 @@ body[data-brand="mulecraft"] .brand-choice-option input:checked + span {
     padding: 4px;
     gap: 4px;
     border: 1px solid rgba(255, 255, 255, 0.03);
+    height: 38px;
+    box-sizing: border-box;
+}
+
+.brand-btn {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    padding: 2px;
+}
+
+.brand-btn input[type="radio"] {
+    display: none !important;
+}
+
+.brand-btn-icon {
+    height: 24px;
+    width: 24px;
+    object-fit: contain;
+    border-radius: 4px;
+    transition: transform var(--transition-smooth);
+}
+
+.brand-btn:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.brand-btn:hover .brand-btn-icon {
+    transform: scale(1.1);
+}
+
+.brand-btn.active {
+    background: rgba(255, 106, 0, 0.12);
+    border-color: rgba(255, 106, 0, 0.35);
+    box-shadow: 0 0 10px rgba(255, 106, 0, 0.15);
+}
+
+body[data-brand="mulecraft"] .brand-btn.active {
+    background: rgba(108, 92, 231, 0.15);
+    border-color: rgba(108, 92, 231, 0.35);
+    box-shadow: 0 0 10px rgba(108, 92, 231, 0.15);
 }
 
 .perf-btn {
     flex: 1;
     background: transparent;
-    border: none;
+    border: 1px solid transparent;
     font-family: var(--font-display);
     font-weight: 600;
     font-size: 0.8rem;
     color: var(--color-text-muted);
-    padding: 0.55rem;
+    padding: 0 0.55rem;
     border-radius: 6px;
     cursor: pointer;
     transition: var(--transition-smooth);
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+}
+
+.perf-btn i,
+.perf-btn svg {
+    width: 13px;
+    height: 13px;
+    opacity: 0.8;
 }
 
 .perf-btn:hover {

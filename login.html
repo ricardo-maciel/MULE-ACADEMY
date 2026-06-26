@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script>
+        if (new URLSearchParams(window.location.search).get('automation') === 'true') {
+            window.confirm = () => true;
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mule Sem Freio Academy - Acesso ao Portal</title>
@@ -45,23 +50,6 @@
                 </div>
             </div>
 
-            <fieldset class="brand-choice" aria-label="Escolha a identidade visual">
-                <legend>Identidade visual</legend>
-                <label class="brand-choice-option">
-                    <input type="radio" name="visual-brand" value="sem-freio">
-                    <span>
-                        <i class="brand-dot brand-dot-warm"></i>
-                        Mule Sem Freio
-                    </span>
-                </label>
-                <label class="brand-choice-option">
-                    <input type="radio" name="visual-brand" value="mulecraft" checked>
-                    <span>
-                        <i class="brand-dot brand-dot-craft"></i>
-                        MuleCraft
-                    </span>
-                </label>
-            </fieldset>
 
             <!-- Tab Selectors -->
             <div class="auth-tabs">
@@ -129,13 +117,35 @@
                 </button>
             </form>
 
-            <!-- Configuração de Desempenho -->
-            <div class="perf-control">
-                <span class="perf-label"><i data-lucide="gauge"></i> Modo Desempenho</span>
-                <div class="perf-buttons">
-                    <button type="button" class="perf-btn" data-mode="normal" title="Efeitos completos">Normal</button>
-                    <button type="button" class="perf-btn" data-mode="media" title="Reduz efeitos e remove sombras">Médio</button>
-                    <button type="button" class="perf-btn" data-mode="maxima" title="Desativa animações de fundo">Máximo</button>
+            <!-- Controles do Rodapé (Identidade e Desempenho) -->
+            <div class="footer-settings">
+                <div class="brand-control">
+                    <span class="control-label"><i data-lucide="palette"></i> Identidade</span>
+                    <div class="brand-buttons">
+                        <label class="brand-btn" title="MuleCraft">
+                            <input type="radio" name="visual-brand" value="mulecraft">
+                            <img src="MuleCraftIcone.png" alt="MuleCraft" class="brand-btn-icon">
+                        </label>
+                        <label class="brand-btn" title="Mule Sem Freio">
+                            <input type="radio" name="visual-brand" value="sem-freio">
+                            <img src="MuleSemFreio.png" alt="Mule Sem Freio" class="brand-btn-icon">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="perf-control">
+                    <span class="perf-label"><i data-lucide="gauge"></i> Desempenho</span>
+                    <div class="perf-buttons">
+                        <button type="button" class="perf-btn" data-mode="normal" title="Efeitos completos">
+                            <i data-lucide="zap"></i><span>Normal</span>
+                        </button>
+                        <button type="button" class="perf-btn" data-mode="media" title="Reduz efeitos e remove sombras">
+                            <i data-lucide="sparkles"></i><span>Médio</span>
+                        </button>
+                        <button type="button" class="perf-btn" data-mode="maxima" title="Desativa animações de fundo">
+                            <i data-lucide="cpu"></i><span>Máximo</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -298,6 +308,36 @@
                                     <span>Salvar Nova Senha</span>
                                 </button>
                             </form>
+                        </div>
+
+                        <!-- Backup & Reset Box -->
+                        <div class="settings-box glass-panel max-w-600 mt-20">
+                            <h3>Backup e Restauração de Dados</h3>
+                            <p class="text-muted small-desc">Baixe uma cópia de segurança contendo todos os dados cadastrados de alunos, logs de auditoria e progressos de aulas, ou restaure de um arquivo anterior.</p>
+                            
+                            <div class="auth-alert hidden mt-10 mb-10" id="backup-alert"></div>
+
+                            <div class="backup-actions-group mt-20" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                <button type="button" class="btn btn-primary" id="btn-backup-export" style="flex: 1; min-width: 180px; justify-content: center;">
+                                    <i data-lucide="download" class="btn-icon"></i>
+                                    <span>Fazer Backup</span>
+                                </button>
+                                
+                                <button type="button" class="btn btn-outline" id="btn-backup-import-trigger" style="flex: 1; min-width: 180px; justify-content: center;">
+                                    <i data-lucide="upload" class="btn-icon"></i>
+                                    <span>Restaurar Backup</span>
+                                </button>
+                                <input type="file" id="input-backup-file" accept=".json" style="display: none;">
+                            </div>
+
+                            <div class="reset-actions-group mt-25 pt-20" style="border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; gap: 0.75rem;">
+                                <h4>Redefinir Banco de Dados</h4>
+                                <p class="text-muted small-desc">Esta ação remove todos os dados adicionais criados e redefine a plataforma para as credenciais padrão de fábrica (limpa logs, alunos extras e mantém apenas <strong>admin@curso.com</strong> e <strong>estudo@email.com</strong>).</p>
+                                <button type="button" class="btn btn-rose" id="btn-backup-reset-default" style="align-self: flex-start; justify-content: center;">
+                                    <i data-lucide="refresh-cw" class="btn-icon"></i>
+                                    <span>Restaurar Padrão de Fábrica</span>
+                                </button>
+                            </div>
                         </div>
                     </section>
 

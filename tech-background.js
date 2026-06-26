@@ -6,7 +6,7 @@
     const spotlight = document.querySelector('.tech-spotlight');
     const pointer = { x: 0, y: 0, tx: 0, ty: 0, active: false, lastMove: 0 };
 
-    let currentMode = localStorage.getItem('muleacademy_perf_mode') || 'normal';
+    let currentMode = localStorage.getItem('muleacademy_perf_mode') || 'media';
     let animationId = null;
 
     let width = 0;

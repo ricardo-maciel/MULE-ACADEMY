@@ -39,6 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         brandRadios.forEach(radio => {
             radio.checked = radio.value === selectedBrand;
+            const btn = radio.closest('.brand-btn');
+            if (btn) {
+                if (radio.checked) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            }
         });
 
         window.dispatchEvent(new CustomEvent('visual-brand-change', {
@@ -52,12 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const savedBrand = localStorage.getItem('muleacademy_visual_brand') || 'mulecraft';
-    applyVisualBrand(savedBrand);
+    // MuleCraft é sempre a identidade padrão ao abrir. A escolha do usuário
+    // durante a sessão é salva no localStorage apenas para uso dentro das outras páginas,
+    // mas na tela de login sempre iniciamos com MuleCraft.
+    applyVisualBrand('mulecraft');
 
     // Configurações do seletor de desempenho (Modo Desempenho)
     const perfButtons = document.querySelectorAll('.perf-btn');
-    const savedPerfMode = localStorage.getItem('muleacademy_perf_mode') || 'normal';
+    const savedPerfMode = localStorage.getItem('muleacademy_perf_mode') || 'media';
 
     perfButtons.forEach(btn => {
         if (btn.getAttribute('data-mode') === savedPerfMode) {
@@ -992,5 +1002,183 @@ document.addEventListener('DOMContentLoaded', () => {
         showAlert(settingsAlert, 'Senha do administrador alterada com sucesso!', 'success');
         document.getElementById('form-admin-password').reset();
     });
+
+    // Ação: Exportar/Download Backup
+    const btnBackupExport = document.getElementById('btn-backup-export');
+    if (btnBackupExport) {
+        btnBackupExport.addEventListener('click', () => {
+            const backupAlert = document.getElementById('backup-alert');
+            clearAlert(backupAlert);
+            
+            try {
+                // Captura usuários e logs
+                const users = JSON.parse(localStorage.getItem('muleacademy_users')) || [];
+                const logs = JSON.parse(localStorage.getItem('muleacademy_access_logs')) || [];
+                
+                // Captura progressos individuais de cada e-mail
+                const progress = {};
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && key.startsWith('muleacademy_progress_')) {
+                        progress[key] = localStorage.getItem(key);
+                    }
+                }
+                
+                // Monta objeto consolidado
+                const backupData = {
+                    version: "1.0",
+                    timestamp: new Date().toISOString(),
+                    users: users,
+                    logs: logs,
+                    progress: progress
+                };
+                
+                // Cria arquivo JSON para download
+                const blob = new Blob([JSON.stringify(backupData, null, 4)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `muleacademy_backup_${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                addAccessLog('admin@curso.com', 'Exportou backup de dados', 'info');
+                showAlert(backupAlert, 'Backup gerado e baixado com sucesso!', 'success');
+            } catch (err) {
+                console.error("Erro ao gerar backup:", err);
+                showAlert(backupAlert, 'Erro ao gerar backup de segurança.', 'error');
+            }
+        });
+    }
+
+    // Ação: Restaurar Backup (Upload de JSON)
+    const btnBackupImportTrigger = document.getElementById('btn-backup-import-trigger');
+    const inputBackupFile = document.getElementById('input-backup-file');
+    
+    if (btnBackupImportTrigger && inputBackupFile) {
+        btnBackupImportTrigger.addEventListener('click', () => {
+            inputBackupFile.click();
+        });
+        
+        inputBackupFile.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const backupAlert = document.getElementById('backup-alert');
+            clearAlert(backupAlert);
+            
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                try {
+                    const backupData = JSON.parse(evt.target.result);
+                    
+                    // Valida dados mínimos
+                    if (!backupData || !Array.isArray(backupData.users)) {
+                        showAlert(backupAlert, 'Arquivo de backup inválido. Chave "users" não encontrada ou corrompida.', 'error');
+                        return;
+                    }
+                    
+                    // Sobrescreve usuários
+                    localStorage.setItem('muleacademy_users', JSON.stringify(backupData.users));
+                    
+                    // Sobrescreve logs
+                    if (Array.isArray(backupData.logs)) {
+                        localStorage.setItem('muleacademy_access_logs', JSON.stringify(backupData.logs));
+                    }
+                    
+                    // Sobrescreve progressos
+                    if (backupData.progress && typeof backupData.progress === 'object') {
+                        // Limpa progressos antigos primeiro
+                        for (let i = 0; i < localStorage.length; i++) {
+                            const key = localStorage.key(i);
+                            if (key && key.startsWith('muleacademy_progress_')) {
+                                localStorage.removeItem(key);
+                                i--;
+                            }
+                        }
+                        // Define os novos progressos
+                        for (const [key, val] of Object.entries(backupData.progress)) {
+                            localStorage.setItem(key, val);
+                        }
+                    }
+                    
+                    addAccessLog('admin@curso.com', 'Restaurou backup de dados com sucesso', 'info');
+                    showAlert(backupAlert, 'Backup restaurado com sucesso! Recarregando dados...', 'success');
+                    
+                    // Recarrega o painel após um delay
+                    setTimeout(() => {
+                        loadAdminDashboard();
+                        inputBackupFile.value = ''; // limpa input
+                    }, 1200);
+                    
+                } catch (err) {
+                    console.error("Erro ao processar arquivo de backup:", err);
+                    showAlert(backupAlert, 'Erro ao ler arquivo JSON. Certifique-se de que é um arquivo de backup válido.', 'error');
+                }
+            };
+            reader.readAsText(file);
+        });
+    }
+
+    // Ação: Restaurar Padrão de Fábrica (Reset)
+    const btnBackupResetDefault = document.getElementById('btn-backup-reset-default');
+    if (btnBackupResetDefault) {
+        btnBackupResetDefault.addEventListener('click', () => {
+            if (!confirm('Tem certeza que deseja redefinir TODA a plataforma para os padrões de fábrica? Todos os outros alunos, logs adicionais e progressos serão apagados permanentemente!')) {
+                return;
+            }
+            
+            const backupAlert = document.getElementById('backup-alert');
+            clearAlert(backupAlert);
+            
+            try {
+                // Alunos padrão: apenas estudo@email.com
+                const defaultUsers = [
+                    { name: "Aluno de Estudos", email: "estudo@email.com", password: "user123", active: true, signupDate: new Date().toISOString().split('T')[0] }
+                ];
+                
+                // Limpa progressos antigos de todos os usuários
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && key.startsWith('muleacademy_progress_')) {
+                        localStorage.removeItem(key);
+                        i--;
+                    }
+                }
+                
+                // Grava usuário padrão
+                localStorage.setItem('muleacademy_users', JSON.stringify(defaultUsers));
+                
+                // Redefine a senha do admin para a hash padrão de fábrica (####admin123)
+                const defaultAdminHash = 'a6563a56ce7603365074a939695cc0e8166b149a1f74c3f5a1dc4bf8642b2eda';
+                localStorage.setItem('muleacademy_admin_password_hash', defaultAdminHash);
+                
+                // Registra log de redefinição
+                const resetLog = [
+                    {
+                        timestamp: new Date().toLocaleString('pt-BR'),
+                        email: 'admin@curso.com',
+                        action: 'Sistema Restaurado ao Padrão (Fábrica)',
+                        status: 'info',
+                        device: navigator.userAgent
+                    }
+                ];
+                localStorage.setItem('muleacademy_access_logs', JSON.stringify(resetLog));
+                
+                showAlert(backupAlert, 'Plataforma redefinida aos padrões com sucesso!', 'success');
+                
+                // Recarrega o painel administrativo
+                setTimeout(() => {
+                    loadAdminDashboard();
+                }, 1200);
+                
+            } catch (err) {
+                console.error("Erro ao redefinir aos padrões:", err);
+                showAlert(backupAlert, 'Erro ao redefinir a plataforma para os padrões de fábrica.', 'error');
+            }
+        });
+    }
 
 });
