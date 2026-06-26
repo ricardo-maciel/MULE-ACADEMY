@@ -44,6 +44,27 @@
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+body[data-brand="mulecraft"] {
+    --color-bg: #0A0E1A;
+    --color-bg-dark: #050813;
+    --color-panel: rgba(26, 31, 54, 0.78);
+    --color-panel-border: rgba(108, 92, 231, 0.38);
+    --color-indigo: #6C5CE7;
+    --color-indigo-light: #8A72FF;
+    --color-indigo-dark: #5144C8;
+    --color-accent: #00D4D8;
+    --color-accent-light: #36F3F6;
+    --color-accent-dark: #009DA1;
+    --color-teal: #00D4D8;
+    --color-teal-light: #36F3F6;
+    --color-text: #F6F8FC;
+    --color-text-muted: #B8C1D1;
+    --color-text-dark: #8B93A7;
+    --glow-indigo: 0 0 24px rgba(108, 92, 231, 0.4);
+    --glow-accent: 0 0 24px rgba(0, 212, 216, 0.36);
+    --glow-teal: 0 0 24px rgba(0, 212, 216, 0.36);
+}
+
 /* ==========================================================================
    1. RESET & GENERAL LAYOUTS
    ========================================================================== */
@@ -204,6 +225,8 @@ body {
    2. AUTH CARD PANEL (LOGIN & REGISTER)
    ========================================================================== */
 .auth-card {
+    position: relative;
+    overflow: hidden;
     width: 100%;
     max-width: 460px;
     padding: 2.5rem;
@@ -211,11 +234,117 @@ body {
     flex-direction: column;
 }
 
+body[data-brand="mulecraft"] .auth-card {
+    max-width: 620px;
+    padding: 1.5rem;
+}
+
+.mulecraft-cover {
+    display: none;
+    margin-bottom: 1.15rem;
+    border: 1px solid rgba(108, 92, 231, 0.58);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #050813;
+    box-shadow:
+        0 0 32px rgba(108, 92, 231, 0.24),
+        0 18px 44px rgba(0, 0, 0, 0.36);
+}
+
+.mulecraft-cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+body[data-brand="mulecraft"] .mulecraft-cover {
+    display: block;
+}
+
+body[data-brand="mulecraft"] .auth-card > .auth-logo {
+    display: none;
+}
+
 .auth-logo {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.35rem;
+}
+
+.brand-choice {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 0 0 1.55rem;
+    padding: 0;
+    border: 0;
+}
+
+.brand-choice legend {
+    grid-column: 1 / -1;
+    margin-bottom: 0.45rem;
+    color: var(--color-text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.brand-choice-option {
+    position: relative;
+    min-width: 0;
+    cursor: pointer;
+}
+
+.brand-choice-option input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.brand-choice-option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 42px;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.22);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.brand-choice-option input:checked + span {
+    border-color: var(--color-indigo);
+    color: var(--color-text);
+    background: rgba(255, 106, 0, 0.14);
+    box-shadow: var(--glow-indigo);
+}
+
+body[data-brand="mulecraft"] .brand-choice-option input:checked + span {
+    background: rgba(108, 92, 231, 0.17);
+}
+
+.brand-dot {
+    width: 10px;
+    height: 10px;
+    flex: 0 0 auto;
+    border-radius: 3px;
+}
+
+.brand-dot-warm {
+    background: linear-gradient(135deg, #FF6A00, #FFB300);
+}
+
+.brand-dot-craft {
+    background: linear-gradient(135deg, #6C5CE7, #00D4D8);
 }
 
 .brand-icon {
@@ -1083,4 +1212,118 @@ body {
     mix-blend-mode: screen;
     border: 1px solid rgba(255, 106, 0, 0.2);
     background: transparent;
+}
+
+.mulecraft-icon-img {
+    display: none;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border-radius: 12px;
+    filter:
+        drop-shadow(0 0 14px rgba(108, 92, 231, 0.48))
+        drop-shadow(0 0 14px rgba(0, 212, 216, 0.26));
+}
+
+.mulecraft-mark {
+    position: relative;
+    display: none;
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+    place-items: center;
+    border: 1px solid rgba(108, 92, 231, 0.62);
+    border-radius: 12px;
+    background:
+        linear-gradient(135deg, rgba(108, 92, 231, 0.95) 0 48%, rgba(0, 212, 216, 0.96) 48% 100%);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+    box-shadow:
+        0 0 26px rgba(108, 92, 231, 0.42),
+        0 0 26px rgba(0, 212, 216, 0.22),
+        inset -10px -10px 0 rgba(0, 0, 0, 0.16);
+}
+
+.mulecraft-mark::before,
+.mulecraft-mark::after {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    content: "";
+    border-radius: 2px;
+    background: #6C5CE7;
+    box-shadow:
+        19px -12px 0 #00D4D8,
+        30px 14px 0 rgba(108, 92, 231, 0.85);
+}
+
+.mulecraft-mark::before {
+    top: -8px;
+    left: 9px;
+}
+
+.mulecraft-mark::after {
+    right: -8px;
+    bottom: 10px;
+}
+
+body[data-brand="mulecraft"] .brand-orange-italic {
+    color: #00D4D8 !important;
+    font-style: normal;
+}
+
+body[data-brand="mulecraft"] .brand-mascot-img {
+    display: none;
+}
+
+body[data-brand="mulecraft"] .mulecraft-icon-img {
+    display: block;
+}
+
+body[data-brand="mulecraft"] .mulecraft-mark {
+    display: grid;
+}
+
+body[data-brand="mulecraft"] .logo-title {
+    background: linear-gradient(90deg, #8A72FF, #00D4D8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 0;
+}
+
+body[data-brand="mulecraft"] .glass-panel {
+    box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.46),
+        0 0 34px rgba(108, 92, 231, 0.18);
+}
+
+body[data-brand="mulecraft"] .auth-card::before,
+body[data-brand="mulecraft"] .auth-card::after {
+    position: absolute;
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    background: #6C5CE7;
+    box-shadow:
+        32px 48px 0 rgba(0, 212, 216, 0.88),
+        295px 82px 0 rgba(108, 92, 231, 0.72),
+        350px 20px 0 rgba(0, 212, 216, 0.55);
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+body[data-brand="mulecraft"] .auth-card::before {
+    top: 18px;
+    right: 72px;
+}
+
+body[data-brand="mulecraft"] .auth-card::after {
+    bottom: 62px;
+    left: 34px;
 }

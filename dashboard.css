@@ -44,6 +44,28 @@
     --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+body[data-brand="mulecraft"] {
+    --color-bg: #0A0E1A;
+    --color-bg-dark: #050813;
+    --color-panel: rgba(26, 31, 54, 0.78);
+    --color-panel-border: rgba(108, 92, 231, 0.38);
+    --color-indigo: #6C5CE7;
+    --color-indigo-light: #8A72FF;
+    --color-indigo-dark: #5144C8;
+    --color-accent: #00D4D8;
+    --color-accent-light: #36F3F6;
+    --color-accent-dark: #009DA1;
+    --color-teal: #00D4D8;
+    --color-teal-light: #36F3F6;
+    --color-text: #F6F8FC;
+    --color-text-muted: #B8C1D1;
+    --color-text-dark: #8B93A7;
+    --glow-indigo: 0 0 24px rgba(108, 92, 231, 0.4);
+    --glow-accent: 0 0 24px rgba(0, 212, 216, 0.36);
+    --glow-teal: 0 0 24px rgba(0, 212, 216, 0.36);
+    --shadow-premium: 0 16px 42px -16px rgba(0, 0, 0, 0.72), 0 0 26px rgba(108, 92, 231, 0.14);
+}
+
 /* ==========================================================================
    RESET & CORE LAYOUT
    ========================================================================== */
@@ -101,6 +123,12 @@ body {
     backdrop-filter: blur(10px);
 }
 
+body[data-brand="mulecraft"] .sidebar,
+body[data-brand="mulecraft"] .mobile-header {
+    background: rgba(5, 8, 19, 0.94);
+    border-color: rgba(108, 92, 231, 0.22);
+}
+
 .sidebar-brand {
     padding: 2rem 1.5rem;
     display: flex;
@@ -123,6 +151,14 @@ body {
 
 .brand-title span {
     color: var(--color-teal-light);
+}
+
+body[data-brand="mulecraft"] .brand-title {
+    background: linear-gradient(90deg, #8A72FF, #00D4D8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent;
 }
 
 .brand-sub {
@@ -433,6 +469,32 @@ h2.sec-title {
     grid-template-columns: 1.7fr 1fr;
     gap: 2rem;
     align-items: center;
+}
+
+.mulecraft-dashboard-cover {
+    display: none;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    overflow: hidden;
+    border-color: rgba(108, 92, 231, 0.58);
+    background: #050813;
+    box-shadow:
+        0 0 32px rgba(108, 92, 231, 0.24),
+        0 18px 44px rgba(0, 0, 0, 0.36);
+}
+
+.mulecraft-dashboard-cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+body[data-brand="mulecraft"] .mulecraft-dashboard-cover {
+    display: block;
+}
+
+body[data-brand="mulecraft"] .welcome-banner {
+    border-color: rgba(0, 212, 216, 0.24);
 }
 
 .welcome-text p {
@@ -1766,4 +1828,35 @@ input:checked + .slider:before {
     mix-blend-mode: screen;
     border: 1px solid rgba(255, 106, 0, 0.2);
     background: transparent;
+}
+
+.mulecraft-icon-img {
+    display: none;
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    margin-right: 8px;
+    border-radius: 12px;
+    filter:
+        drop-shadow(0 0 14px rgba(108, 92, 231, 0.48))
+        drop-shadow(0 0 14px rgba(0, 212, 216, 0.26));
+}
+
+.mobile-logo .mulecraft-icon-img {
+    width: 38px;
+    height: 38px;
+    margin-right: 6px;
+}
+
+body[data-brand="mulecraft"] .brand-mascot-img {
+    display: none !important;
+}
+
+body[data-brand="mulecraft"] .mulecraft-icon-img {
+    display: block;
+}
+
+body[data-brand="mulecraft"] .brand-orange-italic {
+    color: #00D4D8 !important;
+    font-style: normal;
 }

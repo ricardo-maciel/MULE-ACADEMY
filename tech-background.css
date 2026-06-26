@@ -6,11 +6,43 @@ body {
         linear-gradient(145deg, #01030a 0%, #071224 54%, #02050d 100%) !important;
 }
 
+body[data-brand="sem-freio"] {
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 106, 0, 0.16), transparent 28rem),
+        radial-gradient(circle at 86% 18%, rgba(255, 179, 0, 0.12), transparent 32rem),
+        linear-gradient(145deg, #07080B 0%, #121018 54%, #090706 100%) !important;
+}
+
+body[data-brand="mulecraft"] {
+    background:
+        radial-gradient(circle at 18% 12%, rgba(108, 92, 231, 0.22), transparent 28rem),
+        radial-gradient(circle at 86% 18%, rgba(0, 212, 216, 0.18), transparent 32rem),
+        linear-gradient(145deg, #050813 0%, #0A0E1A 52%, #10162A 100%) !important;
+}
+
 .tech-network-bg,
 .tech-spotlight {
     position: fixed;
     inset: 0;
     pointer-events: none;
+}
+
+body[data-brand="sem-freio"] .tech-spotlight {
+    background: radial-gradient(
+        circle 23rem at var(--tech-mx, 50%) var(--tech-my, 50%),
+        rgba(255, 106, 0, 0.06),
+        rgba(255, 179, 0, 0.03) 34%,
+        transparent 70%
+    );
+}
+
+body[data-brand="mulecraft"] .tech-spotlight {
+    background: radial-gradient(
+        circle 23rem at var(--tech-mx, 50%) var(--tech-my, 50%),
+        rgba(0, 212, 216, 0.07),
+        rgba(108, 92, 231, 0.05) 34%,
+        transparent 70%
+    );
 }
 
 .tech-network-bg {
@@ -28,11 +60,91 @@ body {
     z-index: 1;
     background: radial-gradient(
         circle 23rem at var(--tech-mx, 50%) var(--tech-my, 50%),
-        rgba(52, 213, 255, 0.12),
-        rgba(139, 92, 246, 0.07) 34%,
+        rgba(52, 213, 255, 0.05),
+        rgba(139, 92, 246, 0.03) 34%,
         transparent 70%
     );
     mix-blend-mode: screen;
+}
+
+/* ==========================================================================
+   CENTRAL THEMING - MULECRAFT VARIABLE OVERRIDES
+   ========================================================================== */
+body[data-brand="mulecraft"] {
+    --color-bg: #0A0E1A;
+    --color-bg-dark: #050813;
+    --color-panel: rgba(26, 31, 54, 0.78);
+    --color-panel-border: rgba(108, 92, 231, 0.38);
+    --color-indigo: #6C5CE7;
+    --color-indigo-light: #8A72FF;
+    --color-indigo-dark: #5144C8;
+    --color-accent: #00D4D8;
+    --color-accent-light: #36F3F6;
+    --color-accent-dark: #009DA1;
+    --color-teal: #00D4D8;
+    --color-teal-light: #36F3F6;
+    --color-text: #F6F8FC;
+    --color-text-muted: #B8C1D1;
+    --color-text-dark: #8B93A7;
+    --glow-indigo: 0 0 24px rgba(108, 92, 231, 0.4);
+    --glow-accent: 0 0 24px rgba(0, 212, 216, 0.36);
+    --glow-teal: 0 0 24px rgba(0, 212, 216, 0.36);
+    --shadow-premium: 0 16px 42px -16px rgba(0, 0, 0, 0.72), 0 0 26px rgba(108, 92, 231, 0.14);
+}
+
+/* ==========================================================================
+   LOGO & BRAND TEXT SWITCHING (PURE CSS APPROACH)
+   ========================================================================== */
+.mulecraft-icon-img,
+.brand-text-mulecraft {
+    display: none !important;
+}
+
+.brand-mascot-img,
+.brand-text-sem-freio {
+    display: inline-block;
+}
+
+body[data-brand="mulecraft"] .brand-mascot-img,
+body[data-brand="mulecraft"] .brand-text-sem-freio {
+    display: none !important;
+}
+
+body[data-brand="mulecraft"] .mulecraft-icon-img,
+body[data-brand="mulecraft"] .brand-text-mulecraft {
+    display: inline-block !important;
+}
+
+body[data-brand="mulecraft"] .brand-orange-italic {
+    color: #00D4D8 !important;
+    font-style: normal;
+    font-weight: 700;
+}
+
+/* Icon Sizing / Custom Shadow */
+.mulecraft-icon-img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    margin-right: 6px;
+    border-radius: 8px;
+    filter: 
+        drop-shadow(0 0 10px rgba(108, 92, 231, 0.4)) 
+        drop-shadow(0 0 10px rgba(0, 212, 216, 0.2));
+}
+
+/* Sidebar brand icon override (slightly larger in sidebar layout) */
+.sidebar-brand .mulecraft-icon-img {
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    border-radius: 12px;
+}
+
+/* Progress navigation overrides for MuleCraft */
+body[data-brand="mulecraft"] .progress-nav {
+    background: rgba(5, 8, 19, 0.85) !important;
+    border-bottom-color: rgba(108, 92, 231, 0.22) !important;
 }
 
 body::before {

@@ -18,12 +18,31 @@
     let trails = [];
     let frame = 0;
 
-    const palette = [
-        [255, 106, 0],   // Laranja
-        [255, 179, 0],   // Amarelo Ouro
-        [160, 167, 179], // Cinza Claro
-        [224, 93, 0]     // Laranja Escuro
-    ];
+    let activeBrand = localStorage.getItem('muleacademy_visual_brand') || 'mulecraft';
+    document.body.dataset.brand = activeBrand;
+    let palette = getPalette(activeBrand);
+
+    function getPalette(brand) {
+        if (brand === 'mulecraft') {
+            return [
+                [108, 92, 231],
+                [0, 212, 216],
+                [139, 147, 167],
+                [124, 92, 255]
+            ];
+        }
+
+        return [
+            [255, 106, 0],
+            [255, 179, 0],
+            [160, 167, 179],
+            [224, 93, 0]
+        ];
+    }
+
+    function getAccentHue() {
+        return activeBrand === 'mulecraft' ? '0, 212, 216' : '255, 179, 0';
+    }
 
     const random = (min, max) => Math.random() * (max - min) + min;
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -95,7 +114,7 @@
             x: clientX,
             y: clientY,
             life: 1,
-            hue: Math.random() > 0.5 ? '52, 213, 255' : '20, 184, 166'
+            hue: Math.random() > 0.5 ? palette[0].join(', ') : getAccentHue()
         });
 
         if (trails.length > 34) trails.shift();
@@ -123,7 +142,9 @@
 
         ctx.save();
         ctx.globalAlpha = 0.13;
-        ctx.strokeStyle = 'rgba(88, 172, 255, 0.34)';
+        ctx.strokeStyle = activeBrand === 'mulecraft'
+            ? 'rgba(108, 92, 231, 0.34)'
+            : 'rgba(255, 179, 0, 0.24)';
         ctx.lineWidth = 1;
 
         for (let x = ((time * 0.012 + parallaxX) % grid) - grid; x < width + grid; x += grid) {
@@ -273,7 +294,7 @@
             trail.life *= 0.88;
             ctx.save();
             ctx.globalCompositeOperation = 'lighter';
-            ctx.fillStyle = `rgba(${trail.hue}, ${trail.life * 0.18})`;
+            ctx.fillStyle = `rgba(${trail.hue}, ${trail.life * 0.06})`;
             ctx.beginPath();
             ctx.arc(trail.x, trail.y, 22 * (1 - trail.life) + 5, 0, Math.PI * 2);
             ctx.fill();
@@ -288,11 +309,11 @@
             ripple.radius += 5.8;
             ripple.life *= 0.94;
             ctx.save();
-            ctx.strokeStyle = `rgba(52, 213, 255, ${ripple.life * 0.46})`;
+            ctx.strokeStyle = `rgba(${getAccentHue()}, ${ripple.life * 0.20})`;
             ctx.lineWidth = 1.5;
             if (currentMode === 'normal') {
-                ctx.shadowColor = 'rgba(52, 213, 255, 0.72)';
-                ctx.shadowBlur = 18;
+                ctx.shadowColor = `rgba(${getAccentHue()}, 0.36)`;
+                ctx.shadowBlur = 8;
             }
             ctx.beginPath();
             ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
@@ -333,6 +354,12 @@
     window.addEventListener('click', (event) => {
         updatePointer(event.clientX, event.clientY);
         addRipple(event.clientX, event.clientY);
+    });
+
+    window.addEventListener('visual-brand-change', (event) => {
+        activeBrand = event.detail && event.detail.brand ? event.detail.brand : 'sem-freio';
+        palette = getPalette(activeBrand);
+        resize();
     });
 
     window.setPerformanceMode = function (mode) {

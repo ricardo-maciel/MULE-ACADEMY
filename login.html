@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="tech-background.css">
 </head>
-<body>
+<body data-brand="mulecraft">
 
     <!-- Interactive Technology Network Canvas -->
     <div class="tech-network-bg" aria-hidden="true">
@@ -27,14 +27,40 @@
 
         <!-- 🔐 AUTHENTICATION CARD -->
         <div class="auth-card glass-panel" id="auth-card">
+            <div class="mulecraft-cover">
+                <img src="mulecraft_cover.png" alt="MuleCraft Academy - Plataforma de Capacitação em Integrações">
+            </div>
+
             <!-- Header Logo -->
             <div class="auth-logo">
-                <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo">
+                <img src="mule_mascot.png" class="brand-mascot-img" data-brand-logo alt="Logo">
+                <img src="mulecraft_icon.png" class="mulecraft-icon-img" alt="MuleCraft Academy">
                 <div class="logo-text">
-                    <span class="logo-title">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
-                    <span class="logo-sub">Plataforma de Capacitação em Integrações</span>
+                    <span class="logo-title">
+                        <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+                        <span class="brand-text-mulecraft">MuleCraft Academy</span>
+                    </span>
+                    <span class="logo-sub" data-brand-sub>Plataforma de Capacitação em Integrações</span>
                 </div>
             </div>
+
+            <fieldset class="brand-choice" aria-label="Escolha a identidade visual">
+                <legend>Identidade visual</legend>
+                <label class="brand-choice-option">
+                    <input type="radio" name="visual-brand" value="sem-freio">
+                    <span>
+                        <i class="brand-dot brand-dot-warm"></i>
+                        Mule Sem Freio
+                    </span>
+                </label>
+                <label class="brand-choice-option">
+                    <input type="radio" name="visual-brand" value="mulecraft" checked>
+                    <span>
+                        <i class="brand-dot brand-dot-craft"></i>
+                        MuleCraft
+                    </span>
+                </label>
+            </fieldset>
 
             <!-- Tab Selectors -->
             <div class="auth-tabs">
@@ -125,9 +151,13 @@
             <!-- Admin Header -->
             <header class="admin-header glass-panel">
                 <div class="admin-logo">
-                    <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo">
+                    <img src="mule_mascot.png" class="brand-mascot-img" data-brand-logo alt="Logo">
+                    <img src="mulecraft_icon.png" class="mulecraft-icon-img" alt="MuleCraft Academy">
                     <div class="logo-text">
-                        <span class="logo-title">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+                        <span class="logo-title">
+                            <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+                            <span class="brand-text-mulecraft">MuleCraft Academy</span>
+                        </span>
                         <span class="admin-badge">Painel do Administrador</span>
                     </div>
                 </div>

@@ -20,7 +20,10 @@
     <link rel="stylesheet" href="playground.css">
     <link rel="stylesheet" href="tech-background.css">
 </head>
-<body>
+<body data-brand="mulecraft">
+    <script>
+        document.body.dataset.brand = localStorage.getItem('muleacademy_visual_brand') || 'mulecraft';
+    </script>
     <div class="tech-network-bg" aria-hidden="true">
         <canvas id="tech-network-canvas"></canvas>
     </div>
@@ -33,7 +36,11 @@
         </button>
         <div class="mobile-logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
             <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo" style="width: 38px; height: 38px; margin-right: 6px;">
-            <span class="brand-title" style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--color-indigo-light); margin-left: 0.35rem;">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+            <img src="mulecraft_icon.png" class="mulecraft-icon-img" alt="MuleCraft Academy">
+            <span class="brand-title" style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--color-indigo-light); margin-left: 0.35rem;">
+                <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+                <span class="brand-text-mulecraft">MuleCraft Academy</span>
+            </span>
         </div>
         <div class="mobile-header-actions">
             <button class="btn-logout" onclick="if(confirm('Deseja realmente sair da sua conta?')) { sessionStorage.removeItem('muleacademy_current_user'); window.location.href='login.html'; }" style="background: none; border: none; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 6px; border-radius: 6px; transition: var(--transition-smooth);" title="Sair da Conta">
@@ -49,8 +56,12 @@
     <aside class="sidebar">
         <div class="sidebar-brand">
             <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo" style="width: 48px; height: 48px; margin-right: 10px;">
+            <img src="mulecraft_icon.png" class="mulecraft-icon-img" alt="MuleCraft Academy">
             <div class="brand-text-wrapper">
-                <span class="brand-title">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+                <span class="brand-title">
+                    <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+                    <span class="brand-text-mulecraft">MuleCraft Academy</span>
+                </span>
                 <span class="brand-sub">Ricardo <i data-lucide="sparkles" class="ai-signature-icon"></i></span>
             </div>
         </div>

@@ -9,6 +9,52 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     }
 
+    // Identidade visual: a primeira abertura sempre usa Mule Sem Freio Academy.
+    const brandRadios = document.querySelectorAll('input[name="visual-brand"]');
+    const brandTitles = document.querySelectorAll('[data-brand-title]');
+    const brandSubtitles = document.querySelectorAll('[data-brand-sub]');
+    const brandConfig = {
+        'sem-freio': {
+            title: 'Mule <span class="brand-orange-italic">Sem Freio</span> Academy',
+            subtitle: 'Plataforma de Capacitação em Integrações'
+        },
+        mulecraft: {
+            title: 'MuleCraft Academy',
+            subtitle: 'Plataforma de Capacitação em Integrações'
+        }
+    };
+
+    function applyVisualBrand(brand) {
+        const selectedBrand = brandConfig[brand] ? brand : 'sem-freio';
+        document.body.dataset.brand = selectedBrand;
+        localStorage.setItem('muleacademy_visual_brand', selectedBrand);
+
+        brandTitles.forEach(title => {
+            title.innerHTML = brandConfig[selectedBrand].title;
+        });
+
+        brandSubtitles.forEach(subtitle => {
+            subtitle.textContent = brandConfig[selectedBrand].subtitle;
+        });
+
+        brandRadios.forEach(radio => {
+            radio.checked = radio.value === selectedBrand;
+        });
+
+        window.dispatchEvent(new CustomEvent('visual-brand-change', {
+            detail: { brand: selectedBrand }
+        }));
+    }
+
+    brandRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.checked) applyVisualBrand(radio.value);
+        });
+    });
+
+    const savedBrand = localStorage.getItem('muleacademy_visual_brand') || 'mulecraft';
+    applyVisualBrand(savedBrand);
+
     // Configurações do seletor de desempenho (Modo Desempenho)
     const perfButtons = document.querySelectorAll('.perf-btn');
     const savedPerfMode = localStorage.getItem('muleacademy_perf_mode') || 'normal';
