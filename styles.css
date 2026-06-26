@@ -1600,7 +1600,6 @@ code {
     font-style: italic;
     font-weight: 800;
 }
-
 .brand-mascot-img {
     width: 42px;
     height: 42px;
@@ -1611,3 +1610,1144 @@ code {
     border: 1px solid rgba(255, 106, 0, 0.2);
     background: transparent;
 }
+
+/* ==========================================================================
+   NOVO: BLOCO INTERATIVO - QUEM SÃO ESSES SISTEMAS AFINAL
+   ========================================================================== */
+.section-divider-glow {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 106, 0, 0.4) 50%, transparent);
+    margin: 4rem 0;
+    box-shadow: 0 0 15px rgba(255, 106, 0, 0.1);
+}
+
+.systems-explainer-block {
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.block-header {
+    margin-bottom: 2.5rem;
+}
+
+.badge-icon {
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    margin-right: 4px;
+    display: inline-block;
+}
+
+/* Grids dos Cards de Personagens */
+.systems-characters-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.system-character-card {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-column: column;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.system-character-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.system-character-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(15, 23, 42, 0.6);
+}
+
+.system-character-card:hover::before {
+    opacity: 1;
+}
+
+.system-character-card.active {
+    background: rgba(15, 23, 42, 0.7);
+}
+
+/* Temas de cores específicas para cada sistema */
+.character-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.char-icon {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+}
+
+.eco-theme { background: rgba(255, 106, 0, 0.15); border: 1px solid rgba(255, 106, 0, 0.3); color: var(--color-indigo-light); }
+.crm-theme { background: rgba(236, 72, 153, 0.15); border: 1px solid rgba(236, 72, 153, 0.3); color: #fb7185; }
+.erp-theme { background: rgba(79, 70, 229, 0.15); border: 1px solid rgba(79, 70, 229, 0.3); color: #818cf8; }
+.pag-theme { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--color-emerald-light); }
+.ent-theme { background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.3); color: #22d3ee; }
+
+/* Ativos com brilhos de cores customizadas */
+.system-character-card[data-system="ecommerce"].active { border-color: rgba(255, 106, 0, 0.6); box-shadow: 0 0 20px rgba(255, 106, 0, 0.25); }
+.system-character-card[data-system="ecommerce"].active .character-icon-wrapper { background: #FF6A00; box-shadow: 0 0 10px rgba(255, 106, 0, 0.5); }
+
+.system-character-card[data-system="crm"].active { border-color: rgba(236, 72, 153, 0.6); box-shadow: 0 0 20px rgba(236, 72, 153, 0.25); }
+.system-character-card[data-system="crm"].active .character-icon-wrapper { background: #ec4899; box-shadow: 0 0 10px rgba(236, 72, 153, 0.5); }
+
+.system-character-card[data-system="erp"].active { border-color: rgba(79, 70, 229, 0.6); box-shadow: 0 0 20px rgba(79, 70, 229, 0.25); }
+.system-character-card[data-system="erp"].active .character-icon-wrapper { background: #4f46e5; box-shadow: 0 0 10px rgba(79, 70, 229, 0.5); }
+
+.system-character-card[data-system="pagamento"].active { border-color: rgba(16, 185, 129, 0.6); box-shadow: 0 0 20px rgba(16, 185, 129, 0.25); }
+.system-character-card[data-system="pagamento"].active .character-icon-wrapper { background: #10b981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+
+.system-character-card[data-system="entrega"].active { border-color: rgba(6, 182, 212, 0.6); box-shadow: 0 0 20px rgba(6, 182, 212, 0.25); }
+.system-character-card[data-system="entrega"].active .character-icon-wrapper { background: #06b6d4; box-shadow: 0 0 10px rgba(6, 182, 212, 0.5); }
+
+.system-character-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+}
+
+.role-badge {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+/* Painel de Detalhes Dinâmicos */
+.system-details-panel {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.55);
+}
+
+.details-content-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+}
+
+.details-header {
+    margin-bottom: 1rem;
+}
+
+.details-header .badge {
+    margin-bottom: 0.5rem;
+}
+
+.details-header h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.details-description {
+    font-size: 1.15rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.details-examples-box {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.details-examples-box h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-teal);
+    margin-bottom: 0.75rem;
+}
+
+.details-examples-box .bullet-list {
+    margin: 0;
+}
+
+.details-examples-box .bullet-list li {
+    margin-bottom: 0.5rem;
+}
+
+.details-examples-box .bullet-list li:last-child {
+    margin-bottom: 0;
+}
+
+.details-visual-side {
+    background: rgba(7, 10, 18, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 1rem;
+    min-height: 240px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sandbox para micro-animações */
+.mini-animation-sandbox {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.anim-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.anim-container.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+/* ANIMAÇÃO 1: E-commerce */
+.ecommerce-phone {
+    width: 140px;
+    height: 220px;
+    background: #1e293b;
+    border: 3px solid #475569;
+    border-radius: 20px;
+    position: relative;
+    padding: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-header {
+    font-size: 0.65rem;
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.phone-header i {
+    width: 10px;
+    height: 10px;
+}
+
+.phone-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.product-item-card {
+    background: #0f172a;
+    border: 1px solid rgba(255, 106, 0, 0.3);
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.prod-emoji {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.prod-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.prod-price {
+    font-size: 0.65rem;
+    color: var(--color-indigo-light);
+}
+
+.buy-button-visual {
+    background: var(--color-indigo);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.btn-icon-s {
+    width: 10px;
+    height: 10px;
+}
+
+.cart-visual-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ec4899;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(236,72,153,0.5);
+    animation: pulse-glow 2s infinite;
+}
+
+.cart-icon-visual {
+    width: 14px;
+    height: 14px;
+    color: white;
+}
+
+.badge-count-visual {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: red;
+    font-size: 0.55rem;
+    font-weight: 800;
+    color: white;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes pulse-glow {
+    0% { transform: scale(1); box-shadow: 0 0 10px rgba(236,72,153,0.5); }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(236,72,153,0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 10px rgba(236,72,153,0.5); }
+}
+
+/* ANIMAÇÃO 2: CRM */
+.crm-dashboard {
+    width: 180px;
+    background: #1e293b;
+    border-radius: 12px;
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    padding: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.crm-customer-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 8px;
+}
+
+.avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(236, 72, 153, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(236, 72, 153, 0.4);
+}
+
+.customer-avatar {
+    width: 16px;
+    height: 16px;
+    color: #ec4899;
+}
+
+.profile-info {
+    text-align: left;
+}
+
+.profile-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.profile-tag {
+    font-size: 0.6rem;
+    color: #f59e0b;
+    font-weight: 600;
+}
+
+.crm-notebook {
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 8px;
+    font-family: var(--font-mono);
+    text-align: left;
+}
+
+.notebook-header {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.notebook-icon {
+    width: 10px;
+    height: 10px;
+}
+
+.notebook-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.note-line {
+    font-size: 0.65rem;
+    color: #e2e8f0;
+    border-left: 2px solid #ec4899;
+    padding-left: 6px;
+}
+
+/* ANIMAÇÃO 3: ERP */
+.erp-office {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 200px;
+}
+
+.erp-db-wrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: rgba(79, 70, 229, 0.2);
+    border: 1px solid rgba(79, 70, 229, 0.5);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.db-server-icon {
+    width: 24px;
+    height: 24px;
+    color: #818cf8;
+    z-index: 2;
+}
+
+.db-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: #4f46e5;
+    filter: blur(10px);
+    opacity: 0.3;
+    animation: pulse-glow-indigo 2s infinite;
+}
+
+@keyframes pulse-glow-indigo {
+    0% { transform: scale(0.9); opacity: 0.2; }
+    50% { transform: scale(1.1); opacity: 0.5; }
+    100% { transform: scale(0.9); opacity: 0.2; }
+}
+
+.erp-flows {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.erp-flow-item {
+    background: #1e293b;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+    transform: translateY(0);
+    animation: flow-float 3s infinite ease-in-out;
+}
+
+.erp-flow-item.flow-money { animation-delay: 0s; border-left: 3px solid #10b981; }
+.erp-flow-item.flow-stock { animation-delay: 1s; border-left: 3px solid #f43f5e; }
+.erp-flow-item.flow-billing { animation-delay: 2s; border-left: 3px solid #3b82f6; }
+
+.flow-icon {
+    width: 12px;
+    height: 12px;
+}
+
+@keyframes flow-float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ANIMAÇÃO 4: PAGAMENTO */
+.payment-card-visual {
+    width: 200px;
+    height: 120px;
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    border-radius: 12px;
+    padding: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.card-chip-visual {
+    width: 24px;
+    height: 18px;
+    background: #f59e0b;
+    border-radius: 4px;
+}
+
+.card-number-visual {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: white;
+    letter-spacing: 0.05em;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.payment-processing-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.spinner-loader {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255,255,255,0.1);
+    border-top: 2px solid var(--color-indigo);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.payment-processing-spinner span {
+    font-size: 0.65rem;
+    color: #e2e8f0;
+}
+
+.payment-success-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transform: scale(0.9);
+    transition: var(--transition-smooth);
+}
+
+.payment-success-badge.active {
+    transform: scale(1);
+}
+
+.success-icon {
+    width: 32px;
+    height: 32px;
+    color: #10b981;
+}
+
+.payment-success-badge span {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #10b981;
+}
+
+/* ANIMAÇÃO 5: ENTREGA */
+.delivery-road-visual {
+    width: 200px;
+    height: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.delivery-house {
+    color: #64748b;
+}
+
+.delivery-house i {
+    width: 32px;
+    height: 32px;
+}
+
+.delivery-truck-wrapper {
+    position: absolute;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: drive-truck 4s infinite linear;
+}
+
+.delivery-truck {
+    width: 36px;
+    height: 36px;
+    color: #06b6d4;
+    filter: drop-shadow(0 2px 5px rgba(6,182,212,0.4));
+}
+
+.package-box {
+    position: absolute;
+    top: -12px;
+    left: 10px;
+    background: #b45309;
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.package-box i {
+    width: 10px;
+    height: 10px;
+    color: white;
+}
+
+.road-line {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, transparent, transparent 4px, #475569 4px, #475569 8px);
+    z-index: 0;
+}
+
+@keyframes drive-truck {
+    0% { left: 0px; transform: scaleX(1); }
+    45% { left: 150px; transform: scaleX(1); }
+    50% { left: 150px; transform: scaleX(-1); }
+    95% { left: 0px; transform: scaleX(-1); }
+    100% { left: 0px; transform: scaleX(1); }
+}
+
+/* SWITCH MUNDO REAL VS DIGITAL */
+.mode-switch-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 9999px;
+    padding: 0.5rem 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.mode-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    transition: var(--transition-smooth);
+}
+
+.mode-label.active {
+    color: var(--color-text);
+}
+
+.mode-switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+}
+
+.mode-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.mode-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #334155;
+    transition: .4s;
+    border-radius: 34px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.mode-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.mode-switch input:checked + .mode-slider {
+    background-color: var(--color-indigo);
+}
+
+.mode-switch input:checked + .mode-slider:before {
+    transform: translateX(24px);
+}
+
+/* COMPARISON 3D FLIP CARDS */
+.comparison-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    perspective: 1000px;
+}
+
+.comparison-pair-card {
+    background: transparent;
+    height: 185px;
+    perspective: 1000px;
+}
+
+.pair-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Classe aplicada via JS ao ativar o switch */
+.comparison-pair-card.flipped .pair-card-inner {
+    transform: rotateY(180deg);
+}
+
+.pair-front, .pair-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pair-front {
+    background: rgba(30, 41, 59, 0.45);
+    color: var(--color-text);
+}
+
+.pair-back {
+    background: rgba(15, 23, 42, 0.75);
+    transform: rotateY(180deg);
+}
+
+.pair-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+}
+
+.pair-icon-wrapper i {
+    width: 20px;
+    height: 20px;
+}
+
+.pair-front .pair-icon-wrapper {
+    color: var(--color-text-muted);
+}
+
+.pair-front h4, .pair-back h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.pair-front p, .pair-back p {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+}
+
+.pair-back p {
+    color: #e2e8f0;
+}
+
+/* PIPELINE SIMULATOR SYSTEM */
+.pipeline-progress-line {
+    position: absolute;
+    top: 24px;
+    left: 40px;
+    right: 40px;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(255, 255, 255, 0.1) 6px, rgba(255, 255, 255, 0.1) 12px);
+    z-index: 1;
+}
+
+.pipeline-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-indigo), var(--color-accent));
+    box-shadow: 0 0 10px var(--color-indigo);
+    transition: width 0.4s ease;
+}
+
+.simulation-pipeline-container {
+    position: relative;
+    padding: 1rem 0;
+}
+
+.pipeline-nodes {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+.pipeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 80px;
+}
+
+.node-icon-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #1e293b;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.node-icon-circle i {
+    width: 20px;
+    height: 20px;
+    color: var(--color-text-muted);
+    transition: var(--transition-smooth);
+}
+
+.node-label-txt {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    transition: var(--transition-smooth);
+}
+
+/* Classes para controlar a ativação na simulação */
+.pipeline-node.active .node-icon-circle {
+    border-color: var(--color-indigo);
+    box-shadow: 0 0 20px rgba(255, 106, 0, 0.5);
+    background: #FF6A00;
+}
+
+.pipeline-node.active .node-icon-circle i {
+    color: white;
+}
+
+.pipeline-node.active .node-label-txt {
+    color: white;
+    font-weight: 700;
+}
+
+.pipeline-node.completed .node-icon-circle {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.15);
+}
+
+.pipeline-node.completed .node-icon-circle i {
+    color: #10b981;
+}
+
+.pipeline-node.completed .node-label-txt {
+    color: #10b981;
+}
+
+.sim-flow-status-panel {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px dashed rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sim-status-message {
+    font-size: 1.05rem;
+    color: #e2e8f0;
+    margin: 0;
+    font-weight: 500;
+}
+
+.pulse-animation {
+    animation: node-pulse 1s infinite alternate;
+}
+
+@keyframes node-pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.08); }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 992px) {
+    .details-content-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .systems-characters-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .comparison-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .systems-explainer-block h2 {
+        font-size: 1.75rem;
+    }
+    
+    .systems-explainer-block h3 {
+        font-size: 1.3rem;
+    }
+    
+    .systems-explainer-block .center-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Menu horizontal deslizante em smartphones/tablets para economizar espaço vertical */
+    .systems-characters-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.5rem;
+        padding: 0.5rem 0.25rem 1rem;
+        justify-content: flex-start;
+        scrollbar-width: thin;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+    
+    .system-character-card {
+        flex: 0 0 120px !important;
+        scroll-snap-align: start;
+        padding: 1rem 0.5rem;
+    }
+
+    .character-icon-wrapper {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+    }
+
+    .char-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .system-character-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .role-badge {
+        font-size: 0.65rem;
+    }
+    
+    .details-visual-side {
+        min-height: 200px;
+        padding: 0.75rem;
+    }
+
+    /* Redimensionar o pipeline de simulação para caber na tela sem quebrar a linha */
+    .node-icon-circle {
+        width: 42px;
+        height: 42px;
+    }
+    .node-icon-circle i {
+        width: 16px;
+        height: 16px;
+    }
+    .node-label-txt {
+        font-size: 0.65rem;
+    }
+    .pipeline-progress-line {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+    }
+    .pipeline-node {
+        width: 65px;
+    }
+}
+
+@media (max-width: 576px) {
+    .comparison-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .comparison-pair-card {
+        height: 145px;
+    }
+
+    .pair-front, .pair-back {
+        padding: 1rem;
+    }
+    
+    .pair-front h4, .pair-back h4 {
+        font-size: 0.85rem;
+        margin-bottom: 0.35rem;
+    }
+    
+    .pair-front p, .pair-back p {
+        font-size: 0.7rem;
+    }
+    
+    .pair-icon-wrapper {
+        width: 36px;
+        height: 36px;
+        margin-bottom: 0.5rem;
+    }
+    .pair-icon-wrapper i {
+        width: 16px;
+        height: 16px;
+    }
+    
+    /* Pipeline ultra compacto para celulares pequenos */
+    .pipeline-node {
+        width: 50px;
+    }
+    .node-icon-circle {
+        width: 34px;
+        height: 34px;
+    }
+    .node-icon-circle i {
+        width: 14px;
+        height: 14px;
+    }
+    .node-label-txt {
+        font-size: 0.55rem;
+        letter-spacing: -0.02em;
+    }
+    .pipeline-progress-line {
+        top: 16px;
+        left: 15px;
+        right: 15px;
+    }
+    
+    .mode-switch-container {
+        padding: 0.4rem 0.8rem;
+    }
+    .mode-label {
+        font-size: 0.8rem;
+    }
+}
+

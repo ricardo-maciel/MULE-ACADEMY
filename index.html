@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=4">
     <link rel="stylesheet" href="tech-background.css">
 </head>
 <body data-brand="mulecraft">
@@ -182,6 +182,316 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- NOVO: BLOCO INTERATIVO - QUEM SÃO ESSES SISTEMAS AFINAL -->
+                <div class="section-divider-glow"></div>
+                
+                <div class="systems-explainer-block" id="bloco-sistemas">
+                    <div class="block-header text-center">
+                        <span class="badge">
+                            <i data-lucide="brain-circuit" class="badge-icon"></i>
+                            CONHECENDO OS PERSONAGENS
+                        </span>
+                        <h2>🧠 Quem são esses sistemas afinal?</h2>
+                        <p class="center-subtitle">Antes de conectar sistemas, você precisa entender o papel de cada um deles de forma simples e visual.</p>
+                    </div>
+
+                    <!-- 1. Cards de Sistemas (Os Personagens) -->
+                    <div class="systems-characters-grid">
+                        <div class="system-character-card active" data-system="ecommerce">
+                            <div class="character-icon-wrapper eco-theme">
+                                <i data-lucide="shopping-bag" class="char-icon"></i>
+                            </div>
+                            <h3>E-commerce</h3>
+                            <span class="role-badge">🛒 A Vitrine Digital</span>
+                        </div>
+                        <div class="system-character-card" data-system="crm">
+                            <div class="character-icon-wrapper crm-theme">
+                                <i data-lucide="users" class="char-icon"></i>
+                            </div>
+                            <h3>CRM</h3>
+                            <span class="role-badge">🤝 O Vendedor</span>
+                        </div>
+                        <div class="system-character-card" data-system="erp">
+                            <div class="character-icon-wrapper erp-theme">
+                                <i data-lucide="database" class="char-icon"></i>
+                            </div>
+                            <h3>ERP</h3>
+                            <span class="role-badge">🧠 O Administrador</span>
+                        </div>
+                        <div class="system-character-card" data-system="pagamento">
+                            <div class="character-icon-wrapper pag-theme">
+                                <i data-lucide="credit-card" class="char-icon"></i>
+                            </div>
+                            <h3>Pagamento</h3>
+                            <span class="role-badge">💳 O Caixa da Loja</span>
+                        </div>
+                        <div class="system-character-card" data-system="entrega">
+                            <div class="character-icon-wrapper ent-theme">
+                                <i data-lucide="truck" class="char-icon"></i>
+                            </div>
+                            <h3>Entrega</h3>
+                            <span class="role-badge">🚚 O Motoboy</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Detalhes Dinâmicos do Sistema Selecionado -->
+                    <div class="system-details-panel glass-panel mt-30">
+                        <div class="details-content-grid">
+                            <div class="details-text-side">
+                                <div class="details-header">
+                                    <span class="badge" id="details-system-badge">E-commerce</span>
+                                    <h3 id="details-system-title">🛒 A Vitrine Digital</h3>
+                                </div>
+                                <p class="details-description" id="details-system-description">
+                                    É a porta de entrada e a prateleira da sua loja online. Onde o cliente escolhe o que quer sem precisar falar com ninguém.
+                                </p>
+                                <div class="details-examples-box">
+                                    <h4>O que ele faz na prática?</h4>
+                                    <ul class="bullet-list" id="details-system-examples">
+                                        <li><i data-lucide="check" class="list-icon text-teal"></i> <span>Mostra as fotos e preços dos produtos para o cliente</span></li>
+                                        <li><i data-lucide="check" class="list-icon text-teal"></i> <span>Oferece o botão de "Comprar" e o carrinho de compras</span></li>
+                                        <li><i data-lucide="check" class="list-icon text-teal"></i> <span>Gera um pedido com os itens escolhidos</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="details-visual-side flex-center">
+                                <div class="mini-animation-sandbox" id="details-mini-animation">
+                                    <!-- E-commerce animation active by default -->
+                                    <div class="anim-container active" data-anim="ecommerce">
+                                        <div class="ecommerce-phone">
+                                            <div class="screen-product">
+                                                <div class="phone-header"><i data-lucide="smartphone" class="phone-frame"></i> Loja Online</div>
+                                                <div class="phone-content">
+                                                    <div class="product-item-card">
+                                                        <span class="prod-emoji">👕</span>
+                                                        <span class="prod-name">Camiseta Mule</span>
+                                                        <span class="prod-price">R$ 89,90</span>
+                                                    </div>
+                                                    <button class="buy-button-visual pulse-effect">
+                                                        <i data-lucide="shopping-cart" class="btn-icon-s"></i> Comprar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="cart-visual-badge">
+                                                <i data-lucide="shopping-bag" class="cart-icon-visual"></i>
+                                                <span class="badge-count-visual">1</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- CRM animation -->
+                                    <div class="anim-container" data-anim="crm">
+                                        <div class="crm-dashboard">
+                                            <div class="crm-customer-profile">
+                                                <div class="avatar-circle"><i data-lucide="user" class="customer-avatar"></i></div>
+                                                <div class="profile-info">
+                                                    <div class="profile-name">RICARDO</div>
+                                                    <div class="profile-tag">Cliente VIP ⭐</div>
+                                                </div>
+                                            </div>
+                                            <div class="crm-notebook">
+                                                <div class="notebook-header"><i data-lucide="contact" class="notebook-icon"></i> Ficha do Cliente</div>
+                                                <div class="notebook-content">
+                                                    <div class="note-line">🎂 Niver: 26/Jun</div>
+                                                    <div class="note-line">👕 Prefere: Camisetas</div>
+                                                    <div class="note-line">📦 Compras: 3 Realizadas</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- ERP animation -->
+                                    <div class="anim-container" data-anim="erp">
+                                        <div class="erp-office">
+                                            <div class="erp-db-wrapper">
+                                                <i data-lucide="database" class="db-server-icon"></i>
+                                                <div class="db-glow"></div>
+                                            </div>
+                                            <div class="erp-flows">
+                                                <div class="erp-flow-item flow-money">
+                                                    <i data-lucide="dollar-sign" class="flow-icon"></i>
+                                                    <span>Financeiro: R$ +89,90</span>
+                                                </div>
+                                                <div class="erp-flow-item flow-stock">
+                                                    <i data-lucide="box" class="flow-icon"></i>
+                                                    <span>Estoque: Camiseta -1</span>
+                                                </div>
+                                                <div class="erp-flow-item flow-billing">
+                                                    <i data-lucide="receipt" class="flow-icon"></i>
+                                                    <span>Nota Fiscal Gerada</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Payment animation -->
+                                    <div class="anim-container" data-anim="pagamento">
+                                        <div class="payment-card-visual">
+                                            <div class="card-chip-visual"></div>
+                                            <div class="card-number-visual">•••• •••• •••• 9876</div>
+                                            <div class="payment-processing-spinner" id="pag-spinner">
+                                                <div class="spinner-loader"></div>
+                                                <span>Aprovando R$ 89,90...</span>
+                                            </div>
+                                            <div class="payment-success-badge" id="pag-success">
+                                                <i data-lucide="check-circle" class="success-icon text-emerald"></i>
+                                                <span>PAGAMENTO APROVADO!</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Delivery animation -->
+                                    <div class="anim-container" data-anim="entrega">
+                                        <div class="delivery-road-visual">
+                                            <div class="delivery-truck-wrapper">
+                                                <i data-lucide="truck" class="delivery-truck"></i>
+                                                <div class="package-box"><i data-lucide="package"></i></div>
+                                            </div>
+                                            <div class="delivery-house"><i data-lucide="home"></i></div>
+                                            <div class="road-line"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Bloco de Comparação (Mundo Real vs Mundo Digital) -->
+                    <div class="comparison-block glass-panel mt-30">
+                        <div class="comparison-header flex-center flex-column">
+                            <span class="badge badge-teal">DIFERENCIAL DIDÁTICO</span>
+                            <h3>🏢 Empresa Real vs 🧠 Sistemas Digitais</h3>
+                            <p class="small-desc text-center">Os sistemas digitais nada mais são do que versões digitais de funções físicas que já existiam! Alterne abaixo para comparar.</p>
+                            
+                            <div class="mode-switch-container">
+                                <span class="mode-label active" id="label-real">🏢 Loja Física</span>
+                                <label class="mode-switch">
+                                    <input type="checkbox" id="comparison-toggle-input">
+                                    <span class="mode-slider"></span>
+                                </label>
+                                <span class="mode-label" id="label-digital">🧠 Sistemas Digitais</span>
+                            </div>
+                        </div>
+
+                        <div class="comparison-cards-grid mt-20" id="comparison-visuals">
+                            <!-- Card 1: Admin / ERP -->
+                            <div class="comparison-pair-card" data-pair="erp">
+                                <div class="pair-card-inner">
+                                    <div class="pair-front">
+                                        <div class="pair-icon-wrapper"><i data-lucide="clipboard-list"></i></div>
+                                        <h4>Administração Física</h4>
+                                        <p>O gerente trancado na salinha controlando os gastos no papel e contando caixas no galpão de estoque.</p>
+                                    </div>
+                                    <div class="pair-back">
+                                        <div class="pair-icon-wrapper text-indigo"><i data-lucide="database"></i></div>
+                                        <h4>Sistema ERP</h4>
+                                        <p>Software centralizado que atualiza estoque, gera notas e calcula as finanças de forma automática e integrada.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2: Atendimento / CRM -->
+                            <div class="comparison-pair-card" data-pair="crm">
+                                <div class="pair-card-inner">
+                                    <div class="pair-front">
+                                        <div class="pair-icon-wrapper"><i data-lucide="user-cog"></i></div>
+                                        <h4>Vendedor de Caderninho</h4>
+                                        <p>Aquele vendedor simpático que lembra os rostos dos clientes regulares, o que eles gostam e suas datas de aniversário.</p>
+                                    </div>
+                                    <div class="pair-back">
+                                        <div class="pair-icon-wrapper text-pink"><i data-lucide="users"></i></div>
+                                        <h4>Sistema CRM</h4>
+                                        <p>Banco de dados inteligente que organiza todas as interações com o cliente, histórico de compras e preferências.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3: Caixa / Pagamento -->
+                            <div class="comparison-pair-card" data-pair="pagamento">
+                                <div class="pair-card-inner">
+                                    <div class="pair-front">
+                                        <div class="pair-icon-wrapper"><i data-lucide="banknote"></i></div>
+                                        <h4>Caixa Registradora</h4>
+                                        <p>O operador de caixa físico recebendo notas de papel, dando troco e emitindo o cupom fiscal na boca do caixa.</p>
+                                    </div>
+                                    <div class="pair-back">
+                                        <div class="pair-icon-wrapper text-emerald"><i data-lucide="credit-card"></i></div>
+                                        <h4>Sistema de Pagamento</h4>
+                                        <p>Serviço digital (Gateway) que cobra do cartão do cliente ou processa o PIX e valida a transação em segundos.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 4: Logística / Entrega -->
+                            <div class="comparison-pair-card" data-pair="entrega">
+                                <div class="pair-card-inner">
+                                    <div class="pair-front">
+                                        <div class="pair-icon-wrapper"><i data-lucide="bike"></i></div>
+                                        <h4>Boy da Entrega</h4>
+                                        <p>O rapaz da loja física que coloca a mochila com as mercadorias nas costas e dirige pela cidade para entregar.</p>
+                                    </div>
+                                    <div class="pair-back">
+                                        <div class="pair-icon-wrapper text-cyan"><i data-lucide="truck"></i></div>
+                                        <h4>Sistema de Entrega</h4>
+                                        <p>Plataforma que calcula o frete, despacha para transportadoras parceiras e envia o link de rastreamento.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Mini Simulação Integrada -->
+                    <div class="simulation-block glass-panel mt-30 text-center">
+                        <span class="badge badge-accent">PLAYGROUND EDUCATIVO</span>
+                        <h3>🎮 Mini Simulação: Tudo Funcionando Junto</h3>
+                        <p class="small-desc max-w-600 center-subtitle">Veja o que acontece nos bastidores no exato segundo em que um cliente clica em "Comprar" no site.</p>
+                        
+                        <div class="simulation-pipeline-container mt-20">
+                            <!-- Pipeline Connector Line -->
+                            <div class="pipeline-progress-line">
+                                <div class="pipeline-progress-fill" id="sim-progress-fill"></div>
+                            </div>
+                            
+                            <div class="pipeline-nodes">
+                                <div class="pipeline-node active" id="sim-node-cliente" data-step="1">
+                                    <div class="node-icon-circle"><i data-lucide="user"></i></div>
+                                    <span class="node-label-txt">Cliente</span>
+                                </div>
+                                <div class="pipeline-node" id="sim-node-ecommerce" data-step="2">
+                                    <div class="node-icon-circle"><i data-lucide="shopping-bag"></i></div>
+                                    <span class="node-label-txt">E-commerce</span>
+                                </div>
+                                <div class="pipeline-node" id="sim-node-crm" data-step="3">
+                                    <div class="node-icon-circle"><i data-lucide="users"></i></div>
+                                    <span class="node-label-txt">CRM</span>
+                                </div>
+                                <div class="pipeline-node" id="sim-node-erp" data-step="4">
+                                    <div class="node-icon-circle"><i data-lucide="database"></i></div>
+                                    <span class="node-label-txt">ERP</span>
+                                </div>
+                                <div class="pipeline-node" id="sim-node-pagamento" data-step="5">
+                                    <div class="node-icon-circle"><i data-lucide="credit-card"></i></div>
+                                    <span class="node-label-txt">Pagamento</span>
+                                </div>
+                                <div class="pipeline-node" id="sim-node-entrega" data-step="6">
+                                    <div class="node-icon-circle"><i data-lucide="truck"></i></div>
+                                    <span class="node-label-txt">Entrega</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info/Status Text Area for Simulation -->
+                        <div class="sim-flow-status-panel mt-30" id="sim-flow-status-box">
+                            <p class="sim-status-message" id="sim-flow-status-text">Clique no botão abaixo para ver o fluxo de integração acontecer diante dos seus olhos!</p>
+                        </div>
+                        
+                        <div class="sim-controls mt-20">
+                            <button class="btn btn-primary" id="btn-run-full-simulation">
+                                <i data-lucide="play" class="btn-icon"></i>
+                                <span>Ver tudo funcionando junto</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="navigation-footer">
                     <button class="btn btn-outline next-section-btn" data-next="cap2">
                         <span>Avançar para o Capítulo 2</span>
