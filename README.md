@@ -45,7 +45,7 @@ A plataforma tem **duas identidades visuais** que você escolhe na tela de login
 | | Identidade | Visual |
 |---|---|---|
 | ![MuleCraft](MuleCraftIcone.png) | **MuleCraft** *(padrão)* | Tema roxo e ciano, estilo tech corporativo. Ideal para um ambiente mais profissional e sóbrio. |
-| 🐴 | **Mule Sem Freio** | Tema laranja vibrante com mascote. Estilo mais descontraído e divertido. |
+| ![MuleSemFreio](MuleSemFreio.png) | **Mule Sem Freio** | Tema laranja vibrante com mascote. Estilo mais descontraído e divertido. |
 
 > 💡 Trocar de identidade não apaga nem altera nenhum dado. O aluno pode estudar com qualquer uma e continuar de onde parou normalmente.
 
