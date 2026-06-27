@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <script>
         if (!sessionStorage.getItem('muleacademy_current_user')) {
@@ -10,16 +11,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mule Sem Freio Academy - Dashboard do Curso</title>
     <link rel="icon" type="image/x-icon" href="Favicon.ico">
-    <meta name="description" content="Dashboard interativo para iniciantes aprenderem integração de sistemas, formatos de dados, APIs e MuleSoft com laboratórios práticos.">
+    <meta name="description"
+        content="Dashboard interativo para iniciantes aprenderem integração de sistemas, formatos de dados, APIs e MuleSoft com laboratórios práticos.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="tech-background.css">
 </head>
+
 <body data-brand="mulecraft">
     <script>
         document.body.dataset.brand = localStorage.getItem('muleacademy_visual_brand') || 'mulecraft';
@@ -35,15 +40,21 @@
             <i data-lucide="menu"></i>
         </button>
         <div class="mobile-logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
-            <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo" style="width: 38px; height: 38px; margin-right: 6px;">
+            <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo"
+                style="width: 38px; height: 38px; margin-right: 6px;">
             <img src="mulecraft_icon.png" class="mulecraft-icon-img" alt="MuleCraft Academy">
-            <span class="brand-title" style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--color-indigo-light); margin-left: 0.35rem;">
-                <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+            <span class="brand-title"
+                style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--color-indigo-light); margin-left: 0.35rem;">
+                <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span>
+                    Academy</span>
                 <span class="brand-text-mulecraft">MuleCraft Academy</span>
             </span>
         </div>
         <div class="mobile-header-actions">
-            <button class="btn-logout" onclick="if(confirm('Deseja realmente sair da sua conta?')) { sessionStorage.removeItem('muleacademy_current_user'); window.location.href='login.html'; }" style="background: none; border: none; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 6px; border-radius: 6px; transition: var(--transition-smooth);" title="Sair da Conta">
+            <button class="btn-logout"
+                onclick="if(confirm('Deseja realmente sair da sua conta?')) { sessionStorage.removeItem('muleacademy_current_user'); window.location.href='login.html'; }"
+                style="background: none; border: none; color: var(--color-text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 6px; border-radius: 6px; transition: var(--transition-smooth);"
+                title="Sair da Conta">
                 <i data-lucide="log-out" style="width: 18px; height: 18px;"></i>
             </button>
         </div>
@@ -55,34 +66,39 @@
     <!-- Dashboard Sidebar Navigation -->
     <aside class="sidebar">
         <div class="sidebar-brand">
-            <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo" style="width: 48px; height: 48px; margin-right: 10px;">
+            <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo"
+                style="width: 48px; height: 48px; margin-right: 10px;">
             <img src="mulecraft_icon.png" class="mulecraft-icon-img" alt="MuleCraft Academy">
             <div class="brand-text-wrapper">
                 <span class="brand-title">
-                    <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+                    <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span>
+                        Academy</span>
                     <span class="brand-text-mulecraft">MuleCraft Academy</span>
                 </span>
-                <span class="brand-sub" data-brand-sub>Ricardo <i data-lucide="sparkles" class="ai-signature-icon"></i></span>
+                <span class="brand-sub" data-brand-sub>Ricardo <i data-lucide="sparkles"
+                        class="ai-signature-icon"></i></span>
             </div>
         </div>
         <nav class="sidebar-nav">
-            <a href="dashboard.html#welcome" class="nav-item active"><i data-lucide="layout-dashboard"></i>Painel Principal</a>
+            <a href="dashboard.html#welcome" class="nav-item active"><i data-lucide="layout-dashboard"></i>Painel
+                Principal</a>
             <div class="nav-group">
                 <div class="nav-group-title-row">
-                    <a href="dashboard.html#modules" class="nav-item"><i data-lucide="book-open"></i>Introdução a Integrações</a>
+                    <a href="dashboard.html#modules" class="nav-item"><i data-lucide="book-open"></i>Módulo 1 — Introdução a Integrações</a>
                     <button class="btn-reset-icon" id="btn-reset-sidebar" title="Resetar Progresso">
                         <i data-lucide="rotate-ccw"></i>
                     </button>
                 </div>
                 <div class="nav-subitems">
-                    <a href="index.html" class="nav-subitem" id="nav-sub-mod1"><i data-lucide="book-open-check"></i>Módulo 1 — Sistemas</a>
-                    <a href="modulo2.html" class="nav-subitem" id="nav-sub-mod2"><i data-lucide="braces"></i>Módulo 2 — Dados</a>
-                    <a href="modulo3.html" class="nav-subitem" id="nav-sub-mod3"><i data-lucide="cable"></i>Módulo 3 — Caos</a>
-                    <a href="modulo4.html" class="nav-subitem" id="nav-sub-mod4"><i data-lucide="cpu"></i>Módulo 4 — MuleSoft</a>
-                    <a href="modulo5.html" class="nav-subitem" id="nav-sub-mod5"><i data-lucide="shopping-cart"></i>Módulo 5 — Projeto</a>
+                    <a href="index.html" class="nav-subitem" id="nav-sub-mod1"><i data-lucide="book-open-check"></i>Aula 1 — Sistemas</a>
+                    <a href="modulo2.html" class="nav-subitem" id="nav-sub-mod2"><i data-lucide="braces"></i>Aula 2 — Dados</a>
+                    <a href="modulo3.html" class="nav-subitem" id="nav-sub-mod3"><i data-lucide="cable"></i>Aula 3 — Caos</a>
+                    <a href="modulo4.html" class="nav-subitem" id="nav-sub-mod4"><i data-lucide="cpu"></i>Aula 4 — MuleSoft</a>
+                    <a href="modulo5.html" class="nav-subitem" id="nav-sub-mod5"><i data-lucide="shopping-cart"></i>Aula 5 — Projeto</a>
                 </div>
             </div>
-            <a href="playground.html" class="nav-item" id="nav-playground"><i data-lucide="compass"></i>Playground Interativo</a>
+            <a href="playground.html" class="nav-item" id="nav-playground"><i data-lucide="compass"></i>Playground
+                Interativo</a>
         </nav>
         <div class="sidebar-footer">
             <div class="user-profile">
@@ -110,7 +126,8 @@
                 <div class="welcome-text">
                     <span class="badge badge-indigo">JORNADA DE APRENDIZADO</span>
                     <h1>Bem-vindo ao mundo das Integrações!</h1>
-                    <p class="subtitle">Aprenda de forma visual e totalmente prática como os sistemas de software se conectam, transmitem dados e resolvem a complexidade das empresas modernas.</p>
+                    <p class="subtitle">Aprenda de forma visual e totalmente prática como os sistemas de software se
+                        conectam, transmitem dados e resolvem a complexidade das empresas modernas.</p>
                     <div class="banner-ctas">
                         <button class="btn btn-primary btn-lg" id="btn-start-journey">
                             <span>Começar Jornada</span>
@@ -123,13 +140,15 @@
                     <div class="radial-progress-container">
                         <div class="progress-bar-circle">
                             <svg viewBox="0 0 100 100" class="circle-svg">
-                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1e293b" stroke-width="8"/>
-                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="var(--color-indigo)" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="251.2" id="radial-progress-fill"/>
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1e293b" stroke-width="8" />
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="var(--color-indigo)"
+                                    stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="251.2"
+                                    id="radial-progress-fill" />
                             </svg>
                             <span class="progress-percent" id="progress-text">0%</span>
                         </div>
                     </div>
-                    <span class="progress-desc" id="progress-text-desc">0 de 5 Módulos concluídos</span>
+                    <span class="progress-desc" id="progress-text-desc">0 de 5 Aulas concluídas</span>
                 </div>
             </div>
         </section>
@@ -138,15 +157,17 @@
         <section id="modules" class="dashboard-section">
             <div class="section-header-flex">
                 <div class="section-title-group">
-                    <h2 class="sec-title">Introdução a Integrações</h2>
-                    <p class="sec-subtitle">Siga as aulas passo a passo para construir sua base e dominar integrações. Cada módulo desbloqueia novas ferramentas!</p>
+                    <h2 class="sec-title">Módulo 1 — Introdução a Integrações</h2>
+                    <p class="sec-subtitle">Siga as aulas passo a passo para construir sua base e dominar integrações.
+                        Cada módulo desbloqueia novas ferramentas!</p>
                 </div>
-                <button class="btn btn-outline btn-sm btn-reset-course" id="btn-reset-course" title="Resetar Progresso da Trilha">
+                <button class="btn btn-outline btn-sm btn-reset-course" id="btn-reset-course"
+                    title="Resetar Progresso da Trilha">
                     <i data-lucide="rotate-ccw" class="btn-icon"></i>
                     <span>Resetar Progresso</span>
                 </button>
             </div>
-            
+
             <div class="modules-grid">
                 <!-- Module 1 -->
                 <div class="module-card glass-panel" id="card-mod1">
@@ -154,8 +175,9 @@
                         <div class="module-icon"><i data-lucide="network"></i></div>
                         <span class="module-status-badge" id="badge-mod1"><i data-lucide="circle"></i> Pendente</span>
                     </div>
-                    <h3>📘 Módulo 1 — Comunicação entre sistemas</h3>
-                    <p>Por que as empresas precisam integrar seus softwares e o que acontece quando eles operam isolados.</p>
+                    <h3>📘 Aula 1 — Comunicação entre sistemas</h3>
+                    <p>Por que as empresas precisam integrar seus softwares e o que acontece quando eles operam
+                        isolados.</p>
                     <a href="index.html" class="btn btn-primary btn-sm mt-auto" id="btn-mod1">Iniciar Aula</a>
                 </div>
 
@@ -165,7 +187,7 @@
                         <div class="module-icon"><i data-lucide="braces"></i></div>
                         <span class="module-status-badge" id="badge-mod2"><i data-lucide="circle"></i> Bloqueado</span>
                     </div>
-                    <h3>📦 Módulo 2 — JSON, XML e CSV</h3>
+                    <h3>📦 Aula 2 — JSON, XML e CSV</h3>
                     <p>Aprenda a decifrar a "linguagem" que os computadores usam para enviar dados entre si.</p>
                     <a href="modulo2.html" class="btn btn-outline btn-sm mt-auto" id="btn-mod2">Bloqueado</a>
                 </div>
@@ -176,7 +198,7 @@
                         <div class="module-icon"><i data-lucide="cable"></i></div>
                         <span class="module-status-badge" id="badge-mod3"><i data-lucide="circle"></i> Bloqueado</span>
                     </div>
-                    <h3>🔄 Módulo 3 — O problema da complexidade</h3>
+                    <h3>🔄 Aula 3 — O problema da complexidade</h3>
                     <p>Entenda por que criar conexões manuais "ponto a ponto" vira um pesadelo de manutenção.</p>
                     <a href="modulo3.html" class="btn btn-outline btn-sm mt-auto" id="btn-mod3">Bloqueado</a>
                 </div>
@@ -187,7 +209,7 @@
                         <div class="module-icon"><i data-lucide="cpu"></i></div>
                         <span class="module-status-badge" id="badge-mod4"><i data-lucide="circle"></i> Bloqueado</span>
                     </div>
-                    <h3>🌉 Módulo 4 — MuleSoft como solução</h3>
+                    <h3>🌉 Aula 4 — MuleSoft como solução</h3>
                     <p>Como a plataforma MuleSoft age como um hub centralizado organizando o fluxo de dados.</p>
                     <a href="modulo4.html" class="btn btn-outline btn-sm mt-auto" id="btn-mod4">Bloqueado</a>
                 </div>
@@ -198,7 +220,7 @@
                         <div class="module-icon"><i data-lucide="shopping-cart"></i></div>
                         <span class="module-status-badge" id="badge-mod5"><i data-lucide="circle"></i> Bloqueado</span>
                     </div>
-                    <h3>🛒 Módulo 5 — Projeto Prático</h3>
+                    <h3>🛒 Aula 5 — Projeto Prático</h3>
                     <p>Simulação real de uma compra online integrada com pagamento, estoque e logística de entrega.</p>
                     <a href="modulo5.html" class="btn btn-outline btn-sm mt-auto" id="btn-mod5">Bloqueado</a>
                 </div>
@@ -209,12 +231,13 @@
         <section id="progress-summary" class="dashboard-section mt-40">
             <div class="progress-bar-footer glass-panel">
                 <div class="progress-info">
-                    <h4>Módulos Concluídos: <span id="footer-modules-count">0 / 5</span></h4>
-                    <p class="text-muted small-desc">Excelente trabalho! Complete os laboratórios práticos para subir de nível.</p>
+                    <h4>Aulas Concluídas: <span id="footer-modules-count">0 / 5</span></h4>
+                    <p class="text-muted small-desc">Excelente trabalho! Complete os laboratórios práticos para subir de
+                        nível.</p>
                 </div>
                 <div class="progress-cta-box">
                     <button class="btn btn-accent btn-lg" id="btn-footer-continue">
-                        <span>Iniciar Módulo 1</span>
+                        <span>Iniciar Aula 1</span>
                         <i data-lucide="arrow-right" class="btn-icon"></i>
                     </button>
                 </div>
@@ -227,4 +250,8 @@
     <script src="tech-background.js"></script>
     <script src="dashboard.js?v=3"></script>
 </body>
+
+</html>
+</body>
+
 </html>

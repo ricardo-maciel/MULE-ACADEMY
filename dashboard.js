@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        1. SISTEMA DE PROGRESSÃO DESSA PLATAFORMA (LOCALSTORAGE)
        ========================================================================== */
-    
+
     // Pegando estados de conclusão salvos no navegador
     const checkCompletionStates = () => {
         return {
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderDashboardProgress = () => {
         const states = checkCompletionStates();
         let completedCount = 0;
-        
+
         if (states.mod1) completedCount++;
         if (states.mod2) completedCount++;
         if (states.mod3) completedCount++;
@@ -113,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const footerBtn = document.getElementById('btn-footer-continue');
 
         const percent = (completedCount / 5) * 100;
-        
+
         if (progressPercentText) progressPercentText.textContent = `${percent}%`;
-        if (progressTextDesc) progressTextDesc.textContent = `${completedCount} de 5 Módulos concluídos`;
+        if (progressTextDesc) progressTextDesc.textContent = `${completedCount} de 5 Aulas concluídos`;
         if (footerCountText) footerCountText.textContent = `${completedCount} / 5`;
 
         // Circunferência total do círculo SVG radial (2 * PI * r) = 251.2
@@ -129,19 +129,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Controlar o botão CTA principal no rodapé (Footer CTA)
         if (footerBtn) {
             if (completedCount === 0) {
-                footerBtn.innerHTML = '<span>Iniciar Módulo 1</span><i data-lucide="arrow-right"></i>';
+                footerBtn.innerHTML = '<span>Iniciar Aula 1</span><i data-lucide="arrow-right"></i>';
                 footerBtn.onclick = () => window.location.href = "index.html";
             } else if (completedCount === 1) {
-                footerBtn.innerHTML = '<span>Iniciar Módulo 2</span><i data-lucide="arrow-right"></i>';
+                footerBtn.innerHTML = '<span>Iniciar Aula 2</span><i data-lucide="arrow-right"></i>';
                 footerBtn.onclick = () => window.location.href = "modulo2.html";
             } else if (completedCount === 2) {
-                footerBtn.innerHTML = '<span>Iniciar Módulo 3</span><i data-lucide="arrow-right"></i>';
+                footerBtn.innerHTML = '<span>Iniciar Aula 3</span><i data-lucide="arrow-right"></i>';
                 footerBtn.onclick = () => window.location.href = "modulo3.html";
             } else if (completedCount === 3) {
-                footerBtn.innerHTML = '<span>Iniciar Módulo 4</span><i data-lucide="arrow-right"></i>';
+                footerBtn.innerHTML = '<span>Iniciar Aula 4</span><i data-lucide="arrow-right"></i>';
                 footerBtn.onclick = () => window.location.href = "modulo4.html";
             } else if (completedCount === 4) {
-                footerBtn.innerHTML = '<span>Iniciar Módulo 5</span><i data-lucide="arrow-right"></i>';
+                footerBtn.innerHTML = '<span>Iniciar Aula 5</span><i data-lucide="arrow-right"></i>';
                 footerBtn.onclick = () => window.location.href = "modulo5.html";
             } else if (completedCount === 5) {
                 footerBtn.innerHTML = '<span>Parabéns! Curso Concluído 🎓</span>';
@@ -218,16 +218,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Regra de negócios para habilitar as dependências sequenciais:
         // Módulo 1: Sempre liberado
         updateCardAndSubitem(1, true, states.mod1, "index.html", "Sistemas");
-        
+
         // Módulo 2: Requer Módulo 1
         updateCardAndSubitem(2, states.mod1, states.mod2, "modulo2.html", "Dados");
-        
+
         // Módulo 3: Requer Módulo 2
         updateCardAndSubitem(3, states.mod2, states.mod3, "modulo3.html", "Caos");
-        
+
         // Módulo 4: Requer Módulo 3
         updateCardAndSubitem(4, states.mod3, states.mod4, "modulo4.html", "MuleSoft");
-        
+
         // Módulo 5: Requer Módulo 4
         updateCardAndSubitem(5, states.mod4, states.mod5, "modulo5.html", "Projeto");
 
@@ -247,9 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Lógica para resetar o progresso do Módulo Pai (Introdução a Integrações)
+    // Lógica para resetar o progresso do Módulo Pai (Módulo 1 — Introdução a Integrações)
     const resetProgress = () => {
-        if (confirm('Deseja realmente resetar todo o progresso do módulo "Introdução a Integrações"? Todas as aulas serão marcadas como pendentes.')) {
+        if (confirm('Deseja realmente resetar todo o progresso do módulo "Módulo 1 — Introdução a Integrações"? Todas as aulas serão marcadas como pendentes.')) {
             localStorage.removeItem('muleacademy_completed_1');
             localStorage.removeItem('muleacademy_completed_2');
             localStorage.removeItem('muleacademy_completed_3');
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         mobileToggle.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
-        
+
         // Fechar ao clicar em um link interno (para âncoras/módulos)
         sidebar.querySelectorAll('.nav-item, .nav-subitem').forEach(link => {
             link.addEventListener('click', () => {
