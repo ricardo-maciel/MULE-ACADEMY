@@ -46,11 +46,21 @@ Controla os efeitos visuais do background. Ajuste conforme o hardware do disposi
 
 ## 📚 Trilha de Aprendizado
 
-1. **Comunicação entre Sistemas** — Por que empresas precisam integrar softwares
-2. **JSON, XML e CSV** — Formatos de troca de dados com exercícios práticos
-3. **O Caos do Espaguete** — Como conexões ponto a ponto viram um pesadelo
-4. **MuleSoft como Hub Central** — Arquitetura centralizada e seus benefícios
-5. **Mission Control** — Simulador de pipelines, falhas e retentativas
+### Módulo 1 — Introdução a Integrações
+Plataforma introdutória para entender a importância e os conceitos fundamentais de conexões entre sistemas.
+
+1. **Aula 1: Comunicação entre Sistemas** — Por que as empresas precisam integrar seus softwares e o que acontece quando eles operam isolados.
+2. **Aula 2: JSON, XML e CSV** — Aprenda a decifrar a "linguagem" que os computadores usam para enviar dados entre si.
+3. **Aula 3: O Problema da Complexidade** — Entenda por que criar conexões manuais "ponto a ponto" vira um pesadelo de manutenção.
+4. **Aula 4: MuleSoft como Solução** — Como a plataforma MuleSoft age como um hub centralizado organizando o fluxo de dados.
+5. **Aula 5: Projeto Prático** — Simulação real de uma compra online integrada com pagamento, estoque e logística de entrega.
+
+### Módulo 2 — Dados – A Linguagem dos Sistemas
+Aprofundamento sobre a transmissão de informações e formatação de dados no ambiente corporativo.
+
+1. **Aula 1: Introdução & Idiomas** — Descubra como diferentes sistemas "falam" idiomas próprios e por que precisam de tradutores para se comunicar.
+2. **Aula 2: Formatos Corporativos** — Aprenda os três idiomas tech: JSON, XML e CSV — suas estruturas, analogias e quando usar cada um.
+3. **Aula 3: Simulador de Tradução** — Resolva desafios práticos: identifique idiomas, escolha integrações e complete a missão de fixação interativa.
 
 ---
 
