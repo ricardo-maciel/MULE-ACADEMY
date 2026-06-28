@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>
+        if (!sessionStorage.getItem('muleacademy_current_user')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 2 - Dados – A Linguagem dos Sistemas</title>
+    <link rel="icon" type="image/x-icon" href="Favicon.ico">
+    <meta name="description" content="Aprenda JSON, XML e CSV de forma gamificada com o simulador de Dados. Veja as integrações funcionando como tradutores.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tech-background.css">
+    <link rel="stylesheet" href="dados.css">
+</head>
+<body data-brand="mulecraft">
+    <!-- Canvas animado de fundo -->
+    <div class="tech-network-bg" aria-hidden="true">
+        <canvas id="tech-network-canvas"></canvas>
+    </div>
+    <div class="tech-spotlight" aria-hidden="true"></div>
+
+    <!-- Barra de navegação superior com progresso -->
+    <nav class="progress-nav" id="main-nav">
+        <div class="logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
+            <i data-lucide="arrow-left" class="back-icon"></i>
+            <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo" style="margin-right: 6px; margin-left: 6px;">
+            <img src="mulecraft_icon.png" class="mulecraft-icon-img" alt="MuleCraft Academy">
+            <span class="brand-title">
+                <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+                <span class="brand-text-mulecraft">MuleCraft Academy</span>
+            </span>
+        </div>
+        
+        <button class="btn btn-outline btn-sm header-dashboard-btn" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="layout-dashboard" class="btn-icon"></i>
+            <span>Painel Principal</span>
+        </button>
+        <a href="login.html" class="btn btn-sm admin-only-btn hidden" id="btn-back-to-admin" style="background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.35); color: #f59e0b; border-radius: 8px; padding: 8px 14px; display: none; align-items: center; gap: 6px; font-weight: 600; font-size: 0.8rem; text-decoration: none;">
+            <i data-lucide="shield-check" style="width:16px;height:16px;"></i>Admin
+        </a>
+        <div class="chapters-progress">
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+            <div class="steps-container">
+                <button class="step-btn active" data-target="stage1" title="Abertura">1</button>
+                <button class="step-btn" data-target="stage2" title="Integração">2</button>
+                <button class="step-btn" data-target="stage3" title="Formatos">3</button>
+                <button class="step-btn" data-target="stage4" title="Simulador">4</button>
+                <button class="step-btn" data-target="stage5" title="Fixação">5</button>
+                <button class="step-btn" data-target="stage6" title="Conclusão">6</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contêiner principal do simulador -->
+    <main class="app-container">
+
+        <!-- ETAPA 1: CENA DE ABERTURA -->
+        <section id="stage1" class="chapter-section active-section">
+            <div class="section-content text-center">
+                <span class="badge badge-indigo">CENA 1: STORYTELLING</span>
+                <h1>O Grande Mal-entendido Digital</h1>
+                <p class="subtitle max-w-600 center-subtitle">Conheça três sistemas diferentes. Cada um foi programado por equipes distintas e fala o seu próprio "idioma" técnico.</p>
+                
+                <div class="systems-conversation-sandbox mt-40">
+                    <!-- Sistema A (JSON - E-commerce) -->
+                    <div class="sys-character char-json" id="char-sys-a">
+                        <div class="avatar-box">
+                            <i data-lucide="shopping-cart"></i>
+                            <span class="flag-icon">🇺🇸</span>
+                        </div>
+                        <h4>Shopify Store (JSON)</h4>
+                        <div class="speech-bubble bubble-left">
+                            <pre><code class="language-json">{
+  "item": "Tênis",
+  "preco": 89.90
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Sistema B (XML - SAP ERP) -->
+                    <div class="sys-character char-xml" id="char-sys-b">
+                        <div class="avatar-box">
+                            <i data-lucide="building"></i>
+                            <span class="flag-icon">🇪🇸</span>
+                        </div>
+                        <h4>SAP ERP (XML)</h4>
+                        <div class="speech-bubble bubble-right">
+                            <pre><code class="language-xml">&lt;pedido&gt;
+  &lt;item&gt;Tênis&lt;/item&gt;
+  &lt;preco&gt;89.90&lt;/preco&gt;
+&lt;/pedido&gt;</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Sistema C (CSV - Planilha) -->
+                    <div class="sys-character char-csv" id="char-sys-c">
+                        <div class="avatar-box">
+                            <i data-lucide="file-spreadsheet"></i>
+                            <span class="flag-icon">🇧🇷</span>
+                        </div>
+                        <h4>Planilha Fiscal (CSV)</h4>
+                        <div class="speech-bubble bubble-bottom">
+                            <pre><code>item,preco
+Tênis,89.90</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Nuvens de Confusão / Alertas -->
+                    <div class="confusion-overlay">
+                        <div class="cloud-conf text-rose animated-float">❔</div>
+                        <div class="cloud-conf text-rose animated-float-delayed">🚫</div>
+                        <div class="cloud-conf text-rose animated-float">???</div>
+                    </div>
+                </div>
+
+                <div class="action-bar mt-40">
+                    <p class="desc-helper text-rose">Eles não conseguem se comunicar! Shopify fala JSON, SAP fala XML e a Planilha fala CSV.</p>
+                    <button class="btn btn-accent btn-lg next-section-btn" data-next="stage2">
+                        <span>Ajudar os Sistemas</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETAPA 2: ENTRADA DA INTEGRAÇÃO -->
+        <section id="stage2" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="badge badge-accent">CENA 2: A INTEGRAÇÃO</span>
+                <h2>Surge o Tradutor Universal</h2>
+                <p class="subtitle max-w-600 center-subtitle">Para que sistemas de idiomas diferentes troquem dados sem erros, precisamos de uma **Integração** agindo como tradutor.</p>
+                
+                <div class="integration-showcase-sandbox mt-40">
+                    <div class="connectors-overlay">
+                        <svg viewBox="0 0 800 300" class="connector-lines">
+                            <!-- Linha A -> Hub -->
+                            <path d="M 150 150 L 400 150" stroke="#3b82f6" stroke-width="3" stroke-dasharray="8 4" id="line-a-hub"/>
+                            <!-- Linha Hub -> B -->
+                            <path d="M 400 150 L 650 150" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="8 4" id="line-hub-b"/>
+                            <!-- Linha C -> Hub -->
+                            <path d="M 400 150 L 400 240" stroke="#10b981" stroke-width="3" stroke-dasharray="8 4" id="line-c-hub"/>
+                        </svg>
+                    </div>
+
+                    <!-- Sistema A (JSON) -->
+                    <div class="showcase-node node-a">
+                        <div class="node-icon"><i data-lucide="shopping-cart"></i></div>
+                        <span>JSON</span>
+                    </div>
+
+                    <!-- Hub Central (Integração) -->
+                    <div class="showcase-hub">
+                        <div class="hub-icon pulse-glow-gold"><i data-lucide="languages"></i></div>
+                        <span>Tradutor (Integração)</span>
+                    </div>
+
+                    <!-- Sistema B (XML) -->
+                    <div class="showcase-node node-b">
+                        <div class="node-icon"><i data-lucide="building"></i></div>
+                        <span>XML</span>
+                    </div>
+
+                    <!-- Sistema C (CSV) -->
+                    <div class="showcase-node node-c">
+                        <div class="node-icon"><i data-lucide="file-spreadsheet"></i></div>
+                        <span>CSV</span>
+                    </div>
+
+                    <!-- Pacote de Dados Animado -->
+                    <div class="data-pulse-packet" id="data-pulse"></div>
+                </div>
+
+                <div class="interactive-controls mt-40">
+                    <button class="btn btn-outline" id="btn-translate-a-b">
+                        <i data-lucide="play" class="btn-icon"></i>
+                        <span>Traduzir JSON ➜ XML</span>
+                    </button>
+                    <button class="btn btn-outline" id="btn-translate-c-a">
+                        <i data-lucide="play" class="btn-icon"></i>
+                        <span>Traduzir CSV ➜ JSON</span>
+                    </button>
+                </div>
+
+                <div class="action-bar mt-40">
+                    <button class="btn btn-accent btn-lg next-section-btn" data-next="stage3">
+                        <span>Aprender os Idiomas</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETAPA 3: EXPLICAÇÃO INTERATIVA -->
+        <section id="stage3" class="chapter-section">
+            <div class="section-content">
+                <div class="text-center">
+                    <span class="badge badge-indigo">CENA 3: FORMATOS DE DADOS</span>
+                    <h2>Dicionário de Idiomas Tech</h2>
+                    <p class="subtitle max-w-600 center-subtitle">Passe o mouse ou clique sobre cada idioma para entender suas regras estruturais de forma simples.</p>
+                </div>
+
+                <div class="grid-3 cards-formats-grid mt-40">
+                    <!-- JSON Card -->
+                    <div class="format-card border-json-glow">
+                        <div class="card-head">
+                            <span class="flag-badge">🇺🇸</span>
+                            <h3>JSON</h3>
+                        </div>
+                        <span class="analogy-subtitle">"O Inglês do Mundo Tech"</span>
+                        <p class="format-desc">É o idioma mais moderno e popular. Organiza as informações como um **dicionário**, emparelhando chaves e valores dentro de chaves `{}`.</p>
+                        
+                        <div class="code-preview">
+                            <pre><code>{
+  "nome": "João",
+  "idade": 25
+}</code></pre>
+                        </div>
+                        <div class="bullet-details">
+                            <span><i data-lucide="check-circle" class="text-json"></i> Chaves entre aspas duplas</span>
+                            <span><i data-lucide="check-circle" class="text-json"></i> Estrutura leve e rápida</span>
+                        </div>
+                    </div>
+
+                    <!-- XML Card -->
+                    <div class="format-card border-xml-glow">
+                        <div class="card-head">
+                            <span class="flag-badge">🇪🇸</span>
+                            <h3>XML</h3>
+                        </div>
+                        <span class="analogy-subtitle">"O Espanhol Estruturado"</span>
+                        <p class="format-desc">Mais formal e tradicional. Funciona como uma **árvore hierárquica** onde cada dado fica guardado entre tags de abertura e fechamento `&lt;&gt;` e `&lt;/&gt;`.</p>
+                        
+                        <div class="code-preview">
+                            <pre><code>&lt;aluno&gt;
+  &lt;nome&gt;João&lt;/nome&gt;
+  &lt;idade&gt;25&lt;/idade&gt;
+&lt;/aluno&gt;</code></pre>
+                        </div>
+                        <div class="bullet-details">
+                            <span><i data-lucide="check-circle" class="text-xml"></i> Muito seguro e rígido</span>
+                            <span><i data-lucide="check-circle" class="text-xml"></i> Perfeito para sistemas legados</span>
+                        </div>
+                    </div>
+
+                    <!-- CSV Card -->
+                    <div class="format-card border-csv-glow">
+                        <div class="card-head">
+                            <span class="flag-badge">🇧🇷</span>
+                            <h3>CSV</h3>
+                        </div>
+                        <span class="analogy-subtitle">"O Português Direto"</span>
+                        <p class="format-desc">O mais simples e rústico de todos. É estruturado exatamente como uma **linha de planilha**, separando os valores apenas por vírgulas.</p>
+                        
+                        <div class="code-preview">
+                            <pre><code>nome,idade
+João,25</code></pre>
+                        </div>
+                        <div class="bullet-details">
+                            <span><i data-lucide="check-circle" class="text-csv"></i> Computa dados de forma muito compacta</span>
+                            <span><i data-lucide="check-circle" class="text-csv"></i> Excelente para tabelas grandes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-bar text-center mt-40">
+                    <button class="btn btn-accent btn-lg next-section-btn" data-next="stage4">
+                        <span>Ir para o Simulador</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETAPA 4: MINI SIMULADOR -->
+        <section id="stage4" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="badge badge-accent">CENA 4: APRENDIZADO ATIVO</span>
+                <h2>Sua Vez de Integrar</h2>
+                <p class="subtitle max-w-600 center-subtitle">A loja de E-commerce enviou dados em **JSON**, mas o Financeiro só compreende **XML**. Resolva o conflito.</p>
+                
+                <div class="simulator-match-sandbox mt-40">
+                    <div class="sandbox-columns">
+                        <!-- Source System -->
+                        <div class="sandbox-sys border-json-glow">
+                            <i data-lucide="smartphone" class="sys-large-icon text-json"></i>
+                            <h4>E-commerce</h4>
+                            <span class="badge badge-indigo">Envia JSON 🇺🇸</span>
+                            <pre class="code-box"><code>{
+  "total": 150.00
+}</code></pre>
+                        </div>
+
+                        <!-- Central Area: The Decision -->
+                        <div class="sandbox-connector-hub" id="sandbox-hub">
+                            <div class="connection-status-wire" id="status-wire"></div>
+                            <div class="connector-plug" id="decision-plug">
+                                <i data-lucide="help-circle" id="plug-icon"></i>
+                            </div>
+                            <span class="wire-label" id="wire-status-text">Sem Integração</span>
+                        </div>
+
+                        <!-- Target System -->
+                        <div class="sandbox-sys border-xml-glow">
+                            <i data-lucide="receipt" class="sys-large-icon text-xml"></i>
+                            <h4>Financeiro</h4>
+                            <span class="badge badge-indigo">Requer XML 🇪🇸</span>
+                            <pre class="code-box" id="target-expected-code"><code>&lt;faturamento&gt;
+  &lt;total&gt;150.00&lt;/total&gt;
+&lt;/faturamento&gt;</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Opciones de Selección -->
+                    <div class="choices-container mt-30">
+                        <button class="choice-btn" data-choice="ignore">
+                            <span class="choice-marker">A</span>
+                            <span>Ignorar a comunicação (Deixar isolado)</span>
+                        </button>
+                        <button class="choice-btn" data-choice="translate">
+                            <span class="choice-marker">B</span>
+                            <span>Adicionar Tradutor (Integração JSON ➜ XML)</span>
+                        </button>
+                        <button class="choice-btn" data-choice="manual">
+                            <span class="choice-marker">C</span>
+                            <span>Digitar manualmente no Financeiro</span>
+                        </button>
+                    </div>
+
+                    <!-- Caixa de Feedback -->
+                    <div class="feedback-panel-box hidden" id="simulator-feedback">
+                        <i data-lucide="info" class="feedback-icon" id="feedback-panel-icon"></i>
+                        <div class="feedback-details">
+                            <h4 id="feedback-panel-title">Feedback</h4>
+                            <p id="feedback-panel-desc">Texto de feedback aqui...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-bar mt-40">
+                    <button class="btn btn-accent btn-lg next-section-btn hidden" id="btn-next-to-stage5" data-next="stage5">
+                        <span>Iniciar Missão Rápida</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETAPA 5: FIXAÇÃO -->
+        <section id="stage5" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="badge badge-indigo">CENA 5: MISSÃO RÁPIDA</span>
+                <h2>Missão de Fixação 🧠</h2>
+                <p class="subtitle max-w-600 center-subtitle">Complete os 3 pequenos desafios abaixo para consolidar seu aprendizado.</p>
+                
+                <div class="quiz-container-box glass-panel max-w-800 mt-40">
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quiz-progress"></div>
+                    </div>
+
+                    <!-- DESAFIO 1: Identificar o Idioma -->
+                    <div class="quiz-step-panel active-quiz-panel" id="quiz-step-1">
+                        <span class="quiz-number-tag">Passo 1 de 3</span>
+                        <h3>Qual é o "idioma" falado pelo sistema abaixo?</h3>
+                        
+                        <div class="quiz-code-container">
+                            <pre><code>&lt;cliente&gt;
+  &lt;nome&gt;Ricardo&lt;/nome&gt;
+&lt;/cliente&gt;</code></pre>
+                        </div>
+
+                        <div class="quiz-options">
+                            <button class="quiz-opt-btn" data-answer="json">JSON 🇺🇸</button>
+                            <button class="quiz-opt-btn" data-answer="xml">XML 🇪🇸</button>
+                            <button class="quiz-opt-btn" data-answer="csv">CSV 🇧🇷</button>
+                        </div>
+                    </div>
+
+                    <!-- DESAFIO 2: Escolher o Tipo de Integração -->
+                    <div class="quiz-step-panel" id="quiz-step-2">
+                        <span class="quiz-number-tag">Passo 2 de 3</span>
+                        <h3>Sistema A envia um arquivo CSV, mas o Sistema B precisa receber em JSON. O que você deve fazer?</h3>
+
+                        <div class="quiz-options vertical-opts">
+                            <button class="quiz-opt-btn" data-answer="direct">Ligar os dois diretamente por cabo sem tradução</button>
+                            <button class="quiz-opt-btn" data-answer="convert">Usar uma integração para converter CSV em JSON</button>
+                            <button class="quiz-opt-btn" data-answer="db">Criar um banco de dados gigante para os dois</button>
+                        </div>
+                    </div>
+
+                    <!-- DESAFIO 3: Associar Formato ↔ Analogia -->
+                    <div class="quiz-step-panel" id="quiz-step-3">
+                        <span class="quiz-number-tag">Passo 3 de 3</span>
+                        <h3>Qual formato é associado ao "Inglês do mundo tech" por ser moderno, popular e utilizar estrutura de chaves/valores?</h3>
+
+                        <div class="quiz-options">
+                            <button class="quiz-opt-btn" data-answer="json">JSON 🇺🇸</button>
+                            <button class="quiz-opt-btn" data-answer="xml">XML 🇪🇸</button>
+                            <button class="quiz-opt-btn" data-answer="csv">CSV 🇧🇷</button>
+                        </div>
+                    </div>
+
+                    <!-- Feedback do quiz individual -->
+                    <div class="quiz-feedback-box hidden" id="quiz-feedback">
+                        <i data-lucide="check" class="q-icon"></i>
+                        <span id="quiz-feedback-text">Muito bem! Resposta correta.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETAPA 6: MENSAGEM FINAL -->
+        <section id="stage6" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="badge badge-accent">CENA 6: IMPACTO</span>
+                <div class="trophy-container mt-30">
+                    <div class="trophy-glow-gold"></div>
+                    <i data-lucide="graduation-cap" class="huge-trophy-icon text-accent"></i>
+                </div>
+
+                <div class="animated-quote-container mt-40">
+                    <h2 class="glowing-quote">
+                        "Assim como pessoas precisam de tradutores para se entender, sistemas precisam de integrações para trocar informações."
+                    </h2>
+                </div>
+
+                <div class="cta-box glass-panel max-w-600 mt-40">
+                    <h3>Módulo Concluído com Sucesso!</h3>
+                    <p>Você compreendeu como os sistemas organizam dados e como a integração age como tradutora universal para conexões robustas.</p>
+                    
+                    <div class="module-navigation-group mt-20">
+                        <button class="btn btn-accent btn-lg" id="btn-complete-dados">
+                            <span>Concluir Módulo & Voltar</span>
+                            <i data-lucide="check-circle" class="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- App Scripts -->
+    <script src="tech-background.js"></script>
+    <script src="dados.js"></script>
+<script src="admin-utils.js"></script></body>
+</html>

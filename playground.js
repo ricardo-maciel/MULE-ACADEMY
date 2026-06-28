@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.removeItem('muleacademy_completed_3');
                 localStorage.removeItem('muleacademy_completed_4');
                 localStorage.removeItem('muleacademy_completed_5');
+                localStorage.removeItem('muleacademy_completed_dados');
                 window.location.href = 'dashboard.html';
             }
         });
@@ -75,6 +76,56 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
+
+    // Lógica do Acordeão de Aulas do Sidebar
+    const setupSidebarAccordion = () => {
+        const toggleButtons = document.querySelectorAll('.btn-toggle-sidebar-subitems');
+        toggleButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const targetId = btn.getAttribute('data-target');
+                const subitems = document.getElementById(targetId);
+                if (subitems) {
+                    const isHidden = subitems.classList.toggle('hidden');
+                    btn.classList.toggle('rotated', !isHidden);
+                    
+                    const icon = btn.querySelector('i') || btn.querySelector('svg');
+                    if (icon) {
+                        const newIcon = document.createElement('i');
+                        newIcon.setAttribute('data-lucide', isHidden ? 'chevron-down' : 'chevron-up');
+                        icon.replaceWith(newIcon);
+                    }
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                }
+            });
+        });
+
+        // Atualizar ícones dos subitens do Módulo 2 conforme status de conclusão
+        const subitemsMod2 = [
+            document.getElementById('nav-sub-dataflow-1'),
+            document.getElementById('nav-sub-dataflow-2'),
+            document.getElementById('nav-sub-dataflow-3')
+        ];
+        const isMod2Completed = localStorage.getItem('muleacademy_completed_dados') === 'true';
+
+        subitemsMod2.forEach(subitem => {
+            if (subitem) {
+                const iconEl = subitem.querySelector('i') || subitem.querySelector('svg');
+                if (iconEl) {
+                    const newIcon = document.createElement('i');
+                    newIcon.setAttribute('data-lucide', isMod2Completed ? 'book-open-check' : 'play-circle');
+                    iconEl.replaceWith(newIcon);
+                }
+            }
+        });
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    };
+    setupSidebarAccordion();
 
 
     /* ==========================================================================

@@ -242,12 +242,22 @@ body[data-brand="mulecraft"] .auth-card {
 .mulecraft-cover {
     display: none;
     margin-bottom: 1.15rem;
-    border: 1px solid rgba(108, 92, 231, 0.58);
     border-radius: 14px;
     overflow: hidden;
     background: #050813;
+}
+
+.cover-mulecraft {
+    border: 1px solid rgba(108, 92, 231, 0.58);
     box-shadow:
         0 0 32px rgba(108, 92, 231, 0.24),
+        0 18px 44px rgba(0, 0, 0, 0.36);
+}
+
+.cover-sem-freio {
+    border: 1px solid rgba(245, 158, 11, 0.58);
+    box-shadow:
+        0 0 32px rgba(245, 158, 11, 0.24),
         0 18px 44px rgba(0, 0, 0, 0.36);
 }
 
@@ -257,11 +267,19 @@ body[data-brand="mulecraft"] .auth-card {
     height: auto;
 }
 
-body[data-brand="mulecraft"] .mulecraft-cover {
+body[data-brand="mulecraft"] .cover-mulecraft {
+    display: block;
+}
+
+body[data-brand="sem-freio"] .cover-sem-freio {
     display: block;
 }
 
 body[data-brand="mulecraft"] .auth-card > .auth-logo {
+    display: none;
+}
+
+body[data-brand="sem-freio"] .auth-card > .auth-logo {
     display: none;
 }
 

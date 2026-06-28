@@ -9,6 +9,25 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     }
 
+    // Detecção automática de sessão admin ativa — abre painel direto ao voltar de outras páginas
+    try {
+        const activeSession = JSON.parse(sessionStorage.getItem('muleacademy_current_user'));
+        if (activeSession && activeSession.email === 'admin@curso.com') {
+            // Sessão admin ainda ativa: mostrar painel imediatamente sem precisar fazer login novamente
+            const authCard = document.getElementById('auth-card');
+            const adminPortal = document.getElementById('admin-portal');
+            if (authCard) authCard.classList.add('hidden');
+            if (adminPortal) {
+                adminPortal.classList.remove('hidden');
+                // loadAdminDashboard será chamado abaixo quando a função estiver disponível
+                setTimeout(() => {
+                    if (typeof loadAdminDashboard === 'function') loadAdminDashboard();
+                }, 100);
+            }
+        }
+    } catch (e) {}
+
+
     // Identidade visual: a primeira abertura sempre usa Mule Sem Freio Academy.
     const brandRadios = document.querySelectorAll('input[name="visual-brand"]');
     const brandTitles = document.querySelectorAll('[data-brand-title]');
