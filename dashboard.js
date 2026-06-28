@@ -56,6 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (completedDados === 'true') {
             backupStr += 'muleacademy_completed_dados=true;';
         }
+        const completedDados1 = localStorage.getItem('muleacademy_completed_dados_1');
+        if (completedDados1 === 'true') {
+            backupStr += 'muleacademy_completed_dados_1=true;';
+        }
+        const completedDados2 = localStorage.getItem('muleacademy_completed_dados_2');
+        if (completedDados2 === 'true') {
+            backupStr += 'muleacademy_completed_dados_2=true;';
+        }
         if (backupStr) {
             localStorage.setItem(backupKey, backupStr);
         }
@@ -73,7 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
             mod3: localStorage.getItem('muleacademy_completed_3') === 'true',
             mod4: localStorage.getItem('muleacademy_completed_4') === 'true',
             mod5: localStorage.getItem('muleacademy_completed_5') === 'true',
-            mod2_completed: localStorage.getItem('muleacademy_completed_dados') === 'true'
+            mod2_completed: localStorage.getItem('muleacademy_completed_dados') === 'true',
+            mod2_1: localStorage.getItem('muleacademy_completed_dados_1') === 'true',
+            mod2_2: localStorage.getItem('muleacademy_completed_dados_2') === 'true'
         };
     };
 
@@ -137,13 +147,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const progressTextMod2 = document.getElementById('progress-text-mod2');
         const progressDescMod2 = document.getElementById('progress-desc-mod2');
         const isMod2Completed = states.mod2_completed;
-        const completedCount2 = isMod2Completed ? 3 : 0;
-        const percentMod2 = isMod2Completed ? 100 : 0;
-
+        
+        let completedCount2 = 0;
+        if (isMod2Completed) {
+            completedCount2 = 3;
+        } else {
+            if (states.mod2_1) completedCount2++;
+            if (states.mod2_2) completedCount2++;
+        }
+        
+        const percentMod2 = Math.round((completedCount2 / 3) * 100);
         if (progressTextMod2) progressTextMod2.textContent = `${percentMod2}%`;
         if (progressDescMod2) progressDescMod2.textContent = `${completedCount2} de 3 Aulas concluídas`;
 
-        const dashoffsetMod2 = totalCircumference - (totalCircumference * (isMod2Completed ? 1 : 0));
+        const dashoffsetMod2 = totalCircumference - (totalCircumference * (completedCount2 / 3));
         if (radialFillMod2) {
             radialFillMod2.style.strokeDasharray = `${totalCircumference}`;
             radialFillMod2.style.strokeDashoffset = `${dashoffsetMod2}`;
@@ -166,31 +183,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalCompleted = completedCount + completedCount2;
         if (footerCountText) footerCountText.textContent = `${totalCompleted} / 8`;
         if (footerBtn) {
-            if (completedCount === 0) {
-                footerBtn.innerHTML = '<span>Iniciar Aula 1</span><i data-lucide="arrow-right"></i>';
-                footerBtn.onclick = () => window.location.href = "index.html";
-            } else if (completedCount === 1) {
-                footerBtn.innerHTML = '<span>Iniciar Aula 2</span><i data-lucide="arrow-right"></i>';
-                footerBtn.onclick = () => window.location.href = "modulo2.html";
-            } else if (completedCount === 2) {
-                footerBtn.innerHTML = '<span>Iniciar Aula 3</span><i data-lucide="arrow-right"></i>';
-                footerBtn.onclick = () => window.location.href = "modulo3.html";
-            } else if (completedCount === 3) {
-                footerBtn.innerHTML = '<span>Iniciar Aula 4</span><i data-lucide="arrow-right"></i>';
-                footerBtn.onclick = () => window.location.href = "modulo4.html";
-            } else if (completedCount === 4) {
-                footerBtn.innerHTML = '<span>Iniciar Aula 5</span><i data-lucide="arrow-right"></i>';
-                footerBtn.onclick = () => window.location.href = "modulo5.html";
-            } else if (completedCount === 5) {
-                if (isMod2Completed) {
-                    footerBtn.innerHTML = '<span>Parabéns! Curso Concluído 🎓</span>';
-                    footerBtn.classList.replace('btn-accent', 'btn-primary');
-                    footerBtn.onclick = null;
+            if (completedCount < 5) {
+                // Continuar Módulo 1
+                if (!states.mod1) {
+                    footerBtn.innerHTML = '<span>Iniciar Aula 1 (Mód. 1)</span><i data-lucide="arrow-right"></i>';
+                    footerBtn.onclick = () => window.location.href = "index.html";
+                } else if (!states.mod2) {
+                    footerBtn.innerHTML = '<span>Iniciar Aula 2 (Mód. 1)</span><i data-lucide="arrow-right"></i>';
+                    footerBtn.onclick = () => window.location.href = "modulo2.html";
+                } else if (!states.mod3) {
+                    footerBtn.innerHTML = '<span>Iniciar Aula 3 (Mód. 1)</span><i data-lucide="arrow-right"></i>';
+                    footerBtn.onclick = () => window.location.href = "modulo3.html";
+                } else if (!states.mod4) {
+                    footerBtn.innerHTML = '<span>Iniciar Aula 4 (Mód. 1)</span><i data-lucide="arrow-right"></i>';
+                    footerBtn.onclick = () => window.location.href = "modulo4.html";
                 } else {
-                    footerBtn.innerHTML = '<span>Iniciar Módulo 2</span><i data-lucide="arrow-right"></i>';
-                    footerBtn.classList.replace('btn-primary', 'btn-accent');
-                    footerBtn.onclick = () => window.location.href = "dados.html";
+                    footerBtn.innerHTML = '<span>Iniciar Aula 5 (Mód. 1)</span><i data-lucide="arrow-right"></i>';
+                    footerBtn.onclick = () => window.location.href = "modulo5.html";
                 }
+            } else if (completedCount2 < 3) {
+                // Continuar Módulo 2
+                footerBtn.classList.replace('btn-primary', 'btn-accent');
+                if (completedCount2 === 0) {
+                    footerBtn.innerHTML = '<span>Iniciar Aula 1 (Mód. 2)</span><i data-lucide="arrow-right"></i>';
+                    footerBtn.onclick = () => window.location.href = "dados.html#stage1";
+                } else if (completedCount2 === 1) {
+                    footerBtn.innerHTML = '<span>Iniciar Aula 2 (Mód. 2)</span><i data-lucide="arrow-right"></i>';
+                    footerBtn.onclick = () => window.location.href = "dados.html#stage3";
+                } else {
+                    footerBtn.innerHTML = '<span>Iniciar Aula 3 (Mód. 2)</span><i data-lucide="arrow-right"></i>';
+                    footerBtn.onclick = () => window.location.href = "dados.html#stage4";
+                }
+            } else {
+                // Ambos concluídos
+                footerBtn.innerHTML = '<span>Parabéns! Curso Concluído 🎓</span>';
+                footerBtn.classList.remove('btn-accent');
+                footerBtn.classList.add('btn-primary');
+                footerBtn.onclick = null;
             }
         }
 
@@ -263,60 +292,74 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCardAndSubitem(4, isAdmin || states.mod3,        states.mod4, "modulo4.html",  "MuleSoft");
         updateCardAndSubitem(5, isAdmin || states.mod4,        states.mod5, "modulo5.html",  "Projeto");
 
-        // Regra de negócios para Módulo 2
-        const isMod1FullyCompleted = isAdmin ||
-            (states.mod1 && states.mod2 && states.mod3 && states.mod4 && states.mod5);
+        // Atualizar cada um dos cards e subitens de aula do Módulo 2 (Desbloqueados vs Bloqueados)
+        const updateDadosCardAndSubitem = (lessonNum, isUnlocked, isCompleted, href) => {
+            const card = document.getElementById(`card-dados-${lessonNum}`);
+            const badge = document.getElementById(`badge-dados-${lessonNum}`);
+            const btn = document.getElementById(`btn-dados-${lessonNum}`);
+            const subitem = document.getElementById(`nav-sub-dataflow-${lessonNum}`);
 
-        // IDs dos 3 cards de aula do Módulo 2
-        const dadosCards = [
-            { card: 'card-dados-1', badge: 'badge-dados-1', btn: 'btn-dados-1', href: 'dados.html#stage1' },
-            { card: 'card-dados-2', badge: 'badge-dados-2', btn: 'btn-dados-2', href: 'dados.html#stage3' },
-            { card: 'card-dados-3', badge: 'badge-dados-3', btn: 'btn-dados-3', href: 'dados.html#stage4' }
-        ];
-
-        // Sidebar sub-items do Módulo 2
-        const subitemsMod2 = [
-            document.getElementById('nav-sub-dataflow-1'),
-            document.getElementById('nav-sub-dataflow-2'),
-            document.getElementById('nav-sub-dataflow-3')
-        ];
-
-        dadosCards.forEach(({ card: cardId, badge: badgeId, btn: btnId, href }) => {
-            const card  = document.getElementById(cardId);
-            const badge = document.getElementById(badgeId);
-            const btn   = document.getElementById(btnId);
-
-            if (card) card.classList.remove('completed-module', 'highlight-module');
-
-            if (isMod2Completed) {
-                if (card)  card.classList.add('completed-module');
-                if (badge) { badge.className = 'module-status-badge'; badge.innerHTML = '<i data-lucide="check-circle" class="text-emerald"></i> Concluído'; }
-                if (btn)   { btn.className = 'btn btn-outline btn-sm mt-auto'; btn.textContent = 'Rever'; btn.href = href; btn.style.pointerEvents = 'auto'; }
-            } else if (isMod1FullyCompleted) {
-                if (card)  card.classList.add('highlight-module');
-                if (badge) { badge.className = 'module-status-badge hot'; badge.innerHTML = '<i data-lucide="sparkles"></i> Iniciar'; }
-                if (btn)   { btn.className = 'btn btn-accent btn-sm mt-auto'; btn.textContent = 'Iniciar Aula'; btn.href = href; btn.style.pointerEvents = 'auto'; }
-            } else {
-                if (badge) { badge.className = 'module-status-badge pending'; badge.innerHTML = '<i data-lucide="lock"></i> Bloqueado'; }
-                if (btn)   { btn.className = 'btn btn-outline btn-sm mt-auto'; btn.textContent = 'Bloqueado'; btn.style.pointerEvents = 'none'; }
+            if (card) {
+                card.classList.remove('completed-module', 'highlight-module');
             }
-        });
 
-        // Atualizar sidebar subitems do Módulo 2
-        subitemsMod2.forEach(subitem => {
-            if (subitem) {
-                if (isMod2Completed) {
-                    subitem.style.pointerEvents = 'auto'; subitem.style.opacity = '1';
+            if (isCompleted) {
+                if (card) card.classList.add('completed-module');
+                if (badge) {
+                    badge.className = 'module-status-badge';
+                    badge.innerHTML = '<i data-lucide="check-circle" class="text-emerald"></i> Concluído';
+                }
+                if (btn) {
+                    btn.className = 'btn btn-outline btn-sm mt-auto';
+                    btn.textContent = 'Rever';
+                    btn.href = href;
+                    btn.style.pointerEvents = 'auto';
+                }
+                if (subitem) {
+                    subitem.style.pointerEvents = 'auto';
+                    subitem.style.opacity = '1';
                     setLucideIcon(subitem, 'book-open-check');
-                } else if (isMod1FullyCompleted) {
-                    subitem.style.pointerEvents = 'auto'; subitem.style.opacity = '1';
+                }
+            } else if (isUnlocked) {
+                if (card) card.classList.add('highlight-module');
+                if (badge) {
+                    badge.className = 'module-status-badge hot';
+                    badge.innerHTML = '<i data-lucide="sparkles"></i> Iniciar';
+                }
+                if (btn) {
+                    btn.className = 'btn btn-accent btn-sm mt-auto';
+                    btn.textContent = 'Iniciar Aula';
+                    btn.href = href;
+                    btn.style.pointerEvents = 'auto';
+                }
+                if (subitem) {
+                    subitem.style.pointerEvents = 'auto';
+                    subitem.style.opacity = '1';
                     setLucideIcon(subitem, 'book-open');
-                } else {
-                    subitem.style.pointerEvents = 'none'; subitem.style.opacity = '0.4';
+                }
+            } else {
+                if (badge) {
+                    badge.className = 'module-status-badge pending';
+                    badge.innerHTML = '<i data-lucide="lock"></i> Bloqueado';
+                }
+                if (btn) {
+                    btn.className = 'btn btn-outline btn-sm mt-auto';
+                    btn.textContent = 'Bloqueado';
+                    btn.href = '#';
+                    btn.style.pointerEvents = 'none';
+                }
+                if (subitem) {
+                    subitem.style.pointerEvents = 'none';
+                    subitem.style.opacity = '0.4';
                     setLucideIcon(subitem, 'lock');
                 }
             }
-        });
+        };
+
+        // Regras de desbloqueio do Módulo 2 (início independente da primeira aula)
+        updateDadosCardAndSubitem(1, true,                                              isMod2Completed || states.mod2_1, "dados.html#stage1");
+        updateDadosCardAndSubitem(2, isAdmin || isMod2Completed || states.mod2_1, isMod2Completed || states.mod2_2, "dados.html#stage3");
+        updateDadosCardAndSubitem(3, isAdmin || isMod2Completed || states.mod2_2, isMod2Completed,                 "dados.html#stage4");
 
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
@@ -409,6 +452,8 @@ document.addEventListener('DOMContentLoaded', () => {
         btnResetModulo2.addEventListener('click', () => {
             if (confirm('Deseja realmente resetar todo o progresso do Módulo 2? Seu simulador e quiz serão zerados.')) {
                 localStorage.removeItem('muleacademy_completed_dados');
+                localStorage.removeItem('muleacademy_completed_dados_1');
+                localStorage.removeItem('muleacademy_completed_dados_2');
                 window.location.reload();
             }
         });
@@ -425,6 +470,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.removeItem('muleacademy_completed_4');
                 localStorage.removeItem('muleacademy_completed_5');
                 localStorage.removeItem('muleacademy_completed_dados');
+                localStorage.removeItem('muleacademy_completed_dados_1');
+                localStorage.removeItem('muleacademy_completed_dados_2');
                 window.location.reload();
             }
         });

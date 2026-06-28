@@ -528,6 +528,9 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 1; i <= 5; i++) {
             localStorage.removeItem(`muleacademy_completed_${i}`);
         }
+        localStorage.removeItem('muleacademy_completed_dados');
+        localStorage.removeItem('muleacademy_completed_dados_1');
+        localStorage.removeItem('muleacademy_completed_dados_2');
 
         if (backup) {
             // Restaura chaves de progresso (ex: "muleacademy_completed_1=true;muleacademy_completed_2=true;")
@@ -550,6 +553,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (completed === 'true') {
                 backupStr += `muleacademy_completed_${i}=true;`;
             }
+        }
+        const completedDados = localStorage.getItem('muleacademy_completed_dados');
+        if (completedDados === 'true') {
+            backupStr += 'muleacademy_completed_dados=true;';
+        }
+        const completedDados1 = localStorage.getItem('muleacademy_completed_dados_1');
+        if (completedDados1 === 'true') {
+            backupStr += 'muleacademy_completed_dados_1=true;';
+        }
+        const completedDados2 = localStorage.getItem('muleacademy_completed_dados_2');
+        if (completedDados2 === 'true') {
+            backupStr += 'muleacademy_completed_dados_2=true;';
         }
         if (backupStr) {
             localStorage.setItem(backupKey, backupStr);

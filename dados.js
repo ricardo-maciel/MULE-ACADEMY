@@ -20,6 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Grava progresso intermediário conforme o estágio alcançado:
+        // Se alcançou o estágio 3 (Formatos Corporativos / Aula 2), concluiu Aula 1
+        if (activeIndex >= 2) {
+            localStorage.setItem('muleacademy_completed_dados_1', 'true');
+        }
+        // Se alcançou o estágio 4 (Simulador de Tradução / Aula 3), concluiu Aula 2
+        if (activeIndex >= 3) {
+            localStorage.setItem('muleacademy_completed_dados_2', 'true');
+        }
+
         // Atualizar classes dos botões
         stepButtons.forEach((btn, index) => {
             if (index <= activeIndex) {
