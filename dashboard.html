@@ -113,6 +113,23 @@
                     <a href="dados.html#stage4" class="nav-subitem" id="nav-sub-dataflow-3"><i data-lucide="gamepad-2"></i>Aula 3 — Simulador de Tradução</a>
                 </div>
             </div>
+            
+            <!-- Módulo 3 -->
+            <div class="nav-group" style="margin-top: 15px;" id="sidebar-group-mod3">
+                <div class="nav-group-title-row">
+                    <a href="dashboard.html#modules-3" class="nav-item"><i data-lucide="shuffle"></i>Módulo 3 — DataWeave – O Poder do Tradutor</a>
+                    <button class="btn-toggle-sidebar-subitems" data-target="sidebar-sub-mod3" title="Mostrar/Esconder Aulas" id="btn-toggle-sidebar-mod3">
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                </div>
+                <div class="nav-subitems hidden" id="sidebar-sub-mod3">
+                    <a href="dataweave.html#stage1" class="nav-subitem" id="nav-sub-dw-1"><i data-lucide="play-circle"></i>Aula 1 — O Tradutor por Dentro</a>
+                    <a href="dataweave.html#stage2" class="nav-subitem" id="nav-sub-dw-2"><i data-lucide="braces"></i>Aula 2 — Hello World</a>
+                    <a href="dataweave.html#stage3" class="nav-subitem" id="nav-sub-dw-3"><i data-lucide="refresh-cw"></i>Aula 3 — Mudando Idiomas</a>
+                    <a href="dataweave.html#stage4" class="nav-subitem" id="nav-sub-dw-4"><i data-lucide="git-branch"></i>Aula 4 — Regras do Tradutor</a>
+                    <a href="dataweave.html#stage5" class="nav-subitem" id="nav-sub-dw-5"><i data-lucide="gamepad-2"></i>Aula 5 — Missão Final</a>
+                </div>
+            </div>
             <a href="playground.html" class="nav-item" id="nav-playground"><i data-lucide="compass"></i>Playground Interativo</a>
             <!-- Botão exclusivo para Admin voltar ao painel administrativo -->
             <a href="login.html" class="nav-item admin-only-btn hidden" id="btn-back-to-admin" style="display: none; margin-top: 12px; color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); border-radius: 8px; background: rgba(245,158,11,0.08);">
@@ -321,6 +338,100 @@
             </div>
         </section>
 
+        <!-- COURSE MODULES SECTION 3 -->
+        <section id="modules-3" class="dashboard-section card-module-wrapper glass-panel mt-40">
+            <div class="module-header-container">
+                <div class="module-info-left">
+                    <span class="badge badge-indigo">MÓDULO 3</span>
+                    <h2 class="sec-title">Módulo 3 — DataWeave – O Poder do Tradutor</h2>
+                    <p class="sec-subtitle">Aprenda a transformar dados de um formato para outro usando a linguagem oficial da MuleSoft.</p>
+                    
+                    <div class="module-actions">
+                        <button class="btn btn-primary btn-sm btn-toggle-lessons" data-target="grid-mod3" id="btn-toggle-mod3">
+                            <i data-lucide="eye" class="btn-icon"></i>
+                            <span>Mostrar Aulas</span>
+                        </button>
+                        <button class="btn btn-outline btn-sm btn-reset-modulo3" id="btn-reset-modulo3" title="Resetar Progresso do Módulo 3">
+                            <i data-lucide="rotate-ccw" class="btn-icon"></i>
+                            <span>Resetar Progresso</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="module-progress-right">
+                    <div class="radial-progress-container mini">
+                        <div class="progress-bar-circle">
+                            <svg viewBox="0 0 100 100" class="circle-svg">
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1e293b" stroke-width="8" />
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="var(--color-indigo)"
+                                    stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="251.2"
+                                    id="radial-progress-fill-mod3" />
+                            </svg>
+                            <span class="progress-percent" id="progress-text-mod3">0%</span>
+                        </div>
+                    </div>
+                    <span class="progress-desc" id="progress-desc-mod3">0 de 5 Aulas concluídas</span>
+                </div>
+            </div>
+            
+            <div class="modules-grid collapsable-grid hidden" id="grid-mod3">
+                <!-- DW Aula 1 -->
+                <div class="module-card glass-panel" id="card-dw-1">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="play-circle"></i></div>
+                        <span class="module-status-badge" id="badge-dw-1"><i data-lucide="lock"></i> Bloqueado</span>
+                    </div>
+                    <h3>🧠 Aula 1 — O Tradutor por Dentro</h3>
+                    <p>Entenda o que é o DataWeave e como ele funciona como o cérebro das transformações.</p>
+                    <a href="dataweave.html#stage1" class="btn btn-outline btn-sm mt-auto" id="btn-dw-1">Bloqueado</a>
+                </div>
+
+                <!-- DW Aula 2 -->
+                <div class="module-card glass-panel" id="card-dw-2">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="braces"></i></div>
+                        <span class="module-status-badge" id="badge-dw-2"><i data-lucide="lock"></i> Bloqueado</span>
+                    </div>
+                    <h3>💻 Aula 2 — Hello World</h3>
+                    <p>Escreva suas primeiras linhas e aprenda a mapear campos simples como nome e idade.</p>
+                    <a href="dataweave.html#stage2" class="btn btn-outline btn-sm mt-auto" id="btn-dw-2">Bloqueado</a>
+                </div>
+
+                <!-- DW Aula 3 -->
+                <div class="module-card glass-panel" id="card-dw-3">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="refresh-cw"></i></div>
+                        <span class="module-status-badge" id="badge-dw-3"><i data-lucide="lock"></i> Bloqueado</span>
+                    </div>
+                    <h3>🔄 Aula 3 — Mudando Idiomas</h3>
+                    <p>Aprenda a traduzir formatos corporativos entre si: JSON para XML, CSV para JSON e mais.</p>
+                    <a href="dataweave.html#stage3" class="btn btn-outline btn-sm mt-auto" id="btn-dw-3">Bloqueado</a>
+                </div>
+
+                <!-- DW Aula 4 -->
+                <div class="module-card glass-panel" id="card-dw-4">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="git-branch"></i></div>
+                        <span class="module-status-badge" id="badge-dw-4"><i data-lucide="lock"></i> Bloqueado</span>
+                    </div>
+                    <h3>🔁 Aula 4 — Regras do Tradutor</h3>
+                    <p>Domine as regras essenciais como loops (map), filtros (filter) e condições (if/else).</p>
+                    <a href="dataweave.html#stage4" class="btn btn-outline btn-sm mt-auto" id="btn-dw-4">Bloqueado</a>
+                </div>
+
+                <!-- DW Aula 5 -->
+                <div class="module-card glass-panel" id="card-dw-5">
+                    <div class="module-header">
+                        <div class="module-icon"><i data-lucide="gamepad-2"></i></div>
+                        <span class="module-status-badge" id="badge-dw-5"><i data-lucide="lock"></i> Bloqueado</span>
+                    </div>
+                    <h3>🕹️ Aula 5 — Simulador: Missão Final</h3>
+                    <p>Assuma o controle e crie uma transformação real de e-commerce aplicando filtros e regras.</p>
+                    <a href="dataweave.html#stage5" class="btn btn-outline btn-sm mt-auto" id="btn-dw-5">Bloqueado</a>
+                </div>
+            </div>
+        </section>
+
         <!-- PROGRESS FOOTER -->
         <section id="progress-summary" class="dashboard-section mt-40">
             <div class="progress-bar-footer glass-panel">
@@ -343,9 +454,7 @@
     <!-- App Scripts -->
     <script src="tech-background.js"></script>
     <script src="dashboard.js?v=3"></script>
-<script src="admin-utils.js"></script></body>
-
-</html>
-<script src="admin-utils.js"></script></body>
+    <script src="admin-utils.js"></script>
+</body>
 
 </html>

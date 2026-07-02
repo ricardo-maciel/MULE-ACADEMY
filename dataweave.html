@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>
+        if (!sessionStorage.getItem('muleacademy_current_user')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3 - DataWeave: O Poder do Tradutor</title>
+    <link rel="icon" type="image/x-icon" href="Favicon.ico">
+    <meta name="description" content="Aprenda a transformar dados de forma gamificada com o simulador interativo de DataWeave. Mapeie, filtre e converta JSON, XML e CSV.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tech-background.css">
+    <link rel="stylesheet" href="dataweave.css">
+</head>
+<body data-brand="mulecraft">
+    <script>
+        document.body.dataset.brand = localStorage.getItem('muleacademy_visual_brand') || 'mulecraft';
+    </script>
+
+    <!-- Animated Tech Network Canvas Background -->
+    <div class="tech-network-bg" aria-hidden="true">
+        <canvas id="tech-network-canvas"></canvas>
+    </div>
+    <div class="tech-spotlight" aria-hidden="true"></div>
+
+    <!-- Top Navigation Progress Bar -->
+    <nav class="progress-nav" id="main-nav">
+        <div class="logo" onclick="window.location.href='dashboard.html'" style="cursor: pointer;">
+            <i data-lucide="arrow-left" class="back-icon"></i>
+            <img src="mule_mascot.png" class="brand-mascot-img" alt="Logo" style="margin-right: 6px; margin-left: 6px;">
+            <img src="mulecraft_icon.png" class="mulecraft-icon-img" alt="MuleCraft Academy">
+            <span class="brand-title">
+                <span class="brand-text-sem-freio">Mule <span class="brand-orange-italic">Sem Freio</span> Academy</span>
+                <span class="brand-text-mulecraft">MuleCraft Academy</span>
+            </span>
+        </div>
+        
+        <button class="btn btn-outline btn-sm header-dashboard-btn" onclick="window.location.href='dashboard.html'">
+            <i data-lucide="layout-dashboard" class="btn-icon"></i>
+            <span>Painel Principal</span>
+        </button>
+        <a href="login.html" class="btn btn-sm admin-only-btn hidden" id="btn-back-to-admin" style="background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.35); color: #f59e0b; border-radius: 8px; padding: 8px 14px; display: none; align-items: center; gap: 6px; font-weight: 600; font-size: 0.8rem; text-decoration: none;">
+            <i data-lucide="shield-check" style="width:16px;height:16px;"></i>Admin
+        </a>
+        <div class="chapters-progress">
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+            <div class="steps-container">
+                <button class="step-btn active" data-target="stage1" title="Aula 1">1</button>
+                <button class="step-btn" data-target="stage2" title="Aula 2">2</button>
+                <button class="step-btn" data-target="stage3" title="Aula 3">3</button>
+                <button class="step-btn" data-target="stage4" title="Aula 4">4</button>
+                <button class="step-btn" data-target="stage5" title="Simulador">5</button>
+                <button class="step-btn" data-target="stage6" title="Conclusão">6</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="app-container">
+
+        <!-- ETAPA 1: O TRADUTOR POR DENTRO -->
+        <section id="stage1" class="chapter-section active-section">
+            <div class="section-content text-center">
+                <span class="badge badge-indigo">AULA 1 — O TRADUTOR POR DENTRO</span>
+                <h1>O Cérebro da Integração</h1>
+                
+                <div class="recap-box glass-panel max-w-600 mt-20">
+                    <p class="recap-text">
+                        <i data-lucide="help-circle" class="recap-icon"></i>
+                        “Lembra que sistemas falam idiomas diferentes (JSON, XML, CSV), e que precisam de um tradutor para se comunicarem?<br>
+                        <strong>Agora você vai aprender a linguagem usada pelo tradutor.</strong>”
+                    </p>
+                </div>
+
+                <div class="grid-2 mt-40">
+                    <div class="text-block text-left">
+                        <h2>O que é o DataWeave?</h2>
+                        <p>Imagine que o integrador de sistemas é uma pessoa poliglota. Para fazer seu trabalho, ela precisa de uma ferramenta mental de tradução rápida.</p>
+                        <p class="highlight-text"><strong>DataWeave</strong> é a linguagem desenvolvida especificamente para isso. Ela pega uma informação em um formato (como JSON), processa as regras de negócio que você definir e entrega os dados prontinhos em outro formato (como XML ou CSV).</p>
+                        <div class="explanation-card mt-20">
+                            <i data-lucide="cpu" class="card-icon text-accent"></i>
+                            <div>
+                                <h4>Transformação Dinâmica</h4>
+                                <p>Ele não apenas altera a extensão do arquivo; ele reorganiza as chaves, calcula valores e filtra o que não é útil.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visual-block flex-center">
+                        <div class="translator-sandbox glass-panel">
+                            <h3 class="mb-20 text-center">Visualizador de Fluxo</h3>
+                            
+                            <div class="visual-flow-container">
+                                <!-- Entrada (JSON) -->
+                                <div class="flow-card node-json border-json-glow">
+                                    <span class="node-tag">JSON</span>
+                                    <pre><code>{
+  "nome": "Mule"
+}</code></pre>
+                                </div>
+
+                                <!-- Tradutor (DW) -->
+                                <div class="flow-translator border-indigo-glow pulsating-box">
+                                    <i data-lucide="refresh-cw" class="spinning-icon"></i>
+                                    <span>DataWeave</span>
+                                </div>
+
+                                <!-- Saída (XML) -->
+                                <div class="flow-card node-xml border-xml-glow">
+                                    <span class="node-tag">XML</span>
+                                    <pre><code>&lt;pessoa&gt;
+  &lt;nome&gt;Mule&lt;/nome&gt;
+&lt;/pessoa&gt;</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Animated Connection Path -->
+                            <div class="flow-path-lines">
+                                <div class="laser-beam beam-left-to-center"></div>
+                                <div class="laser-beam beam-center-to-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAYLOAD EXPLAINER: O que é o Payload? -->
+                <div class="grid-2 mt-40">
+                    <div class="text-block text-left">
+                        <h2>📦 O que é o <em>Payload</em>?</h2>
+                        <p>Imagine um <strong>caminhão de entregas</strong> viajando pela rodovia. O caminhão em si é a infraestrutura de rede — os servidores, a internet, os cabos. Mas o que realmente importa para quem vai receber a mercadoria é a <strong>caixa de encomendas guardada no baú</strong>. Essa caixa é a <strong>carga útil</strong>.</p>
+                        <p class="highlight-text">Na tecnologia, chamamos essa carga de dados de <strong>Payload</strong>. É o conteúdo que trafega de um sistema para outro — a informação real que precisa ser entregue e processada.</p>
+                        <div class="explanation-card mt-20">
+                            <i data-lucide="package" class="card-icon text-accent"></i>
+                            <div>
+                                <h4>A Palavra Mágica do DataWeave</h4>
+                                <p>Sempre que você escreve <code>payload</code> em um script, você está dizendo: <em>"Ei, pegue a caixa de encomendas que acabou de chegar e leia o que está dentro!"</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visual-block flex-center">
+                        <div class="translator-sandbox glass-panel">
+                            <h3 class="mb-20 text-center">Visualizador de Payload</h3>
+
+                            <div class="payload-flow-container">
+                                <!-- Caminhão (Rede/Internet) -->
+                                <div class="payload-vehicle-lane">
+                                    <div class="payload-road-label">🌐 Rede (Internet)</div>
+                                    <div class="payload-truck-track">
+                                        <div class="payload-truck-icon" id="payload-truck">
+                                            🚛
+                                            <div class="truck-cargo-indicator">📦</div>
+                                        </div>
+                                        <div class="payload-road-line"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Seta de chegada -->
+                                <div class="payload-arrow-down">
+                                    <i data-lucide="arrow-down" style="width:28px;height:28px;color:var(--color-accent);"></i>
+                                    <span class="payload-arrow-label">chega no sistema</span>
+                                </div>
+
+                                <!-- Caixa de encomendas (Payload) -->
+                                <div class="payload-box-reveal flow-card border-indigo-glow pulsating-box">
+                                    <span class="node-tag" style="background: rgba(108,92,231,0.3); color: #a78bfa;">PAYLOAD</span>
+                                    <pre><code>{
+  "nome": "Maria",
+  "idade": 30
+}</code></pre>
+                                    <div class="payload-box-caption">📦 A carga útil — os dados reais</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-bar mt-40">
+                    <button class="btn btn-accent btn-lg next-section-btn" data-next="stage2" id="btn-start-dw-aulas">
+                        <span>Iniciar Primeira Tradução</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ETAPA 2: PRIMEIRA TRADUÇÃO (HELLO WORLD) -->
+        <section id="stage2" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="badge badge-indigo">AULA 2 — HELLO WORLD</span>
+                <h2>Sua Primeira Tradução</h2>
+                <p class="subtitle max-w-600 center-subtitle">Todo script DataWeave tem um cabeçalho (que define a versão e o formato de saída) e o corpo da transformação.</p>
+
+
+                <div class="syntax-explainer glass-panel max-w-700 mt-20 text-left">
+                    <div class="panel-header"><i data-lucide="code-2"></i> Estrutura Básica</div>
+                    <pre><code class="language-dw"><strong>%dw 2.0</strong>                     <span class="comment">// 1. Cabeçalho: Versão do tradutor</span>
+<strong>output application/json</strong>     <span class="comment">// 2. Formato: Qual idioma será a saída</span>
+<strong>---</strong>                         <span class="comment">// 3. Divisor: Separa o cabeçalho das regras</span>
+<strong>payload.message</strong>             <span class="comment">// 4. Corpo: O que traduzir (payload é o dado de entrada)</span></code></pre>
+                </div>
+
+                <!-- Exercício 1 & 2 Box -->
+                <div class="exercise-container glass-panel max-w-900 mt-40">
+                    <div class="exercise-header">
+                        <i data-lucide="gamepad-2" class="text-accent"></i>
+                        <h3>Laboratório Prático: Hello World</h3>
+                    </div>
+
+                    <!-- Ex 1 -->
+                    <div class="exercise-box active-ex" id="ex-hw-1">
+                        <div class="grid-3">
+                            <!-- Entrada -->
+                            <div class="ex-column">
+                                <div class="col-title">Entrada (JSON)</div>
+                                <pre class="code-box-small"><code>{
+  "nome": "Maria"
+}</code></pre>
+                            </div>
+                            
+                            <!-- Código -->
+                            <div class="ex-column">
+                                <div class="col-title">Script DataWeave</div>
+                                <div class="interactive-code-editor">
+                                    <span class="editor-fixed-line">%dw 2.0</span>
+                                    <span class="editor-fixed-line">output application/json</span>
+                                    <span class="editor-fixed-line">---</span>
+                                    <div class="editor-input-line">
+                                        <span>{ name: </span>
+                                        <input type="text" class="code-text-input" id="input-ex1" placeholder="payload.nome" autocomplete="off" spellcheck="false">
+                                        <span> }</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Saída -->
+                            <div class="ex-column">
+                                <div class="col-title">Saída Esperada (JSON)</div>
+                                <pre class="code-box-small"><code>{
+  "name": "Maria"
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-validation mt-20">
+                            <button class="btn btn-primary btn-sm btn-validate" data-exercise="ex1">Testar Script</button>
+                            <span class="validation-status status-pending" id="status-ex1">Aguardando teste...</span>
+                        </div>
+                    </div>
+
+                    <!-- Ex 2 -->
+                    <div class="exercise-box locked-ex" id="ex-hw-2">
+                        <div class="grid-3">
+                            <!-- Entrada -->
+                            <div class="ex-column">
+                                <div class="col-title">Entrada (JSON)</div>
+                                <pre class="code-box-small"><code>{
+  "idade": 30
+}</code></pre>
+                            </div>
+                            
+                            <!-- Código -->
+                            <div class="ex-column">
+                                <div class="col-title">Script DataWeave</div>
+                                <div class="interactive-code-editor">
+                                    <span class="editor-fixed-line">%dw 2.0</span>
+                                    <span class="editor-fixed-line">output application/json</span>
+                                    <span class="editor-fixed-line">---</span>
+                                    <div class="editor-input-line">
+                                        <span>{ age: </span>
+                                        <input type="text" class="code-text-input" id="input-ex2" placeholder="payload.idade" autocomplete="off" spellcheck="false">
+                                        <span> }</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Saída -->
+                            <div class="ex-column">
+                                <div class="col-title">Saída Esperada (JSON)</div>
+                                <pre class="code-box-small"><code>{
+  "age": 30
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-validation mt-20">
+                            <button class="btn btn-primary btn-sm btn-validate" data-exercise="ex2" disabled>Testar Script</button>
+                            <span class="validation-status status-pending" id="status-ex2">Aguardando desbloqueio...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-bar mt-40 flex-center-gap">
+                    <button class="btn btn-accent btn-lg next-section-btn hidden" id="btn-next-to-stage3" data-next="stage3">
+                        <span>Avançar: Mudando Idiomas</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                    <div class="practice-cta-mini hidden" id="practice-cta-stage2">
+                        <span class="practice-text">Agora pratique no:</span>
+                        <a href="https://dataweave.mulesoft.com/learn/?utm_source=chatgpt.com" target="_blank" class="playground-button-mini">
+                            <img src="dataweave.png" alt="DataWeave Logo">
+                            <span>DataWeave Playground</span>
+                            <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ETAPA 3: MUDANDO IDIOMAS -->
+        <section id="stage3" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="badge badge-indigo">AULA 3 — MUDANDO IDIOMAS</span>
+                <h2>Traduzindo Formatos</h2>
+                <p class="subtitle max-w-600 center-subtitle">Mudar o tipo de saída no DataWeave é tão simples quanto alterar o cabeçalho `output application/...`. Veja a mágica acontecer!</p>
+
+                <div class="format-showcase-grid max-w-850 mt-20">
+                    <div class="format-badge-card json-card">
+                        <i data-lucide="braces" class="format-ico text-json"></i>
+                        <h4>application/json</h4>
+                        <p>Moderno, baseado em chaves e valores. Idioma padrão web.</p>
+                    </div>
+                    <div class="format-badge-card xml-card">
+                        <i data-lucide="code" class="format-ico text-xml"></i>
+                        <h4>application/xml</h4>
+                        <p>Estrutura hierárquica baseada em tags (&lt;tag&gt;).</p>
+                    </div>
+                    <div class="format-badge-card csv-card">
+                        <i data-lucide="file-spreadsheet" class="format-ico text-csv"></i>
+                        <h4>application/csv</h4>
+                        <p>Linhas separadas por vírgula, ideal para tabelas.</p>
+                    </div>
+                </div>
+
+                <div class="exercise-container glass-panel max-w-900 mt-40">
+                    <div class="exercise-header">
+                        <i data-lucide="repeat" class="text-accent"></i>
+                        <h3>Laboratório: Conversão de Formatos</h3>
+                    </div>
+
+                    <!-- Ex 3 (JSON -> XML) -->
+                    <div class="exercise-box active-ex" id="ex-lang-3">
+                        <div class="grid-3">
+                            <!-- Entrada -->
+                            <div class="ex-column">
+                                <div class="col-title">Entrada (JSON)</div>
+                                <pre class="code-box-small"><code>{
+  "nome": "João"
+}</code></pre>
+                            </div>
+                            
+                            <!-- Código -->
+                            <div class="ex-column">
+                                <div class="col-title">Script DataWeave</div>
+                                <div class="interactive-code-editor">
+                                    <span class="editor-fixed-line">%dw 2.0</span>
+                                    <div class="editor-input-line">
+                                        <span>output </span>
+                                        <select class="code-select-input" id="input-ex3">
+                                            <option value="none">-- Selecione --</option>
+                                            <option value="application/json">application/json</option>
+                                            <option value="application/xml">application/xml</option>
+                                            <option value="application/csv">application/csv</option>
+                                        </select>
+                                    </div>
+                                    <span class="editor-fixed-line">---</span>
+                                    <span class="editor-fixed-line">pessoa: {</span>
+                                    <span class="editor-fixed-line">  nome: payload.nome</span>
+                                    <span class="editor-fixed-line">}</span>
+                                </div>
+                            </div>
+
+                            <!-- Saída -->
+                            <div class="ex-column">
+                                <div class="col-title">Saída Esperada (XML)</div>
+                                <pre class="code-box-small"><code>&lt;pessoa&gt;
+  &lt;nome&gt;João&lt;/nome&gt;
+&lt;/pessoa&gt;</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-validation mt-20">
+                            <button class="btn btn-primary btn-sm btn-validate" data-exercise="ex3">Testar Script</button>
+                            <span class="validation-status status-pending" id="status-ex3">Aguardando teste...</span>
+                        </div>
+                    </div>
+
+                    <!-- Ex 4 (CSV -> JSON) -->
+                    <div class="exercise-box locked-ex" id="ex-lang-4">
+                        <div class="grid-3">
+                            <!-- Entrada -->
+                            <div class="ex-column">
+                                <div class="col-title">Entrada (CSV)</div>
+                                <pre class="code-box-small"><code>nome,idade
+Ana,25</code></pre>
+                            </div>
+                            
+                            <!-- Código -->
+                            <div class="ex-column">
+                                <div class="col-title">Script DataWeave</div>
+                                <div class="interactive-code-editor">
+                                    <span class="editor-fixed-line">%dw 2.0</span>
+                                    <div class="editor-input-line">
+                                        <span>output </span>
+                                        <select class="code-select-input" id="input-ex4" disabled>
+                                            <option value="none">-- Selecione --</option>
+                                            <option value="application/json">application/json</option>
+                                            <option value="application/xml">application/xml</option>
+                                            <option value="application/csv">application/csv</option>
+                                        </select>
+                                    </div>
+                                    <span class="editor-fixed-line">---</span>
+                                    <span class="editor-fixed-line">payload</span>
+                                </div>
+                            </div>
+
+                            <!-- Saída -->
+                            <div class="ex-column">
+                                <div class="col-title">Saída Esperada (JSON)</div>
+                                <pre class="code-box-small"><code>[
+  {
+    "nome": "Ana",
+    "idade": "25"
+  }
+]</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-validation mt-20">
+                            <button class="btn btn-primary btn-sm btn-validate" data-exercise="ex4" disabled>Testar Script</button>
+                            <span class="validation-status status-pending" id="status-ex4">Aguardando desbloqueio...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-bar mt-40 flex-center-gap">
+                    <button class="btn btn-accent btn-lg next-section-btn hidden" id="btn-next-to-stage4" data-next="stage4">
+                        <span>Avançar: Regras do Tradutor</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                    <div class="practice-cta-mini hidden" id="practice-cta-stage3">
+                        <span class="practice-text">Agora pratique no:</span>
+                        <a href="https://dataweave.mulesoft.com/learn/?utm_source=chatgpt.com" target="_blank" class="playground-button-mini">
+                            <img src="dataweave.png" alt="DataWeave Logo">
+                            <span>DataWeave Playground</span>
+                            <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ETAPA 4: REGRAS DO TRADUTOR -->
+        <section id="stage4" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="badge badge-indigo">AULA 4 — REGRAS DO TRADUTOR (LÚDICO)</span>
+                <h2>Ferramentas do Tradutor</h2>
+                <p class="subtitle max-w-600 center-subtitle">Para transformações complexas, o tradutor possui operadores que funcionam como ordens humanas inteligentes:</p>
+
+                <div class="rules-analogies-grid max-w-900 mt-20 text-left">
+                    <div class="analogy-card glass-panel">
+                        <div class="card-icon-row text-accent">
+                            <i data-lucide="repeat"></i>
+                            <h4>map = “Lista Completa”</h4>
+                        </div>
+                        <p>Pega uma lista inteira de dados (como clientes) e traduz cada item um por um para uma nova lista de saída.</p>
+                    </div>
+
+                    <div class="analogy-card glass-panel">
+                        <div class="card-icon-row text-emerald">
+                            <i data-lucide="filter"></i>
+                            <h4>filter = “Escolher o Importante”</h4>
+                        </div>
+                        <p>Varre a lista e ignora tudo o que não encaixar na sua condição. Retorna apenas o que for importante.</p>
+                    </div>
+
+                    <div class="analogy-card glass-panel">
+                        <div class="card-icon-row text-rose">
+                            <i data-lucide="git-commit"></i>
+                            <h4>if/else = “Tomar Decisões”</h4>
+                        </div>
+                        <p>Faz perguntas aos dados: se a condição for verdadeira, traduz de um jeito; se for falsa, traduz de outro.</p>
+                    </div>
+                </div>
+
+                <div class="exercise-container glass-panel max-w-900 mt-40">
+                    <div class="exercise-header">
+                        <i data-lucide="cpu" class="text-accent"></i>
+                        <h3>Desafios de Regras Lúdicas</h3>
+                    </div>
+
+                    <!-- Ex 5 (map) -->
+                    <div class="exercise-box active-ex" id="ex-rule-5">
+                        <span class="ex-tag badge-accent">DESAFIO 5 (map)</span>
+                        <div class="grid-3 mt-15">
+                            <div class="ex-column">
+                                <div class="col-title">Entrada (JSON)</div>
+                                <pre class="code-box-small"><code>[
+  { "nome": "Ana" },
+  { "nome": "Carlos" }
+]</code></pre>
+                            </div>
+                            
+                            <div class="ex-column">
+                                <div class="col-title">Script DataWeave</div>
+                                <div class="interactive-code-editor">
+                                    <span class="editor-fixed-line">payload map (item) -> {</span>
+                                    <div class="editor-input-line">
+                                        <span>  name: </span>
+                                        <input type="text" class="code-text-input" id="input-ex5" placeholder="item.nome" autocomplete="off" spellcheck="false">
+                                    </div>
+                                    <span class="editor-fixed-line">}</span>
+                                </div>
+                            </div>
+
+                            <div class="ex-column">
+                                <div class="col-title">Saída Esperada</div>
+                                <pre class="code-box-small"><code>[
+  { "name": "Ana" },
+  { "name": "Carlos" }
+]</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-validation mt-20">
+                            <button class="btn btn-primary btn-sm btn-validate" data-exercise="ex5">Validar map</button>
+                            <span class="validation-status status-pending" id="status-ex5">Aguardando teste...</span>
+                        </div>
+                    </div>
+
+                    <!-- Ex 6 (filter) -->
+                    <div class="exercise-box locked-ex" id="ex-rule-6">
+                        <span class="ex-tag badge-emerald">DESAFIO 6 (filter)</span>
+                        <div class="grid-3 mt-15">
+                            <div class="ex-column">
+                                <div class="col-title">Entrada (JSON)</div>
+                                <pre class="code-box-small"><code>[
+  { "idade": 10 },
+  { "idade": 20 }
+]</code></pre>
+                            </div>
+                            
+                            <div class="ex-column">
+                                <div class="col-title">Script DataWeave</div>
+                                <div class="interactive-code-editor">
+                                    <div class="editor-input-line">
+                                        <span>payload filter (item) -> </span>
+                                        <input type="text" class="code-text-input" id="input-ex6" placeholder="item.idade > 18" autocomplete="off" spellcheck="false" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ex-column">
+                                <div class="col-title">Saída Esperada</div>
+                                <pre class="code-box-small"><code>[
+  { "idade": 20 }
+]</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-validation mt-20">
+                            <button class="btn btn-primary btn-sm btn-validate" data-exercise="ex6" disabled>Validar filter</button>
+                            <span class="validation-status status-pending" id="status-ex6">Aguardando desbloqueio...</span>
+                        </div>
+                    </div>
+
+                    <!-- Ex 7 (if) -->
+                    <div class="exercise-box locked-ex" id="ex-rule-7">
+                        <span class="ex-tag badge-rose">DESAFIO 7 (if)</span>
+                        <div class="grid-3 mt-15">
+                            <div class="ex-column">
+                                <div class="col-title">Entrada (JSON)</div>
+                                <pre class="code-box-small"><code>{
+  "idade": 17
+}</code></pre>
+                            </div>
+                            
+                            <div class="ex-column">
+                                <div class="col-title">Script DataWeave</div>
+                                <div class="interactive-code-editor">
+                                    <span class="editor-fixed-line">{</span>
+                                    <div class="editor-input-line" style="text-indent: 10px;">
+                                        <span>status: if (payload.idade >= 18) "maior" else </span>
+                                        <input type="text" class="code-text-input" id="input-ex7" placeholder='"menor"' autocomplete="off" spellcheck="false" style="width: 100px;" disabled>
+                                    </div>
+                                    <span class="editor-fixed-line">}</span>
+                                </div>
+                            </div>
+
+                            <div class="ex-column">
+                                <div class="col-title">Saída Esperada</div>
+                                <pre class="code-box-small"><code>{
+  "status": "menor"
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-validation mt-20">
+                            <button class="btn btn-primary btn-sm btn-validate" data-exercise="ex7" disabled>Validar if/else</button>
+                            <span class="validation-status status-pending" id="status-ex7">Aguardando desbloqueio...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-bar mt-40 flex-center-gap">
+                    <button class="btn btn-accent btn-lg next-section-btn hidden" id="btn-next-to-stage5" data-next="stage5">
+                        <span>Ir para Missão Final (Simulador)</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                    <div class="practice-cta-mini hidden" id="practice-cta-stage4">
+                        <span class="practice-text">Agora pratique no:</span>
+                        <a href="https://dataweave.mulesoft.com/learn/?utm_source=chatgpt.com" target="_blank" class="playground-button-mini">
+                            <img src="dataweave.png" alt="DataWeave Logo">
+                            <span>DataWeave Playground</span>
+                            <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ETAPA 5: SIMULADOR (MISSÃO FINAL) -->
+        <section id="stage5" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="badge badge-accent">🕹️ AULA 5 — SIMULADOR</span>
+                <h2>Missão Final do Tradutor ⚔️</h2>
+                
+                <div class="scenario-intro-box glass-panel max-w-750 mt-20 text-left">
+                    <p><strong>Cenário:</strong> Você é o tradutor oficial da empresa. O <strong>Sistema A</strong> envia uma lista de clientes em JSON, mas o <strong>Sistema B</strong> necessita dessa lista convertida para XML.</p>
+                    <p class="mb-5"><strong>Regras de Negócio requeridas:</strong></p>
+                    <ul class="scenario-bullets">
+                        <li><i data-lucide="check-circle" class="text-accent"></i> O nome do cliente deve ser mapeado de <code>nome</code> para <code>name</code>.</li>
+                        <li><i data-lucide="check-circle" class="text-accent"></i> A idade deve ser mapeada de <code>idade</code> para <code>age</code>.</li>
+                        <li><i data-lucide="check-circle" class="text-accent"></i> <strong>Apenas</strong> maiores de idade (maiores ou iguais a 18 anos) devem ser enviados.</li>
+                    </ul>
+                </div>
+
+                <!-- Simulation Interactive Board -->
+                <div class="simulator-dashboard-box glass-panel mt-40">
+                    <div class="simulator-main-row">
+                        
+                        <!-- System A input panel -->
+                        <div class="sim-panel sim-input-panel border-json-glow">
+                            <div class="panel-tag"><i data-lucide="shopping-cart"></i> Sistema A (JSON)</div>
+                            <pre class="sim-code-preview"><code>[
+  { "nome": "Ana", "idade": 25 },
+  { "nome": "Bruno", "idade": 15 },
+  { "nome": "Carlos", "idade": 42 }
+]</code></pre>
+                        </div>
+
+                        <!-- DataWeave Assembler Hub -->
+                        <div class="sim-panel sim-assembler-panel border-indigo-glow">
+                            <div class="panel-tag"><i data-lucide="cpu"></i> Script DataWeave</div>
+                            <div class="assembler-lines">
+                                <div class="assembler-line">%dw 2.0</div>
+                                <div class="assembler-line flex-row">
+                                    <span>output </span>
+                                    <select class="sim-select" id="sim-format">
+                                        <option value="none">-- Formato --</option>
+                                        <option value="application/json">application/json</option>
+                                        <option value="application/xml">application/xml</option>
+                                        <option value="application/csv">application/csv</option>
+                                    </select>
+                                </div>
+                                <div class="assembler-line">---</div>
+                                <div class="assembler-line flex-row">
+                                    <span>payload filter (usuario) -> </span>
+                                    <select class="sim-select" id="sim-filter">
+                                        <option value="none">-- Condição --</option>
+                                        <option value="usuario.idade < 18">usuario.idade < 18</option>
+                                        <option value="usuario.idade == 18">usuario.idade == 18</option>
+                                        <option value="usuario.idade >= 18">usuario.idade >= 18</option>
+                                    </select>
+                                </div>
+                                <div class="assembler-line flex-row" style="margin-left: 20px;">
+                                    <span>map (usuario) -> {</span>
+                                </div>
+                                <div class="assembler-line flex-row" style="margin-left: 40px;">
+                                    <select class="sim-select short" id="sim-key-name">
+                                        <option value="none">-- Nome --</option>
+                                        <option value="nome">nome</option>
+                                        <option value="name">name</option>
+                                        <option value="Name">Name</option>
+                                    </select>
+                                    <span>: usuario.nome,</span>
+                                </div>
+                                <div class="assembler-line flex-row" style="margin-left: 40px;">
+                                    <select class="sim-select short" id="sim-key-age">
+                                        <option value="none">-- Idade --</option>
+                                        <option value="idade">idade</option>
+                                        <option value="age">age</option>
+                                        <option value="Age">Age</option>
+                                    </select>
+                                    <span>: usuario.idade</span>
+                                </div>
+                                <div class="assembler-line" style="margin-left: 20px;">}</div>
+                            </div>
+                        </div>
+
+                        <!-- System B output panel -->
+                        <div class="sim-panel sim-output-panel border-xml-glow">
+                            <div class="panel-tag"><i data-lucide="building"></i> Sistema B (XML)</div>
+                            <div class="output-visual-display" id="sim-output-container">
+                                <span class="display-placeholder">Aguardando execução...</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Action Trigger & Status -->
+                    <div class="sim-trigger-row mt-30">
+                        <button class="btn btn-primary btn-lg" id="btn-run-simulation">
+                            <i data-lucide="play" class="btn-icon"></i>
+                            <span>Executar Tradução</span>
+                        </button>
+                    </div>
+
+                    <!-- Feedback Box -->
+                    <div class="feedback-panel-box hidden mt-20" id="simulator-feedback">
+                        <i data-lucide="info" class="feedback-icon" id="feedback-panel-icon"></i>
+                        <div class="feedback-details text-left">
+                            <h4 id="feedback-panel-title">Feedback da Missão</h4>
+                            <p id="feedback-panel-desc">Texto de feedback dinâmico.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="action-bar mt-40">
+                    <button class="btn btn-accent btn-lg next-section-btn hidden" id="btn-next-to-stage6" data-next="stage6">
+                        <span>Avançar para Conclusão</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ETAPA 6: GRADUAÇÃO / CONCLUSÃO -->
+        <section id="stage6" class="chapter-section">
+            <div class="section-content text-center">
+                <span class="badge badge-accent">🏆 GRADUAÇÃO</span>
+                
+                <div class="trophy-container mt-30">
+                    <div class="trophy-glow-gold"></div>
+                    <i data-lucide="award" class="huge-trophy-icon text-accent"></i>
+                </div>
+
+                <div class="animated-quote-container mt-40">
+                    <h2 class="glowing-quote">
+                        “Integrações conectam sistemas…<br>
+                        DataWeave faz eles se entenderem.”
+                    </h2>
+                </div>
+
+                <!-- PLAYGROUND EXTERNAL LINK CTA -->
+                <div class="playground-cta-panel glass-panel max-w-600 mt-40">
+                    <h3>Quer expandir seus poderes? 🌐</h3>
+                    <p class="mb-20">Você dominou a base das transformações! Agora é hora de testar cenários reais em tempo real no ambiente oficial da MuleSoft.</p>
+                    
+                    <a href="https://dataweave.mulesoft.com/learn/?utm_source=chatgpt.com" target="_blank" class="playground-button" id="btn-dataweave-playground">
+                        <div class="pg-btn-glow"></div>
+                        <img src="dataweave.png" alt="DataWeave Playground Icon" class="pg-btn-img">
+                        <span class="pg-btn-text">Praticar no DataWeave Playground</span>
+                        <i data-lucide="external-link" class="pg-btn-icon"></i>
+                    </a>
+                    <span class="pg-help-note">Abre em uma nova guia. Agora é com você!</span>
+                </div>
+
+                <div class="cta-box glass-panel max-w-600 mt-40">
+                    <h3>Módulo Concluído com Sucesso!</h3>
+                    <p>Você provou ser um tradutor de sistemas de elite. As chaves de transformação não guardam mais segredos para você.</p>
+                    
+                    <div class="module-navigation-group mt-20">
+                        <button class="btn btn-accent btn-lg" id="btn-complete-dataweave">
+                            <span>Concluir Módulo & Voltar</span>
+                            <i data-lucide="check-circle" class="btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="tech-background.js"></script>
+    <script src="dataweave.js"></script>
+</body>
+</html>
